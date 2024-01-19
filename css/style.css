@@ -8,12 +8,152 @@
 
 /* Tipografía */
 @font-face {
-  font-family: "";
-  src: url("") format("woff2"), url("") format("woff");
+  font-family: "GoRegular";
+  src: url("../font/go-regular-webfont.woff2") format("woff2"), url("../font/go-regular-webfont.woff") format("woff");
+}
+
+@font-face {
+  font-family: "GoBold";
+  src: url("../font/go-bold-webfont.woff2") format("woff2"), url("../font/go-bold-webfont.woff") format("woff");
 }
 
 /* ******************************** */
 
 /* Colores */
+:root {
+  /* colors */
+  --azul-flojo: #dbf0ff;
+  --azul-marino: #004d84;
+  --azul-normal: #0073c7;
+  --azul-oscuro: #002642;
+  --blanco-gris: #f5f5f5;
+  --dorado: #e7d58b;
+  --gris-texto: #383838;
+  --verde-light: #4fc168;
+}
 
 /* ******************************** */
+html {
+  font-family: "GoRegular";
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  
+  min-height: 100vh;
+
+  & .header {
+    width: 100vw;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 100px;
+    background-color: var(--azul-flojo);
+
+    & .header__nombre {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 18px;
+      color: var(--azul-oscuro);
+
+      & .nombre__logo {
+        width: 75px;
+      }
+    }
+
+    & .header__nav {
+      justify-content: center;
+      align-items: center;
+      gap: 100px;
+      font-size: 14px;
+
+      & .nav__login {
+        text-decoration: none;
+        padding: 10px 15px;
+        color: var(--azul-oscuro);
+      }
+
+      & .nav__registrarse {
+        text-decoration: none;
+        padding: 15px 25px;
+        background-color: var(--azul-normal);
+        color: white;
+        border-radius: 10px;
+        font-family: "GoBold";
+      }
+    }
+  }
+
+  & .main {
+    width: 1200px;
+
+    & .generador {
+      margin-top: 75px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      color: var(--gris-texto);
+
+      & .generador__titulo {
+        font-size: 2.7rem;
+      }
+
+      & .generador__frase {
+        margin-top: 2rem;
+        font-weight: 400;
+      }
+
+      & .generador__result {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 50px;
+        margin-left: 175px;
+        font-family: "GoBold";
+
+        & .result__box {
+          width: 400px;
+          text-align: center;
+          margin: 25px 0;
+          background-color: var(--azul-flojo);
+          color: var(--azul-marino);
+          padding: 10px 50px;
+          border-radius: 50px;
+          box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.25);
+        }
+
+        & .result__copy {
+          background-color: var(--dorado);
+          padding: 10px 40px;
+          border-radius: 20px;
+          box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.25);
+          font-size: 14px;
+          cursor: pointer;
+        }
+      }
+
+      & .generador__generar {
+        padding: 10px 45px;
+        background-color: var(--azul-marino);
+        color: white;
+        border-radius: 25px;
+        box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.25);
+        cursor: pointer;
+      }
+    }
+  }
+
+  & .footer {
+    position: absolute;
+    width: 100vw;
+    display: flex;
+    justify-content: space-between;
+    padding: 35px 360px;
+    background-color: var(--azul-oscuro);
+    color: white;
+    bottom: 0;
+  }
+}

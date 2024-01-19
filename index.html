@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <!-- SEO = Básico -->
     <!-- Cada página del sitio tiene que ser diferente el título y la descripción -->
-    <title></title>
+    <title>Make Me A Pass - Index</title>
     <meta name="description" content="" />
     <meta name="keywords" content="" />
 
@@ -43,27 +43,51 @@
     <script src="preloader.js"></script>
   </head>
   <body>
-    <div id="container">
-      <!-- *** ESTRUCTURA SEMÁNTICA *** -->
-      <!-- Header (encabezado de la página, zona superior) -->
-      <header>
-        <!-- nav (el navegador de toda la web) -->
-        <nav>
-          <a href="" class="link1">link1</a>
-          <a href="" class="link2">link2</a>
-          <a href="" class="link3">link3</a>
-          <a href="" class="link4">link4</a>
+    <div class="container" id="container">
+      <header class="header">
+        <section class="header__nombre">
+          <h2>Make Me</h2>
+          <img class="nombre__logo" src="img/desktop/logo.webp">
+          <h2>A Pass</h2>
+        </section>
+
+        <nav class="header__nav">
+          <a href="login.php" class="nav__login">Iniciar Sesión</a>
+          <a href="registrarse.php" class="nav__registrarse"><u>Registrarse</u></a>
         </nav>
       </header>
-      <!-- Main (centro de la página, zona central) -->
-      <main>
-        <!-- section y article (posibilidades dentro de main) -->
+      
+      <main class="main">
+        <section class="generador">
+          <h1 class="generador__titulo">Generador de Contraseñas Aleatorias</h1>
+          <h3 class="generador__frase">Contraseñas seguras en segundos</h3>
+
+          <section class="generador__result">
+            <div class="result__box" id="randompass">Click Generar</div>
+            <a class="result__copy" id="btncopy">Copiar</a>
+          </section>
+
+          <a class="generador__generar" id="generar">Generar</a>
+        </section>
       </main>
-      <!-- Footer (final de la página, zona inferior) -->
-      <footer>
-        <h6>&copy;Copyright</h6>
+      
+      <footer class="footer">
+        <nav class="footer__izq">
+          <a>Contacto</a>
+          <a class="coffee"><img class="coffee__img" src="svg/buymeacoffee.svg">Buy Me a Coffee</a>
+          <a>Privacidad</a>
+          <a>Cookies</a>
+          <h6>&copy; All Rights Reserved made by Javier Navarro</h6>
+        </nav>
+
+        <nav class="redes">
+          <h3><u>Redes Sociales</u></h3>
+          <a><img src="svg/linkedin.svg">Linked In</a>
+          <a><img src="svg/github.svg">GitHub</a>
+          <a><img src="svg/twitter.svg">Twitter</a>
+          <a><img src="svg/instagram.svg">Instagram</a>
+        </nav>
       </footer>
     </div>
-
   </body>
 </html>
