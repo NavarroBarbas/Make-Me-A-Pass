@@ -52,8 +52,8 @@
         </section>
 
         <nav class="header__nav">
-          <a href="login.php" class="nav__login">Iniciar Sesión</a>
-          <a href="registrarse.php" class="nav__registrarse"><u>Registrarse</u></a>
+          <a href="contraseñas.php" class="nav__login">Contraseñas</a>
+          <a href="cuenta.php" class="nav__registrarse"><u>Username</u></a>
         </nav>
       </header>
       
@@ -62,12 +62,43 @@
           <h1 class="generador__titulo">Generador de Contraseñas Aleatorias</h1>
           <h3 class="generador__frase">Contraseñas seguras en segundos</h3>
 
+          <section class="settings">
+            <section class="setting">
+              <input type="checkbox" id="uppercase" />
+              <label for="uppercase">A-Z</label>
+            </section>
+
+            <section class="setting">
+              <input type="checkbox" id="lowercase" />
+              <label for="lowercase">a-z</label>
+            </section>
+
+            <section class="setting">
+              <input type="checkbox" id="numeros" />
+              <label for="numeros">0-9</label>
+            </section>
+
+            <section class="setting">
+              <input type="checkbox" id="caracteres" />
+              <label for="caracteres">!-#</label>
+            </section>
+          </section>
+
           <section class="generador__result">
             <div class="result__box" id="randompass">Click Generar</div>
             <a class="result__copy" id="btncopy">Copiar</a>
           </section>
 
-          <a class="generador__generar" id="generar">Generar</a>
+          <section class="generador__length">
+            <label for="length">Longitud:</label>
+            <input class="length__slider" type="range" min="8" max="32" value="18" name="length" id="length">
+            <span class="length__valor" id="valor"></span>
+          </section>
+
+          <section class="generador__botones">
+            <a class="generador__generar" id="generar">Generar</a>
+            <a class="generador__guardar" id="guardar">Guardar Contraseña</a>
+          </section>
         </section>
 
         <section class="main__info">
@@ -116,3 +147,13 @@
     </div>
   </body>
 </html>
+
+<script type="text/javascript">
+  var slider = document.getElementById("length");
+  var output = document.getElementById("valor");
+  output.innerHTML = slider.value;
+  
+  slider.oninput = function() {
+      output.innerHTML = this.value;
+  }
+</script>
