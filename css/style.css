@@ -34,6 +34,9 @@
 
 /* ******************************** */
 html {
+  margin: 0; 
+  padding: 0;
+  overflow-x: hidden;
   font-family: "GoRegular";
 }
 
@@ -44,7 +47,7 @@ html {
   width: 100vw;
 
   & .header {
-    width: 100vw;
+    width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -87,9 +90,11 @@ html {
   }
 
   & .main {
-    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 
-    & .generador {
+    & .main__generador {
       margin-top: 75px;
       display: flex;
       flex-direction: column;
@@ -143,17 +148,52 @@ html {
         cursor: pointer;
       }
     }
+
+    & .main__info {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100vw;
+      margin-top: 25px;
+      background-color: var(--azul-flojo);
+
+      & .info__explicacion {
+        max-width: 1000px;
+        display: grid;
+        grid-template-columns: 35% 65%;
+        grid-template-rows: repeat(4, 1fr);
+        row-gap: 10px;
+        padding: 25px 0;
+        
+        & .explicacion__cajafuerte {
+          background-image: url("../img/desktop/cajafuerte.webp");
+          background-position: center;
+          background-repeat: no-repeat;
+          background-size: cover;
+          grid-column: 1/2;
+          grid-row: 1/5;
+          border-radius: 25px;
+          margin-right: 25px;
+          height: 100%;
+        }
+  
+        & .explicacion__informacion {
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+        }
+      }
+    }
   }
 
   & .footer {
-    position: absolute;
-    width: 100vw;
+    width: 100%;
     display: flex;
     justify-content: space-between;
     padding: 15px 200px;
     background-color: var(--azul-oscuro);
     color: white;
-    bottom: 0;
+    box-shadow: 0px -5px 10px 0px rgba(0, 0, 0, 0.25);
 
     & .footer__izq {
       display: flex;
