@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <!-- SEO = Básico -->
     <!-- Cada página del sitio tiene que ser diferente el título y la descripción -->
-    <title>Make Me A Pass - Index</title>
+    <title>Make Me A Pass - Cuenta</title>
     <meta name="description" content="" />
     <meta name="keywords" content="" />
 
@@ -44,36 +44,28 @@
   </head>
   <body>
     <div class="container">
-      <header class="header">
-        <section class="header__nombre">
-          <h2>Make Me</h2>
-          <img class="nombre__logo" src="img/desktop/logo.webp">
-          <h2>A Pass</h2>
-        </section>
-
-        <nav class="header__nav">
-          <a href="login.php" class="nav__login">Iniciar Sesión</a>
-          <a href="registrarse.php" class="nav__registrarse"><u>Registrarse</u></a>
-        </nav>
-      </header>
+      <?php include 'assets/header.php' ?>
       
-      <footer class="footer">
-        <nav class="footer__izq">
-          <a>Contacto</a>
-          <a class="coffee"><img src="svg/buymeacoffee.svg">Buy Me a Coffee</a>
-          <a>Privacidad</a>
-          <a>Cookies</a>
-          <h6 class="izq__copyright">&copy; All Rights Reserved made by Javier Navarro</h6>
-        </nav>
+      <main class="cuenta__main">
+        <div class="main__barra">
+          <section class="barra__datos">
+            <a><u>usuario@hotmail.com</u></a>
+            <a>Datos de Usuario</a>
+          </section>
 
-        <nav class="footer__redes">
-          <h3><u>Redes Sociales</u></h3>
-          <a class="redes__red"><img src="svg/linkedin.svg">Linked In</a>
-          <a class="redes__red"><img src="svg/github.svg">GitHub</a>
-          <a class="redes__red"><img src="svg/twitter.svg">Twitter</a>
-          <a class="redes__red"><img src="svg/instagram.svg">Instagram</a>
-        </nav>
-      </footer>
+          <a class="sessionout">Cerrar Sesión</a>
+        </div>
+
+        <form class="main__cambiopass">
+          <input type="password" id="pass" name="pass" placeholder="Nueva Contraseña">
+          <input type="password" id="pass_verify" name="pass_verify" placeholder="Confirmar Contraseña">
+          <input type="email" id="email" name="email"  placeholder="Email">
+
+          <input class="botonenviar" type="submit" value="Enviar">
+        </form>
+      </main>
+      
+      <?php include 'assets/footer.php' ?>
     </div>
   </body>
 </html>

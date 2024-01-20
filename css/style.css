@@ -257,48 +257,62 @@ html {
   & .footer {
     position: sticky;
     bottom: 0;
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    padding: 15px 200px;
+    width: 100vw;
     background-color: var(--azul-oscuro);
     color: white;
     box-shadow: 0px -5px 10px 0px rgba(0, 0, 0, 0.25);
+    display: flex;
+    justify-content: center;
 
-    & .footer__izq {
+    & .footer__bg {
       display: flex;
-      flex-direction: column;
       justify-content: space-between;
-      gap: 20px;
-      margin-right: 30px;
+      width: 90vw;
+      max-width: 1000px;
+      padding: 15px 0;
 
-      & .coffee {
+      & .footer__izq {
         display: flex;
-        align-items: center;
-        gap: 10px;
-        
+        flex-direction: column;
+        justify-content: space-between;
+        gap: 20px;
+        margin-right: 30px;
+  
+        & a {
+          color: white;
+          text-decoration: none;
+        }
+  
+        & .coffee {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          
+            & img {
+              width: 20px;
+            }
+        }
+  
+        & .izq__copyright {
+          font-weight: 400;
+        }
+      }
+  
+      & .footer__redes {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+  
+        & .redes__red {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          text-decoration: none;
+          color: white;
+  
           & img {
-            width: 20px;
+            width: 25px;
           }
-      }
-
-      & .izq__copyright {
-        font-weight: 400;
-      }
-    }
-
-    & .footer__redes {
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-
-      & .redes__red {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-
-        & img {
-          width: 25px;
         }
       }
     }
@@ -471,6 +485,7 @@ html {
       border-bottom: 2px solid var(--azul-marino);
       outline: none;
       color: var(--gris-texto);
+      background-color: var(--blanco-gris);
     }
 
     & .botonenviar {
@@ -509,31 +524,53 @@ html {
     flex-wrap: wrap;
     padding: 10px;
     justify-content: center;
-    gap: 25px;
+    gap: 15px;
     margin: 15px 0;
 
     & .passwords__passdiv {
-      width: 220px;
+      width: 150px;
       height: 100px;
       border-radius: 15px;
       display: flex;
       flex-direction: column;
       justify-content: center;
-      padding: 10px;
+      padding: 15px;
       gap: 10px;
       background-color: white;
+      transition: transform 0.2s linear;
       box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.25);
 
       & .passdiv__nombre, .passdiv__password {
+        font-size: 14px;
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
       }
 
       &.passdiv__password {
-        font-size: 14px;
+        font-size: 12px;
         font-weight: 400;
       }
     }
+
+    & .passwords__passdiv:hover {
+      transform: scale(1.2);
+
+      & .passdiv__password {
+        white-space: normal;
+        overflow: visible; 
+        text-overflow: clip;
+      }
+    }
   }
+}
+
+/* Cookies y Privacidad */
+.cookiesandpriv__main {
+  width: 90vw;
+  max-width: 1000px;
+  margin-top: 25px;
+  margin-bottom: 25px;
+  text-align: justify;
+  flex: 1;
 }

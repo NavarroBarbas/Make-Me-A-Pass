@@ -41,64 +41,23 @@
     <script></script>
     <!-- Scripts a cargar antes de la renderización -->
     <script src="preloader.js"></script>
+    <script src="js/scroll.js"></script>
   </head>
   <body>
     <div class="container">
-      <header class="header">
-        <section class="header__nombre">
-          <h2>Make Me</h2>
-          <img class="nombre__logo" src="img/desktop/logo.webp">
-          <h2>A Pass</h2>
-        </section>
-
-        <nav class="header__nav">
-          <a href="contraseñas.php" class="nav__login">Contraseñas</a>
-          <a href="cuenta.php" class="nav__registrarse"><u>Username</u></a>
-        </nav>
-      </header>
+      <?php include 'assets/header.php'; ?>
       
       <main class="main">
         <section class="main__generador">
           <h1 class="generador__titulo">Generador de Contraseñas Aleatorias</h1>
           <h3 class="generador__frase">Contraseñas seguras en segundos</h3>
 
-          <section class="settings">
-            <section class="setting">
-              <input type="checkbox" id="uppercase" />
-              <label for="uppercase">A-Z</label>
-            </section>
-
-            <section class="setting">
-              <input type="checkbox" id="lowercase" />
-              <label for="lowercase">a-z</label>
-            </section>
-
-            <section class="setting">
-              <input type="checkbox" id="numeros" />
-              <label for="numeros">0-9</label>
-            </section>
-
-            <section class="setting">
-              <input type="checkbox" id="caracteres" />
-              <label for="caracteres">!-#</label>
-            </section>
-          </section>
-
           <section class="generador__result">
             <div class="result__box" id="randompass">Click Generar</div>
             <a class="result__copy" id="btncopy">Copiar</a>
           </section>
 
-          <section class="generador__length">
-            <label for="length">Longitud:</label>
-            <input class="length__slider" type="range" min="8" max="32" value="18" name="length" id="length">
-            <span class="length__valor" id="valor"></span>
-          </section>
-
-          <section class="generador__botones">
-            <a class="generador__generar" id="generar">Generar</a>
-            <a class="generador__guardar" id="guardar">Guardar Contraseña</a>
-          </section>
+          <a class="generador__generar" id="generar">Generar</a>
         </section>
 
         <section class="main__info">
@@ -127,33 +86,7 @@
         </section>
       </main>
       
-      <footer class="footer">
-        <nav class="footer__izq">
-          <a>Contacto</a>
-          <a class="coffee"><img src="svg/buymeacoffee.svg">Buy Me a Coffee</a>
-          <a>Privacidad</a>
-          <a>Cookies</a>
-          <h6 class="izq__copyright">&copy; All Rights Reserved made by Javier Navarro</h6>
-        </nav>
-
-        <nav class="footer__redes">
-          <h3><u>Redes Sociales</u></h3>
-          <a class="redes__red"><img src="svg/linkedin.svg">Linked In</a>
-          <a class="redes__red"><img src="svg/github.svg">GitHub</a>
-          <a class="redes__red"><img src="svg/twitter.svg">Twitter</a>
-          <a class="redes__red"><img src="svg/instagram.svg">Instagram</a>
-        </nav>
-      </footer>
+      <?php include 'assets/footer.php' ?>
     </div>
   </body>
 </html>
-
-<script type="text/javascript">
-  var slider = document.getElementById("length");
-  var output = document.getElementById("valor");
-  output.innerHTML = slider.value;
-  
-  slider.oninput = function() {
-      output.innerHTML = this.value;
-  }
-</script>

@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <!-- SEO = Básico -->
     <!-- Cada página del sitio tiene que ser diferente el título y la descripción -->
-    <title>Make Me A Pass - Cuenta</title>
+    <title>Make Me A Pass - Contraseñas</title>
     <meta name="description" content="" />
     <meta name="keywords" content="" />
 
@@ -41,58 +41,37 @@
     <script></script>
     <!-- Scripts a cargar antes de la renderización -->
     <script src="preloader.js"></script>
+    <script src="js/scroll.js"></script>
   </head>
   <body>
     <div class="container">
-      <header class="header">
-        <section class="header__nombre">
-          <h2>Make Me</h2>
-          <img class="nombre__logo" src="img/desktop/logo.webp">
-          <h2>A Pass</h2>
-        </section>
-
-        <nav class="header__nav">
-          <a href="login.php" class="nav__login">Contraseñas</a>
-          <a href="registrarse.php" class="nav__registrarse"><u>Username</u></a>
-        </nav>
-      </header>
+      <?php include 'assets/header.php' ?>
       
-      <main class="cuenta__main">
-        <div class="main__barra">
-          <section class="barra__datos">
-            <a><u>usuario@hotmail.com</u></a>
-            <a>Datos de Usuario</a>
-          </section>
+      <main class="cookiesandpriv__main">
+        <h2>Privacidad</h2>
 
-          <a class="sessionout">Cerrar Sesión</a>
-        </div>
-
-        <form class="main__cambiopass">
-          <input type="password" id="pass" name="pass" placeholder="Nueva Contraseña">
-          <input type="password" id="pass_verify" name="pass_verify" placeholder="Confirmar Contraseña">
-          <input type="email" id="email" name="email"  placeholder="Email">
-
-          <input class="botonenviar" type="submit" value="Enviar">
-        </form>
+        <h2>Información que recopilamos</h2>
+        <p>Recopilamos información personal que proporcionas voluntariamente, como tu nombre, dirección de correo electrónico, y otra información identificable cuando utilizas nuestro sitio web.</p>
+    
+        <h2>Uso de la información</h2>
+        <p>Utilizamos la información recopilada para personalizar tu experiencia en nuestro sitio web, mejorar nuestros productos y servicios, y enviar comunicaciones relevantes.</p>
+    
+        <h2>Compartir información con terceros</h2>
+        <p>No compartimos tu información personal con terceros, excepto en situaciones legalmente requeridas.</p>
+    
+        <h2>Seguridad de la información</h2>
+        <p>Tomamos medidas de seguridad para proteger tu información personal. Sin embargo, no podemos garantizar la seguridad completa de la información transmitida a través de Internet.</p>
+    
+        <h2>Derechos del usuario</h2>
+        <p>Tienes el derecho de acceder, corregir, actualizar o eliminar tu información personal. Si deseas ejercer estos derechos, por favor, contáctanos.</p>
+    
+        <h2>Cambios en nuestra política de privacidad</h2>
+        <p>Nos reservamos el derecho de actualizar nuestra política de privacidad en cualquier momento. Cualquier cambio será publicado en esta página.</p>
+      </section>
       </main>
 
-      <footer class="footer">
-        <nav class="footer__izq">
-          <a>Contacto</a>
-          <a class="coffee"><img src="svg/buymeacoffee.svg">Buy Me a Coffee</a>
-          <a>Privacidad</a>
-          <a>Cookies</a>
-          <h6 class="izq__copyright">&copy; All Rights Reserved made by Javier Navarro</h6>
-        </nav>
-
-        <nav class="footer__redes">
-          <h3><u>Redes Sociales</u></h3>
-          <a class="redes__red"><img src="svg/linkedin.svg">Linked In</a>
-          <a class="redes__red"><img src="svg/github.svg">GitHub</a>
-          <a class="redes__red"><img src="svg/twitter.svg">Twitter</a>
-          <a class="redes__red"><img src="svg/instagram.svg">Instagram</a>
-        </nav>
-      </footer>
+      <?php include 'assets/footer.php' ?>
     </div>
   </body>
 </html>
+
