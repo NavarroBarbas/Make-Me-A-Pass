@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- SEO = Básico -->
+    <!-- Cada página del sitio tiene que ser diferente el título y la descripción -->
+    <title>Make Me A Pass - Cuenta</title>
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+
+    <!-- Etiquetas Open Graph y Twitter Card, para crear el SEO de Redes Sociales -->
+    <meta property="og:title" content="Título de tu página" />
+    <meta property="og:description" content="Descripción de tu página" />
+    <meta
+      property="og:image"
+      content="URL de la imagen que quieres mostrar en las redes sociales"
+    />
+    <meta property="og:url" content="URL de tu página" />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Título de tu página" />
+    <meta name="twitter:description" content="Descripción de tu página" />
+    <meta
+      name="twitter:image"
+      content="URL de la imagen que quieres mostrar en Twitter"
+    />
+
+    <!-- App Web, inidicar al navegador que elementos mostrar en un JSON -->
+    <link rel="manifest" href="site.webmanifest" />
+    <!-- icono de acceso para IOS -->
+    <link rel="apple-touch-icon" href="icon.png" />
+    <!-- Recordar que favicon.ico tiene que estar en el directorio inicial -->
+
+    <!-- links de estilos -->
+    <link rel="stylesheet" href="css/style.css" />
+    
+    <!-- Se cambia el tema de algunos navegadores -->
+    <meta name="theme-color" content="#fafafa" />
+    <!-- Código de las plataformas de Análisis -->
+    <script></script>
+    <!-- Scripts a cargar antes de la renderización -->
+    <script src="preloader.js"></script>
+  </head>
+  <body>
+    <div class="container">
+      <header class="header">
+        <section class="header__nombre">
+          <h2>Make Me</h2>
+          <img class="nombre__logo" src="img/desktop/logo.webp">
+          <h2>A Pass</h2>
+        </section>
+
+        <nav class="header__nav">
+          <a href="login.php" class="nav__login">Contraseñas</a>
+          <a href="registrarse.php" class="nav__registrarse"><u>Username</u></a>
+        </nav>
+      </header>
+      
+      <main class="cuenta__main">
+        <div class="main__barra">
+          <section class="barra__datos">
+            <a><u>usuario@hotmail.com</u></a>
+            <a>Datos de Usuario</a>
+          </section>
+
+          <a class="sessionout">Cerrar Sesión</a>
+        </div>
+
+        <form class="main__cambiopass">
+          <input type="password" id="pass" name="pass" placeholder="Nueva Contraseña">
+          <input type="password" id="pass_verify" name="pass_verify" placeholder="Confirmar Contraseña">
+          <input type="email" id="email" name="email"  placeholder="Email">
+
+          <input class="botonenviar" type="submit" value="Enviar">
+        </form>
+      </main>
+
+      <footer class="footer">
+        <nav class="footer__izq">
+          <a>Contacto</a>
+          <a class="coffee"><img src="svg/buymeacoffee.svg">Buy Me a Coffee</a>
+          <a>Privacidad</a>
+          <a>Cookies</a>
+          <h6 class="izq__copyright">&copy; All Rights Reserved made by Javier Navarro</h6>
+        </nav>
+
+        <nav class="footer__redes">
+          <h3><u>Redes Sociales</u></h3>
+          <a class="redes__red"><img src="svg/linkedin.svg">Linked In</a>
+          <a class="redes__red"><img src="svg/github.svg">GitHub</a>
+          <a class="redes__red"><img src="svg/twitter.svg">Twitter</a>
+          <a class="redes__red"><img src="svg/instagram.svg">Instagram</a>
+        </nav>
+      </footer>
+    </div>
+  </body>
+</html>
