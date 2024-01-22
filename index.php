@@ -46,7 +46,7 @@
   </head>
   <body>
     <div class="container">
-      <?php include 'assets/header.php'; ?>
+      <?php include 'components/header.php'; ?>
       
       <main class="main">
         <section class="main__generador">
@@ -87,7 +87,7 @@
         </section>
       </main>
       
-      <?php include 'assets/footer.php' ?>
+      <?php include 'components/footer.php' ?>
     </div>
   </body>
 </html>

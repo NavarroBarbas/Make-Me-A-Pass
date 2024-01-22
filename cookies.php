@@ -45,7 +45,7 @@
   </head>
   <body>
     <div class="container">
-      <?php include 'assets/header.php' ?>
+      <?php include 'components/header.php' ?>
       
       <main class="cookiesandpriv__main">
         <h1>Cookie Policy for makemeapass</h1>
@@ -94,7 +94,7 @@
         </ul>
       </main>
 
-      <?php include 'assets/footer.php' ?>
+      <?php include 'components/footer.php' ?>
     </div>
   </body>
 </html>

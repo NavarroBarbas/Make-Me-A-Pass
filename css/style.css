@@ -175,6 +175,7 @@ html {
       background-color: var(--azul-flojo);
 
       & .info__explicacion {
+        width: 90vw;
         max-width: 1000px;
         display: grid;
         grid-template-columns: 35% 65%;

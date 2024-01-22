@@ -45,7 +45,7 @@
   </head>
   <body>
     <div class="container">
-      <?php include 'assets/header.php' ?>
+      <?php include 'components/header.php' ?>
     
       <main class="passwords__main">
         <h2 class="main__titulo">Contraseñas</h2>
@@ -77,7 +77,7 @@
         
       </main>
 
-      <?php include 'assets/footer.php' ?>
+      <?php include 'components/footer.php' ?>
     </div>
   </body>
 </html>
