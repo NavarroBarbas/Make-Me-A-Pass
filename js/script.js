@@ -16,6 +16,10 @@ function closeOverlay(event) {
     if(event.target.id == "login") {
         let overlay = document.getElementById("login");
         let formulario = document.querySelector(".overlay__box");
+        let emailError = document.getElementById("email-error-login");
+        let passError = document.getElementById("pass-error-login");
+        emailError.innerHTML = "";
+        passError.innerHTML = "";
 
         if (event.target === overlay && !formulario.contains(event.target)) {
             login(event);
@@ -23,9 +27,9 @@ function closeOverlay(event) {
     } else if (event.target.id == "registro") { //Cierra Overlay Registro al clickar fuera del form
         let overlay = document.getElementById("registro");
         let formulario = document.querySelector(".overlay__box");
-        let emailError = document.getElementById("email-error");
-        let passError = document.getElementById("pass-error");
-        let passVerifyError = document.getElementById("passverify-error");
+        let emailError = document.getElementById("email-error-registro");
+        let passError = document.getElementById("pass-error-registro");
+        let passVerifyError = document.getElementById("passverify-error-registro");
         emailError.innerHTML = "";
         passError.innerHTML = "";
         passVerifyError.innerHTML = "";
@@ -55,9 +59,9 @@ function validarFormRegistro() {
     let email = document.getElementById("email-registro").value;
     let pass = document.getElementById("pass-registro").value;
     let pass_verify = document.getElementById("pass_verify").value;
-    let emailError = document.getElementById("email-error");
-    let passError = document.getElementById("pass-error");
-    let passVerifyError = document.getElementById("passverify-error");
+    let emailError = document.getElementById("email-error-registro");
+    let passError = document.getElementById("pass-error-registro");
+    let passVerifyError = document.getElementById("passverify-error-registro");
 
     let error = 0;
 
@@ -85,7 +89,7 @@ function validarFormRegistro() {
     }
 
     //Validar confirmación de Contraseña
-    if (pass_verify == 0 || pass_verify == null) {
+    if (pass_verify.length == 0 || pass_verify == null) {
         passVerifyError.innerHTML = "Confirmar contraseña es obligatorio";
         error = 1;
     }
@@ -98,11 +102,72 @@ function validarFormRegistro() {
 
     if(error == 1) {
         return false;
+    } else {
+        $.ajax({
+            type: 'POST',
+            url: 'php/registrarse.php',
+            data: { emailregistro: email, passregistro: pass, passverify:  pass_verify},
+            success: function(response) {
+                if(response === 'Añadiendo usuario') {
+                    alert("Añadiendo un nuevo usuario");
+                    //Continuar para crear sesión
+                    window.location.reload();
+                } else if(response === "Este usuario ya existe en el sistema") {
+                    passVerifyError.innerHTML = response;
+                }
+            } ,
+            error: function() {
+                passError.innerHTML = "Error al procesar la solicitud";
+            }
+        });
+        return false;
     }
-
-    return true;
 }
 
-function validarLogin() {
-    
+function validarFormLogin() {
+    let email = document.getElementById("email-login").value;
+    let pass = document.getElementById("pass-login").value;
+    let emailError = document.getElementById("email-error-login");
+    let passError = document.getElementById("pass-error-login");
+
+    let error = 0;
+
+    // Restablecer mensajes de error
+    emailError.innerHTML = "";
+    passError.innerHTML = "";
+
+    if (email.length == 0 || email == null) {
+        emailError.innerHTML = "Email es obligatorio";
+        error = 1;
+    } else if(!(/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/.test(email))) {
+        emailError.innerHTML = "Email es incorrecto";
+        error = 1;
+    }
+
+    if (pass.length == 0 || pass == null) {
+        passError.innerHTML = "Contraseña es obligatoria";
+        error = 1;
+    }
+
+    if(error == 1) {
+        return false;
+    } else {
+        $.ajax({
+            type: 'POST',
+            url: 'php/login.php',
+            data: { correo: email, password: pass },
+            success: function(response) {
+                if(response === 'Login Correcto') {
+                    alert("Login Correcto");
+                    window.location.href = "sesioniniciada.php";
+                } else {
+                    passError.innerHTML = response;
+                }
+            },
+            error: function() {
+                passError.innerHTML = "Error al procesar la solicitud";
+            }
+        });
+        return false;
+    }
 }

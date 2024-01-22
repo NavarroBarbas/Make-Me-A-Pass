@@ -1,3 +1,8 @@
+<?php
+	//Activo la sesión en PHP
+	session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="es">
   <head>
@@ -42,10 +47,21 @@
     <!-- Scripts a cargar antes de la renderización -->
     <script src="preloader.js"></script>
     <script src="js/scroll.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="js/script.js"></script>
   </head>
   <body>
     <div class="container">
-      <?php include 'components/header.php' ?>
+      <?php include 'components/header.php';
+      
+      if (!isset($_SESSION["email"])){
+        echo "<br/><h2>Mensaje de Rechazo</h2>
+        <br/>
+        Lo siento, NO tiene privilegios para entrar en esta página, por favor vuelva a la página principal e ingrese un nombre de usuario y apellido.
+        <br /><br />
+        <a href='index.php'>Volver a página de Inicio </a>";
+      } else {
+      ?>
       
       <main class="main">
         <section class="main__generador">
@@ -116,8 +132,19 @@
           </section>
         </section>
       </main>
+      <?php } ?>
       
       <?php include 'components/footer.php' ?>
     </div>
   </body>
 </html>
+
+<script type="text/javascript">
+    var slider = document.getElementById("length");
+    var output = document.getElementById("valor");
+    output.innerHTML = slider.value;
+    
+    slider.oninput = function() {
+        output.innerHTML = this.value;
+    }
+</script>
