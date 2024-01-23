@@ -180,3 +180,119 @@ function validarFormLogin() {
         return false;
     }
 }
+
+//No carga index correctamente
+function cerrarSesion() {
+    window.location.href = "index.php";
+    $.ajax ({
+        type: 'POST',
+        url: 'php/logout.php',
+        success: function(response) {
+            if(response === 'Sesion Cerrada') {
+                alert("La sesión se ha cerrado correctamente");
+                window.location.reload();
+            }
+        },
+        error: function() {
+            alert("Error al procesar la solicitud");
+        }
+    });
+}
+
+function generarPass() {
+    let randompass = document.getElementById("randompass");
+
+    let caracteresEspeciales = "!@#$%^&*()_-+=<>?/{}[]";
+    let letrasMayusculas = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    let letrasMinusculas = "abcdefghijklmnopqrstuvwxyz";
+    let numeros = "0123456789";
+    let caracteres = [letrasMayusculas, letrasMinusculas, numeros, caracteresEspeciales];
+
+    function obtenerCaracter() {
+        let indice = Math.floor(Math.random() * caracteres.length);      
+        return indice;
+    }
+
+    $.ajax ({
+        type: 'POST',
+        url: 'php/passlength.php',
+        data: {length: length},
+        success: function(response) {
+            let password = "";
+
+            if(response === 'Sesion iniciada') {
+                let length = document.getElementById("length").value;
+                /*let uppercase = document.getElementById("uppercase");       //0
+                let lowercase = document.getElementById("lowercase");       //1            
+                let numeros = document.getElementById("numeros");           //2
+                let charEspeciales = document.getElementById("caracteres"); //3
+
+                if(!uppercase.checked) {
+                    caracteres.splice(0, 1);
+                }
+
+                if(!lowercase.checked) {
+                    caracteres.splice(1, 1);
+                }
+                
+                if(!numeros.checked) {
+                    caracteres.splice(2, 1);
+                }
+                
+                if(!charEspeciales.checked) {
+                    caracteres.splice(3, 1);
+                }*/
+
+                let indiceAnterior = obtenerCaracter();
+                let indiceNuevo = obtenerCaracter();
+
+                for (let index = 0; index < length; index++) {
+                    while(indiceAnterior == indiceNuevo) {
+                        indiceNuevo = obtenerCaracter();
+                        //Saca mas de 8 caracteres
+                    }
+                    let caracter = caracteres[indiceNuevo].charAt(Math.floor(Math.random() * caracteres[indiceNuevo].length));
+                    indiceAnterior = indiceNuevo;
+                    indiceNuevo = obtenerCaracter();
+                    password += caracter;
+                }
+                randompass.innerHTML = password;
+            } else if(response === 'Sesion no iniciada'){
+                let indiceAnterior = obtenerCaracter();
+                let indiceNuevo = obtenerCaracter();
+
+                for (let index = 0; index < 8; index++) {
+                    while(indiceAnterior == indiceNuevo) {
+                        indiceNuevo = obtenerCaracter();
+                    }
+                    let caracter = caracteres[indiceNuevo].charAt(Math.floor(Math.random() * caracteres[indiceNuevo].length));
+                    indiceAnterior = indiceNuevo;
+                    indiceNuevo = obtenerCaracter();
+                    password += caracter;
+                }
+                randompass.innerHTML = password;
+            }
+        },
+        error: function() {
+            randompass.innerHTML = "Operación no válida";
+        }
+    });
+}
+
+function copiar() {
+    let texto = document.getElementById('randompass').innerText;
+
+    // Crear un elemento de input oculto
+    let input = document.createElement('input');
+    input.value = texto;
+    document.body.appendChild(input);
+
+    // Seleccionar el contenido del input
+    input.select();
+
+    // Intentar copiar el contenido al portapapeles
+    document.execCommand('copy');
+
+    // Eliminar el elemento de input creado
+    document.body.removeChild(input);
+}

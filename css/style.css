@@ -563,6 +563,7 @@ html {
         white-space: normal;
         overflow: visible; 
         text-overflow: clip;
+        word-wrap: break-word;
       }
     }
   }

@@ -59,22 +59,22 @@
           <?php if (isset($_SESSION["email"])) { ?>
           <section class="settings">
             <section class="setting">
-              <input type="checkbox" id="uppercase" />
+              <input type="checkbox" id="uppercase" checked/>
               <label for="uppercase">A-Z</label>
             </section>
 
             <section class="setting">
-              <input type="checkbox" id="lowercase" />
+              <input type="checkbox" id="lowercase" checked/>
               <label for="lowercase">a-z</label>
             </section>
 
             <section class="setting">
-              <input type="checkbox" id="numeros" />
+              <input type="checkbox" id="numeros" checked/>
               <label for="numeros">0-9</label>
             </section>
 
             <section class="setting">
-              <input type="checkbox" id="caracteres" />
+              <input type="checkbox" id="caracteres" checked/>
               <label for="caracteres">!-#</label>
             </section>
           </section>
@@ -82,7 +82,7 @@
 
           <section class="generador__result">
             <div class="result__box" id="randompass">Click Generar</div>
-            <a class="result__copy" id="btncopy">Copiar</a>
+            <a class="result__copy" onclick="copiar()" id="btncopy">Copiar</a>
           </section>
 
           <?php if (isset($_SESSION["email"])) { ?>
@@ -95,7 +95,7 @@
           <?php } ?>
 
           <div class="generador__botones">
-          <a class="generador__generar" id="generar">Generar</a>
+          <a class="generador__generar" id="generar" onclick="generarPass()">Generar</a>
 
           <?php if (isset($_SESSION["email"])) { ?>
             <a class="generador__guardar" id="guardar">Guardar Contraseña</a>

@@ -56,7 +56,7 @@
         <section class="main__passwords">
           <div class="passwords__passdiv">
             <h4 class="passdiv__nombre">Nombre Password</h4>
-            <a class="passdiv__password">Password</a>
+            <a class="passdiv__password">12345678901234567890123456789012</a>
           </div>
           <div class="passwords__passdiv">
             <h4 class="passdiv__nombre">Nombre Password</h4>

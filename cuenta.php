@@ -63,11 +63,11 @@
       <main class="cuenta__main">
         <div class="main__barra">
           <section class="barra__datos">
-            <a><u>usuario@hotmail.com</u></a>
+            <a><u><?php echo $_SESSION["email"] ?></u></a>
             <a>Datos de Usuario</a>
           </section>
 
-          <a class="sessionout">Cerrar Sesión</a>
+          <a class="sessionout" onclick="cerrarSesion()">Cerrar Sesión</a>
         </div>
 
         <form class="main__cambiopass">
