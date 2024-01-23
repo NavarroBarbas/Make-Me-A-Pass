@@ -6,8 +6,13 @@
     </a>
 
     <nav class="header__nav">
+        <?php if (isset($_SESSION["email"])) {
+            echo '<a id="contraseñas" href="passwords.php" class="nav__login">Contraseñas</a>';
+            echo '<a id="cuenta" href="cuenta.php" class="nav__registrarse">' . $_SESSION['email'] . '</a>';
+        } else { ?>
         <a id="loginclick" onclick="openOverlay(event)" class="nav__login">Iniciar Sesión</a>
         <a id="registroclick" onclick="openOverlay(event)" class="nav__registrarse">Registrarse</a>
+        <?php } ?>
     </nav>
 </header>
 

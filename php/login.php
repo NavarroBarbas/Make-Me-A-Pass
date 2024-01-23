@@ -1,6 +1,8 @@
 <?php
     include '../bbdd/conexiones.php';
 
+    session_start();
+
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $email = $_POST['correo'];
         $pass = $_POST['password'];
@@ -16,14 +18,8 @@
             }
 
             if(password_verify($pass, $hashedPass)) {
+                $_SESSION['email'] = $email;
                 echo "Login Correcto";
-                //Comienza la sesión
-                session_start([
-                    'cookie_lifetime' => 86400,
-                    'read_and_close'  => true
-                ]);
-                $_SESSION["email"] = $_POST['correo'];
-                $_SESSION["password"] = $_POST['password'];
             } else {
                 echo "Datos de usuario incorrectos";
             }

@@ -1,3 +1,6 @@
+<?php
+  session_start();
+?>
 <!DOCTYPE html>
 <html lang="es">
   <head>
@@ -53,12 +56,52 @@
           <h1 class="generador__titulo">Generador de Contraseñas Aleatorias</h1>
           <h3 class="generador__frase">Contraseñas seguras en segundos</h3>
 
+          <?php if (isset($_SESSION["email"])) { ?>
+          <section class="settings">
+            <section class="setting">
+              <input type="checkbox" id="uppercase" />
+              <label for="uppercase">A-Z</label>
+            </section>
+
+            <section class="setting">
+              <input type="checkbox" id="lowercase" />
+              <label for="lowercase">a-z</label>
+            </section>
+
+            <section class="setting">
+              <input type="checkbox" id="numeros" />
+              <label for="numeros">0-9</label>
+            </section>
+
+            <section class="setting">
+              <input type="checkbox" id="caracteres" />
+              <label for="caracteres">!-#</label>
+            </section>
+          </section>
+          <?php } ?> 
+
           <section class="generador__result">
             <div class="result__box" id="randompass">Click Generar</div>
             <a class="result__copy" id="btncopy">Copiar</a>
           </section>
 
+          <?php if (isset($_SESSION["email"])) { ?>
+            <section class="generador__length">
+            <label for="length">Longitud:</label>
+            <input class="length__slider" type="range" min="8" max="32" value="18" name="length" id="length">
+            <span class="length__valor" id="valor"></span>
+          </section>
+          <script type="text/javascript">numLength()</script>
+          <?php } ?>
+
+          <div class="generador__botones">
           <a class="generador__generar" id="generar">Generar</a>
+
+          <?php if (isset($_SESSION["email"])) { ?>
+            <a class="generador__guardar" id="guardar">Guardar Contraseña</a>
+          <?php } ?>
+
+          </div>
         </section>
 
         <section class="main__info">

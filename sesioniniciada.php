@@ -1,6 +1,6 @@
 <?php
 	//Activo la sesión en PHP
-	session_start();
+	//session_start();
 ?>
 
 <!DOCTYPE html>
@@ -54,7 +54,7 @@
     <div class="container">
       <?php include 'components/header.php';
       
-      if (!isset($_SESSION["email"])){
+      if (!isset($_SESSION["email"])){ //NO COGE LA SESIÓN
         echo "<br/><h2>Mensaje de Rechazo</h2>
         <br/>
         Lo siento, NO tiene privilegios para entrar en esta página, por favor vuelva a la página principal e ingrese un nombre de usuario y apellido.
@@ -138,13 +138,3 @@
     </div>
   </body>
 </html>
-
-<script type="text/javascript">
-    var slider = document.getElementById("length");
-    var output = document.getElementById("valor");
-    output.innerHTML = slider.value;
-    
-    slider.oninput = function() {
-        output.innerHTML = this.value;
-    }
-</script>

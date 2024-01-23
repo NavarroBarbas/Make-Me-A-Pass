@@ -54,6 +54,16 @@ function login(event) {
     }
 }
 
+function numLength() {
+    var slider = document.getElementById("length");
+    var output = document.getElementById("valor");
+    output.innerHTML = slider.value;
+    
+    slider.oninput = function() {
+        output.innerHTML = this.value;
+    }
+}
+
 function validarFormRegistro() {
     // Obtener referencias a los campos y mensajes de error
     let email = document.getElementById("email-registro").value;
@@ -109,7 +119,7 @@ function validarFormRegistro() {
             data: { emailregistro: email, passregistro: pass, passverify:  pass_verify},
             success: function(response) {
                 if(response === 'Añadiendo usuario') {
-                    alert("Añadiendo un nuevo usuario");
+                    alert("Añadiendo usuario");
                     //Continuar para crear sesión
                     window.location.reload();
                 } else if(response === "Este usuario ya existe en el sistema") {
@@ -158,8 +168,7 @@ function validarFormLogin() {
             data: { correo: email, password: pass },
             success: function(response) {
                 if(response === 'Login Correcto') {
-                    alert("Login Correcto");
-                    window.location.href = "sesioniniciada.php";
+                    window.location.reload();
                 } else {
                     passError.innerHTML = response;
                 }
