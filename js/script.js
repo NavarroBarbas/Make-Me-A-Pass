@@ -8,6 +8,10 @@ function openOverlay(event) {
         let overlay = document.getElementById("registro");
         overlay.style.opacity = "1";
         overlay.style.visibility = "visible";
+    } else if (event.target.id == "guardarclick") { //Overlay Guardar Contraseña
+        let overlay = document.getElementById("savepass");
+        overlay.style.opacity = "1";
+        overlay.style.visibility = "visible";
     }
 }
 
@@ -37,6 +41,16 @@ function closeOverlay(event) {
         if (event.target === overlay && !formulario.contains(event.target)) {
             login(event);
         }
+    }  else if (event.target.id == "savepass") { //Cierra Overlay Registro al clickar fuera del form
+        let overlay = document.getElementById("savepass");
+        let formulario = document.querySelector(".overlay__box");
+        let saveError = document.getElementById("save-error-savepass");
+        saveError.innerHTML = "";
+
+
+        if (event.target === overlay && !formulario.contains(event.target)) {
+            login(event);
+        }
     }
 }
 
@@ -49,6 +63,10 @@ function login(event) {
 
     } else if (event.target.id == "registro") { //Quita la visibilidad del overlay registro
         let overlay = document.getElementById("registro");
+        overlay.style.opacity = "0";
+        overlay.style.visibility = "hidden";
+    } else if (event.target.id == "savepass") { //Quita la visibilidad del overlay Guardar Contraseña
+        let overlay = document.getElementById("savepass");
         overlay.style.opacity = "0";
         overlay.style.visibility = "hidden";
     }
@@ -181,16 +199,13 @@ function validarFormLogin() {
     }
 }
 
-//No carga index correctamente
 function cerrarSesion() {
-    window.location.href = "index.php";
     $.ajax ({
         type: 'POST',
         url: 'php/logout.php',
         success: function(response) {
             if(response === 'Sesion Cerrada') {
-                alert("La sesión se ha cerrado correctamente");
-                window.location.reload();
+                window.location.href="index.php";
             }
         },
         error: function() {
@@ -199,6 +214,7 @@ function cerrarSesion() {
     });
 }
 
+//Problemas con las opciones
 function generarPass() {
     let randompass = document.getElementById("randompass");
 
@@ -208,7 +224,7 @@ function generarPass() {
     let numeros = "0123456789";
     let caracteres = [letrasMayusculas, letrasMinusculas, numeros, caracteresEspeciales];
 
-    function obtenerCaracter() {
+    function obtenerIndiceCaracter() {
         let indice = Math.floor(Math.random() * caracteres.length);      
         return indice;
     }
@@ -222,54 +238,58 @@ function generarPass() {
 
             if(response === 'Sesion iniciada') {
                 let length = document.getElementById("length").value;
-                /*let uppercase = document.getElementById("uppercase");       //0
+                let uppercase = document.getElementById("uppercase");       //0
                 let lowercase = document.getElementById("lowercase");       //1            
-                let numeros = document.getElementById("numeros");           //2
+                let charNumeros = document.getElementById("numeros");       //2
                 let charEspeciales = document.getElementById("caracteres"); //3
 
                 if(!uppercase.checked) {
-                    caracteres.splice(0, 1);
+                    caracteres = caracteres.filter(elemento => elemento !== letrasMayusculas);
                 }
 
                 if(!lowercase.checked) {
-                    caracteres.splice(1, 1);
+                    caracteres = caracteres.filter(elemento => elemento !== letrasMinusculas);
                 }
                 
-                if(!numeros.checked) {
-                    caracteres.splice(2, 1);
+                if(!charNumeros.checked) {
+                    caracteres = caracteres.filter(elemento => elemento !== numeros);
                 }
                 
                 if(!charEspeciales.checked) {
-                    caracteres.splice(3, 1);
-                }*/
+                    caracteres = caracteres.filter(elemento => elemento !== caracteresEspeciales);
+                }
 
-                let indiceAnterior = obtenerCaracter();
-                let indiceNuevo = obtenerCaracter();
+                let indiceAnterior = obtenerIndiceCaracter();
+                let indiceNuevo = obtenerIndiceCaracter();
 
                 for (let index = 0; index < length; index++) {
-                    while(indiceAnterior == indiceNuevo) {
-                        indiceNuevo = obtenerCaracter();
-                        //Saca mas de 8 caracteres
+                    if(caracteres.length > 1) {
+                        while(indiceAnterior == indiceNuevo) {
+                            indiceNuevo = obtenerIndiceCaracter();
+                            //Saca menos caracteres de lo marcado a veces
+                        }
                     }
                     let caracter = caracteres[indiceNuevo].charAt(Math.floor(Math.random() * caracteres[indiceNuevo].length));
                     indiceAnterior = indiceNuevo;
-                    indiceNuevo = obtenerCaracter();
+                    indiceNuevo = obtenerIndiceCaracter();
                     password += caracter;
                 }
+
                 randompass.innerHTML = password;
             } else if(response === 'Sesion no iniciada'){
-                let indiceAnterior = obtenerCaracter();
-                let indiceNuevo = obtenerCaracter();
+                let indiceAnterior = obtenerIndiceCaracter();
+                let indiceNuevo = obtenerIndiceCaracter();
 
                 for (let index = 0; index < 8; index++) {
                     while(indiceAnterior == indiceNuevo) {
-                        indiceNuevo = obtenerCaracter();
+                        indiceNuevo = obtenerIndiceCaracter();
                     }
                     let caracter = caracteres[indiceNuevo].charAt(Math.floor(Math.random() * caracteres[indiceNuevo].length));
                     indiceAnterior = indiceNuevo;
-                    indiceNuevo = obtenerCaracter();
+                    indiceNuevo = obtenerIndiceCaracter();
                     password += caracter;
                 }
+
                 randompass.innerHTML = password;
             }
         },
@@ -295,4 +315,7 @@ function copiar() {
 
     // Eliminar el elemento de input creado
     document.body.removeChild(input);
+}
+
+function guardarPass() {
 }

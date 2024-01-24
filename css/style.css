@@ -135,20 +135,22 @@ html {
           color: var(--azul-marino);
           padding: 10px 50px;
           border-radius: 50px;
-          box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.25);
+          box-shadow: 0px 3px 5px 0px rgba(0, 0, 0, 0.15);
         }
 
         & .result__copy {
           background-color: var(--dorado);
           padding: 10px 40px;
           border-radius: 20px;
-          box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.25);
+          box-shadow: 0px 3px 5px 0px rgba(0, 0, 0, 0.15);
           font-size: 14px;
           cursor: pointer;
         }
 
         & .result__copy:hover {
           background-color: #b5a66c;
+          transform: scale(1.2);
+          transition: transform 0.2s linear;
         }
       }
 
@@ -163,6 +165,8 @@ html {
 
       & .generador__generar:hover {
         background-color: var(--azul-normal);
+        transform: scale(1.1);
+        transition: transform 0.2s linear;
       }
     }
 
@@ -367,6 +371,8 @@ html {
 
   & .generador__guardar:hover {
     background-color: #3aab53;
+    transform: scale(1.1);
+    transition: transform 0.2s linear;
   }
 }
 
@@ -579,8 +585,11 @@ html {
   flex: 1;
 }
 
-/* Overlays Login y Registrarse */
+/* Overlays Login, Registrarse y Guardar Contraseña */
 .overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
   opacity: 0;
   visibility: hidden;
   position: fixed;
@@ -639,6 +648,10 @@ html {
         cursor: pointer;
       }
 
+      & .nombrepass {
+        border-bottom: 2px solid var(--verde-light);
+      }
+
       & .botonenviar {
         margin-top: 15px;
         width: 65%;
@@ -653,6 +666,14 @@ html {
 
       & .botonenviar:hover {
         background-color: var(--azul-marino);
+      }
+
+      & .savepass {
+        background-color: var(--verde-light);
+      }
+
+      & .savepass:hover {
+        background-color: #3aab53;
       }
     }
   }

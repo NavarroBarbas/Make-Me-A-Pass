@@ -48,37 +48,46 @@
   </head>
   <body>
     <div class="container">
-      <?php include 'components/header.php' ?>
+      <?php 
+      include 'components/header.php';
+      include 'bbdd/conexiones.php';
+      
+      if (!isset($_SESSION["email"])){ //NO COGE LA SESIÓN
+        echo "<br/><h2>Mensaje de Rechazo</h2>
+        <br/>
+        Lo siento, NO tiene privilegios para entrar en esta página, por favor vuelva a la página principal e ingrese un nombre de usuario y apellido.
+        <br /><br />
+        <a href='index.php'>Volver a página de Inicio </a>";
+      } else {
+
+      ?>
     
       <main class="passwords__main">
         <h2 class="main__titulo">Contraseñas</h2>
 
         <section class="main__passwords">
-          <div class="passwords__passdiv">
-            <h4 class="passdiv__nombre">Nombre Password</h4>
-            <a class="passdiv__password">12345678901234567890123456789012</a>
-          </div>
-          <div class="passwords__passdiv">
-            <h4 class="passdiv__nombre">Nombre Password</h4>
-            <a class="passdiv__password">Password</a>
-          </div>
-          <div class="passwords__passdiv">
-            <h4 class="passdiv__nombre">Nombre Password</h4>
-            <a class="passdiv__password">Password</a>
-          </div>
-          <div class="passwords__passdiv">
-            <h4 class="passdiv__nombre">Nombre Password</h4>
-            <a class="passdiv__password">Password</a>
-          </div>
-          <div class="passwords__passdiv">
-            <h4 class="passdiv__nombre">Nombre Password</h4>
-            <a class="passdiv__password">Password</a>
-          </div>
-          
-          
+          <?php 
+            $sqlPasswords = 'SELECT generated_pass, nombre_pass FROM saved_passwords AS sp
+              INNER JOIN usuarios AS u ON sp.user_id = u.user_id
+              WHERE u.email = "' . $_SESSION['email'] . '"';
+            
+            $resPasswords = mysqli_query($conexion, $sqlPasswords);
+
+            while($column = $resPasswords -> fetch_assoc()) {
+              $nombrePass = $column["nombre_pass"];
+              $password = $column["generated_pass"];
+
+              echo '<div class="passwords__passdiv">
+                      <h4 class="passdiv__nombre">' . $nombrePass . '</h4>
+                      <a class="passdiv__password">' . $password . '</a>
+                    </div>';
+            }
+          ?>
         </section>
         
       </main>
+
+      <?php } ?>
 
       <?php include 'components/footer.php' ?>
     </div>

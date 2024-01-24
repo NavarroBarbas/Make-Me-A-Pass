@@ -5,4 +5,3 @@
         session_destroy();
         echo "Sesion Cerrada";
     }
-?>
