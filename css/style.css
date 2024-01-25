@@ -84,17 +84,17 @@ html {
       & .nav__registrarse {
         text-decoration: none;
         padding: 15px 25px;
-        background: linear-gradient(265deg, #9f2fb3fb, #4e50da);
+        background: linear-gradient(265deg, #3d92dc, var(--azul-normal));
         background-size: 400% 400%;
-        
         color: white;
-        border-radius: 10px;
+        border-radius: 35px;
         font-family: "GoBold";
         cursor: pointer;
       }
 
       & .nav__registrarse:hover {
-        background-color: var(--azul-marino);
+        background: linear-gradient(265deg, #337dbe, var(--azul-normal));
+        background-size: 400% 400%;
       }
     }
   }
@@ -143,16 +143,17 @@ html {
         }
 
         & .result__copy {
-          background: linear-gradient(265deg, #eadb87, #dae85e);
+          background: linear-gradient(265deg, #3d92dc, var(--azul-normal));
+          color: white;
           padding: 10px 40px;
-          border-radius: 20px;
+          border-radius: 15px;
           box-shadow: 0px 3px 5px 0px rgba(0, 0, 0, 0.15);
           font-size: 14px;
           cursor: pointer;
         }
 
         & .result__copy:hover {
-          background-color: #b5a66c;
+          background: #e8f578;
           transform: scale(1.2);
           transition: transform 0.2s linear;
         }
@@ -160,8 +161,7 @@ html {
 
       & .generador__generar {
         padding: 10px 45px;
-        background: linear-gradient(265deg, #287cc6, var(--azul-normal));
-        background-size: 400% 400%;
+        background: linear-gradient(265deg, #3d92dc, var(--azul-normal));
         animation: headerBackground 10s ease infinite;
         color: white;
         border-radius: 15px;
@@ -271,7 +271,7 @@ html {
     position: sticky;
     bottom: 0;
     width: 100vw;
-    background-color: var(--azul-oscuro);
+    background: linear-gradient(270deg, #225582, var(--azul-oscuro));
     color: white;
     box-shadow: 0px -5px 10px 0px rgba(0, 0, 0, 0.25);
     display: flex;
@@ -373,7 +373,7 @@ html {
   gap: 50px;
 
   & .generador__guardar {
-    background-color: var(--verde-light);
+    background: linear-gradient(265deg, #43ab6b, #48b274);
     padding: 10px 25px;
     border-radius: 15px;
     color: white;
@@ -437,7 +437,7 @@ html {
       
       &:checked {
         & + label:before {
-          background-color: var(--verde-light);
+          background: linear-gradient(265deg, #348d56, #5ee898);
           transition: all 150ms cubic-bezier(0, 0, 0, 0.1);
         }
         & + label:after {
@@ -463,7 +463,7 @@ html {
     width: 200px;
     height: calc(100vh - 302px);
     min-height: 365px;
-    background-color: #fcfcfc;
+    background-color: #f4f4f4;
     box-shadow: 5px 0px 10px 0px rgba(0, 0, 0, 0.25);
     display: flex;
     flex-direction: column;
@@ -477,12 +477,12 @@ html {
       gap: 35px;
       width: 100%;
       padding: 35px 20px;
-      background-color: var(--azul-marino);
+      background: linear-gradient(265deg, #3d92dc, var(--azul-normal));
     }
 
     & .sessionout {
       padding: 20px;
-      background-color: var(--azul-marino);
+      background: linear-gradient(265deg, #3d92dc, var(--azul-normal));
       margin-bottom: 25px;
       cursor: pointer;
     }
@@ -518,13 +518,14 @@ html {
       padding: 10px;
       border-radius: 15px;
       border: none;
-      background-color: var(--verde-light);
+      background: linear-gradient(265deg, #43ab6b, #48b274);
+      cursor: pointer;
       color: white;
       box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
     }
 
     & .botonenviar:hover {
-      background-color: #3aab53;
+      background: linear-gradient(265deg, #39915b, #3b9861);
     }
   }
 }
@@ -684,11 +685,11 @@ html {
       }
 
       & .savepass {
-        background-color: var(--verde-light);
+        background: linear-gradient(265deg, #48b371, #4fc37f);
       }
 
       & .savepass:hover {
-        background-color: #3aab53;
+        background: #3aab53;
       }
     }
   }
