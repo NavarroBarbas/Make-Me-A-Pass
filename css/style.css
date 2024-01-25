@@ -17,19 +17,27 @@
   src: url("../font/go-bold-webfont.woff2") format("woff2"), url("../font/go-bold-webfont.woff") format("woff");
 }
 
+@font-face {
+  font-family: "VeraSerif";
+  src: url("../font/veraserif-webfont.woff2") format("woff2"), url("../font/veraserif-webfont.woff") format("woff");
+}
+
 /* ******************************** */
 
 /* Colores */
 :root {
   /* colors */
-  --azul-flojo: #dbf0ff;
+  --azul-flojo-1: #c4e6ff;
+  --azul-flojo-2: #d7eeff;
   --azul-marino: #004d84;
   --azul-normal: #0073c7;
+  --azul-normal-2: #3d92dc;
   --azul-oscuro: #002642;
   --blanco-gris: #f5f5f5;
-  --dorado: #e7d58b;
-  --gris-texto: #383838;
+  --gris-texto: #2c2c2c;
   --verde-light: #3ba953;
+  --verde-deg-1: #43ab6b;
+  --verde-deg-2: #48b274;
 }
 
 /* ******************************** */
@@ -47,6 +55,8 @@ html {
   align-items: center;
   width: 100vw;
   min-height: 100vh;
+  animation-name: show;
+  animation-duration: 1s;
 
   & .header {
     width: 100%;
@@ -54,7 +64,7 @@ html {
     justify-content: space-between;
     align-items: center;
     padding: 0 200px;
-    background: linear-gradient(270deg, #c4e6ff, #d7eeff);
+    background: linear-gradient(270deg, var(--azul-flojo-1), var(--azul-flojo-2));
 
     & .header__nombre {
       display: flex;
@@ -62,6 +72,7 @@ html {
       gap: 10px;
       font-size: 18px;
       color: var(--azul-oscuro);
+      font-family: "VeraSerif";
 
       & .nombre__logo {
         width: 75px;
@@ -69,9 +80,10 @@ html {
     }
 
     & .header__nav {
+      display: flex;
       justify-content: center;
       align-items: center;
-      gap: 100px;
+      gap: 15px;
       font-size: 14px;
 
       & .nav__login {
@@ -79,12 +91,13 @@ html {
         padding: 10px 15px;
         color: var(--azul-oscuro);
         cursor: pointer;
+        
       }
 
       & .nav__registrarse {
         text-decoration: none;
         padding: 15px 25px;
-        background: linear-gradient(265deg, #3d92dc, var(--azul-normal));
+        background: linear-gradient(265deg, var(--azul-normal-2), var(--azul-normal));
         background-size: 400% 400%;
         color: white;
         border-radius: 35px;
@@ -93,7 +106,7 @@ html {
       }
 
       & .nav__registrarse:hover {
-        background: linear-gradient(265deg, #337dbe, var(--azul-normal));
+        background: linear-gradient(265deg, #3186d1, #3386cf);
         background-size: 400% 400%;
       }
     }
@@ -113,11 +126,15 @@ html {
 
       & .generador__titulo {
         font-size: 2.7rem;
+        opacity: 0;
+        animation: text-animate 1s 0.5s cubic-bezier(.04,.79,.49,.93) forwards;
       }
 
       & .generador__frase {
         margin-top: 2rem;
         font-weight: 400;
+        opacity: 0;
+        animation: text-animate 1s 1s cubic-bezier(.04,.79,.49,.93) forwards;
       }
 
       & .generador__result {
@@ -127,6 +144,8 @@ html {
         gap: 50px;
         margin-left: 175px;
         font-family: "GoBold";
+        opacity: 0;
+        animation: text-animate 1s 1.5s cubic-bezier(.04,.79,.49,.93) forwards;
 
         & .result__box {
           width: 500px;
@@ -140,10 +159,11 @@ html {
           padding: 10px 50px;
           border-radius: 15px;
           box-shadow: 0px 3px 5px 0px rgba(0, 0, 0, 0.15);
+          
         }
 
         & .result__copy {
-          background: linear-gradient(265deg, #3d92dc, var(--azul-normal));
+          background: linear-gradient(265deg, var(--azul-normal-2), var(--azul-normal));
           color: white;
           padding: 10px 40px;
           border-radius: 15px;
@@ -153,7 +173,7 @@ html {
         }
 
         & .result__copy:hover {
-          background: #e8f578;
+          background: var(--azul-normal);
           transform: scale(1.2);
           transition: transform 0.2s linear;
         }
@@ -161,16 +181,18 @@ html {
 
       & .generador__generar {
         padding: 10px 45px;
-        background: linear-gradient(265deg, #3d92dc, var(--azul-normal));
+        background: linear-gradient(265deg, var(--azul-normal-2), var(--azul-normal));
         animation: headerBackground 10s ease infinite;
         color: white;
         border-radius: 15px;
         box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.25);
         cursor: pointer;
+        opacity: 0;
+        animation: text-animate 1s 2s cubic-bezier(.04,.79,.49,.93) forwards;
       }
 
       & .generador__generar:hover {
-        background-color: var(--azul-normal);
+        background: var(--azul-normal);
         transform: scale(1.1);
         transition: transform 0.2s linear;
       }
@@ -182,7 +204,9 @@ html {
       align-items: center;
       width: 100vw;
       margin-top: 25px;
-      background: linear-gradient(270deg, #c4e6ff, #d7eeff);
+      background: linear-gradient(270deg, var(--azul-flojo-1), var(--azul-flojo-2));
+      opacity: 0;
+      animation: text-animate 1s 2s cubic-bezier(.04,.79,.49,.93) forwards;
 
       & .info__explicacion {
         width: 90vw;
@@ -332,12 +356,6 @@ html {
   }
 }
 
-@keyframes headerBackground {
-  0%{background-position:0% 50%}
-  50%{background-position:100% 50%}
-  100%{background-position:0% 50%}
-}
-
 /* OPCIONES GENERADOR SESION INICIADA */
 .generador__length {
   width: 375px;
@@ -346,6 +364,8 @@ html {
   align-items: center;
   gap: 10px;
   margin-bottom: 15px;
+  opacity: 0;
+  animation: text-animate 1s 1.5s cubic-bezier(.04,.79,.49,.93) forwards;
 
   & .length__slider {
     width: 100%;
@@ -373,16 +393,18 @@ html {
   gap: 50px;
 
   & .generador__guardar {
-    background: linear-gradient(265deg, #43ab6b, #48b274);
+    background: linear-gradient(265deg, var(--verde-deg-1), var(--verde-deg-2));
     padding: 10px 25px;
     border-radius: 15px;
     color: white;
     box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.25);
     cursor: pointer;
+    opacity: 0;
+    animation: text-animate 1s 2s cubic-bezier(.04,.79,.49,.93) forwards;
   }
 
   & .generador__guardar:hover {
-    background-color: #3aab53;
+    background: var(--verde-light);
     transform: scale(1.1);
     transition: transform 0.2s linear;
   }
@@ -391,6 +413,8 @@ html {
 .settings {
   display: flex;
   gap: 15px;
+  opacity: 0;
+  animation: text-animate 1s 1.5s cubic-bezier(.04,.79,.49,.93) forwards;
 
   & .setting {
     position: relative;
@@ -477,23 +501,22 @@ html {
       gap: 35px;
       width: 100%;
       padding: 35px 20px;
-      background: linear-gradient(265deg, #3d92dc, var(--azul-normal));
+      background: linear-gradient(265deg, var(--azul-normal-2), var(--azul-normal));
     }
 
     & .sessionout {
       padding: 20px;
-      background: linear-gradient(265deg, #3d92dc, var(--azul-normal));
+      background: linear-gradient(265deg, var(--azul-normal-2), var(--azul-normal));
       margin-bottom: 25px;
       cursor: pointer;
     }
 
     & .sessionout:hover {
-      background-color: var(--azul-normal);
+      background: var(--azul-normal);
     }
   }
 
   & .main__cambiopass {
-    
     width: 100%;
     padding: 0 200px;
     display: flex;
@@ -501,6 +524,8 @@ html {
     justify-content: center;
     align-items: center;
     gap: 20px;
+    opacity: 0;
+    animation: text-animate 1s 1s cubic-bezier(.04,.79,.49,.93) forwards;
 
     & input {
       width: 400px;
@@ -518,7 +543,7 @@ html {
       padding: 10px;
       border-radius: 15px;
       border: none;
-      background: linear-gradient(265deg, #43ab6b, #48b274);
+      background: linear-gradient(265deg, var(--verde-deg-1), var(--verde-deg-2));
       cursor: pointer;
       color: white;
       box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
@@ -542,6 +567,8 @@ html {
     font-size: 25px;
     font-weight: 400;
     border-bottom: 2px solid var(--gris-texto);
+    opacity: 0;
+    animation: text-animate 1s 0.5s cubic-bezier(.04,.79,.49,.93) forwards;
   }
 
   & .main__passwords {
@@ -564,6 +591,8 @@ html {
       background-color: white;
       transition: transform 0.2s linear;
       box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.25);
+      opacity: 0;
+      animation: text-animate 1s 1s cubic-bezier(.04,.79,.49,.93) forwards;
 
       & .passdiv__nombre, .passdiv__password {
         font-size: 14px;
@@ -699,4 +728,31 @@ html {
   color: #ff0000; /* Color rojo para destacar el error */
   font-size: 12px; /* Tamaño de fuente más pequeño para los mensajes de error */
   margin-top: 5px; /* Espaciado superior para separar los mensajes del campo */
+}
+
+@keyframes headerBackground {
+  0%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+  100%{background-position:0% 50%}
+}
+
+@keyframes show {
+  from {
+    opacity: 0.1;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes text-animate {
+  from {
+    transform: translateY(150px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0px);
+    opacity: 1;
+  }
 }
