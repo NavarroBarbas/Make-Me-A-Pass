@@ -29,7 +29,7 @@
   --blanco-gris: #f5f5f5;
   --dorado: #e7d58b;
   --gris-texto: #383838;
-  --verde-light: #228738;
+  --verde-light: #3ba953;
 }
 
 /* ******************************** */
@@ -54,7 +54,7 @@ html {
     justify-content: space-between;
     align-items: center;
     padding: 0 200px;
-    background-color: var(--azul-flojo);
+    background: linear-gradient(270deg, #c4e6ff, #d7eeff);
 
     & .header__nombre {
       display: flex;
@@ -84,7 +84,9 @@ html {
       & .nav__registrarse {
         text-decoration: none;
         padding: 15px 25px;
-        background-color: var(--azul-normal);
+        background: linear-gradient(265deg, #9f2fb3fb, #4e50da);
+        background-size: 400% 400%;
+        
         color: white;
         border-radius: 10px;
         font-family: "GoBold";
@@ -131,15 +133,17 @@ html {
           text-align: center;
           font-size: 18px;
           margin: 25px 0;
-          background-color: var(--azul-flojo);
-          color: var(--azul-marino);
+          background: linear-gradient(265deg, #669fd0, #0073c7);
+          background-size: 400% 400%;
+          animation: headerBackground 20s ease infinite;
+          color: var(--blanco-gris);
           padding: 10px 50px;
-          border-radius: 50px;
+          border-radius: 15px;
           box-shadow: 0px 3px 5px 0px rgba(0, 0, 0, 0.15);
         }
 
         & .result__copy {
-          background-color: var(--dorado);
+          background: linear-gradient(265deg, #eadb87, #dae85e);
           padding: 10px 40px;
           border-radius: 20px;
           box-shadow: 0px 3px 5px 0px rgba(0, 0, 0, 0.15);
@@ -156,9 +160,11 @@ html {
 
       & .generador__generar {
         padding: 10px 45px;
-        background-color: var(--azul-marino);
+        background: linear-gradient(265deg, #287cc6, var(--azul-normal));
+        background-size: 400% 400%;
+        animation: headerBackground 10s ease infinite;
         color: white;
-        border-radius: 25px;
+        border-radius: 15px;
         box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.25);
         cursor: pointer;
       }
@@ -176,7 +182,7 @@ html {
       align-items: center;
       width: 100vw;
       margin-top: 25px;
-      background-color: var(--azul-flojo);
+      background: linear-gradient(270deg, #c4e6ff, #d7eeff);
 
       & .info__explicacion {
         width: 90vw;
@@ -195,7 +201,7 @@ html {
           background-size: cover;
           grid-column: 1/2;
           grid-row: 1/5;
-          border-radius: 25px;
+          border-radius: 15px;
           margin-right: 25px;
           height: 100%;
           box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.25);
@@ -228,7 +234,7 @@ html {
             grid-column: 2/3;
             grid-row: 1/4;
             margin-left: 25px;
-            border-radius: 25px;
+            border-radius: 15px;
             box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.25);
 
           }
@@ -252,7 +258,7 @@ html {
             grid-column: 1/2;
             grid-row: 1/3;
             margin-right: 25px;
-            border-radius: 25px;
+            border-radius: 15px;
             box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.25);
           }
         }
@@ -326,6 +332,12 @@ html {
   }
 }
 
+@keyframes headerBackground {
+  0%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+  100%{background-position:0% 50%}
+}
+
 /* OPCIONES GENERADOR SESION INICIADA */
 .generador__length {
   width: 375px;
@@ -363,7 +375,7 @@ html {
   & .generador__guardar {
     background-color: var(--verde-light);
     padding: 10px 25px;
-    border-radius: 25px;
+    border-radius: 15px;
     color: white;
     box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.25);
     cursor: pointer;
@@ -659,10 +671,10 @@ html {
         margin-top: 15px;
         width: 65%;
         border: none;
-        border-radius: 20px;
+        border-radius: 15px;
         padding: 5px 0;
         color: white;
-        background-color: var(--azul-normal);
+        background: linear-gradient(265deg, #2f6fb3fb, #4e50da);
         box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.25);
         cursor: pointer;
       }
