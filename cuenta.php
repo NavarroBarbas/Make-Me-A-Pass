@@ -43,6 +43,7 @@
     <script></script>
     <!-- Scripts a cargar antes de la renderización -->
     <script src="preloader.js"></script>
+    <script src="js/scroll.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script src="js/script.js"></script>
   </head>
@@ -50,7 +51,7 @@
     <div class="container">
       <?php include 'components/header.php';
       
-      if (!isset($_SESSION["email"])){ //NO COGE LA SESIÓN
+      if (!isset($_SESSION["email"])){
         echo "<br/><h2>Mensaje de Rechazo</h2>
         <br/>
         Lo siento, NO tiene privilegios para entrar en esta página, por favor vuelva a la página principal e ingrese un nombre de usuario y apellido.
@@ -71,9 +72,14 @@
         </div>
 
         <form class="main__cambiopass">
-          <input type="password" id="pass" name="pass" placeholder="Nueva Contraseña">
+          <input type="password" id="new_pass" name="pass" placeholder="Nueva Contraseña">
+          <div id="pass-error-change" class="label-error"></div>
+
           <input type="password" id="pass_verify_change" name="pass_verify" placeholder="Confirmar Contraseña">
+          <div id="passvfy-error-change" class="label-error"></div>
+
           <input type="email" id="email" name="email"  placeholder="Email">
+          <div id="email-error-change" class="label-error"></div>
 
           <input class="botonenviar" type="submit" value="Enviar">
         </form>

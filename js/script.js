@@ -214,6 +214,59 @@ function cerrarSesion() {
     });
 }
 
+function cambiarPass() {
+    let password = document.getElementById("new_pass");
+    let pass_verify = document.getElementById("pass_verify_change");
+    let email = document.getElementById("email");
+    
+    let passError = document.getElementById("pass-error-change");
+    let passVfyError = document.getElementById("passvfy-error-change");
+    let emailError = document.getElementById("email-error-change");
+
+    let error = 0;
+
+    passError.innerHTML = "";
+    passVfyError = "";
+    emailError.innerHTML = "";
+
+    if (password.length == 0 || password == null) {
+        passError.innerHTML = "Contraseña es obligatoria";
+        error = 1;
+    } else if(!(/^.{8,}$/.test(password))) {
+        passError.innerHTML = "Contraseña debe tener mínimo 8 carácteres";
+        error = 1;
+    }
+
+    //Validar confirmación de Contraseña
+    if (pass_verify.length == 0 || pass_verify == null) {
+        passVfyError.innerHTML = "Confirmar contraseña es obligatorio";
+        error = 1;
+    }
+
+    if (email.length == 0 || email == null) {
+        emailError.innerHTML = "Email es obligatorio";
+        error = 1;
+    }
+
+    if(error == 1) {
+        return false;
+    } else {
+        $.ajax ({
+            type: 'POST',
+            url: 'php/changepass.php',
+            data: { email: email, changepass: password, passvfy:  pass_verify},
+            success: function(response) {
+                if(response === "") {
+
+                }
+            },
+            error: function(response) {
+                emailError.innerHTML = "Error al procesar la solicitud";
+            }
+        });
+    }
+}
+
 function generarPass() {
     let randompass = document.getElementById("randompass");
 
