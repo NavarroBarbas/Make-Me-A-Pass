@@ -101,10 +101,10 @@
             <a class="generador__guardar" id="guardarclick" onclick="openOverlay(event)">Guardar Contraseña</a>
             <div id="savepass" class="overlay" onclick="closeOverlay(event)">
               <div class="overlay__box">
-                <form class="box__form" method="POST" onsubmit="" novalidate>
+                <form class="box__form" method="POST" onsubmit="return guardarPass()" novalidate>
                   <h4 class="form__titulo">Ponga un nombre a la contraseña</h4>
                 
-                  <input class="input nombrepass" type="text" id="nombrepass"  placeholder="Nombre">
+                  <input class="input nombrepass" type="text" id="nombrepass" placeholder="Nombre">
                   <div id="save-error-savepass" class="label-error"></div>
                   <input class="botonenviar savepass" type="submit" value="Enviar">
                 </form>

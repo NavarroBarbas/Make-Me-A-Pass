@@ -72,7 +72,7 @@
 
         <form class="main__cambiopass">
           <input type="password" id="pass" name="pass" placeholder="Nueva Contraseña">
-          <input type="password" id="pass_verify" name="pass_verify" placeholder="Confirmar Contraseña">
+          <input type="password" id="pass_verify_change" name="pass_verify" placeholder="Confirmar Contraseña">
           <input type="email" id="email" name="email"  placeholder="Email">
 
           <input class="botonenviar" type="submit" value="Enviar">

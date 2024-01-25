@@ -214,7 +214,6 @@ function cerrarSesion() {
     });
 }
 
-//Problemas con las opciones
 function generarPass() {
     let randompass = document.getElementById("randompass");
 
@@ -318,4 +317,39 @@ function copiar() {
 }
 
 function guardarPass() {
+    let randompass = document.getElementById("randompass").innerText;
+    let nombrepass = document.getElementById("nombrepass").value;
+    let errorPass = document.getElementById("save-error-savepass");
+    let error = 0;
+
+    errorPass.innerHTML = "";
+
+    if (nombrepass.length == 0 || nombrepass == null) {
+        errorPass.innerHTML = "Nombre es obligatorio";
+        error = 1;
+    } else if (randompass == "Click Generar") {
+        errorPass.innerHTML = "Debes generar una contraseña";
+        error = 1;
+    }
+
+    if(error == 1) {
+        return false;
+    } else {
+        $.ajax ({
+            type: 'POST',
+            url: 'php/guardarpass.php',
+            data: {password: randompass, nombre: nombrepass},
+            success: function(response) {
+                if(response === "Insert realizado") {
+                    window.location.reload();
+                } else {
+                    alert(response);
+                }
+            },
+            error: function() {
+                errorPass.innerHTML = "Operación no válida";
+            }
+        });
+        return false;
+    }
 }

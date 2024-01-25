@@ -1,6 +1,6 @@
 <?php
     include '../bbdd/conexiones.php';
-
+    
     session_start();
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {

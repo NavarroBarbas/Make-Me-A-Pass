@@ -2,7 +2,7 @@
         <div class="footer__bg">
             <nav class="footer__izq">
                 <a>Contacto</a>
-                <a class="coffee"><img src="svg/buymeacoffee.svg">Buy Me a Coffee</a>
+                <a class="coffee" href="https://www.buymeacoffee.com/navarrobarbas"><img src="svg/buymeacoffee.svg">Buy Me a Coffee</a>
                 <a href="privacidad.php">Privacidad</a>
                 <a href="cookies.php">Cookies</a>
                 <h6 class="izq__copyright">&copy; All Rights Reserved made by Javier Navarro</h6>
