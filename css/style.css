@@ -67,11 +67,12 @@ html {
     background: linear-gradient(270deg, var(--azul-flojo-1), var(--azul-flojo-2));
 
     & .header__nombre {
+      text-decoration: none;
       display: flex;
       align-items: center;
       gap: 10px;
       font-size: 18px;
-      color: var(--azul-oscuro);
+      color: #18486b;
       font-family: "VeraSerif";
 
       & .nombre__logo {
@@ -134,7 +135,7 @@ html {
         margin-top: 2rem;
         font-weight: 400;
         opacity: 0;
-        animation: text-animate 1s 1s cubic-bezier(.04,.79,.49,.93) forwards;
+        animation: text-animate 1s 0.75s cubic-bezier(.04,.79,.49,.93) forwards;
       }
 
       & .generador__result {
@@ -145,7 +146,7 @@ html {
         margin-left: 175px;
         font-family: "GoBold";
         opacity: 0;
-        animation: text-animate 1s 1.5s cubic-bezier(.04,.79,.49,.93) forwards;
+        animation: text-animate 1s 1s cubic-bezier(.04,.79,.49,.93) forwards;
 
         & .result__box {
           width: 500px;
@@ -188,7 +189,7 @@ html {
         box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.25);
         cursor: pointer;
         opacity: 0;
-        animation: text-animate 1s 2s cubic-bezier(.04,.79,.49,.93) forwards;
+        animation: text-animate 1s 1.25s cubic-bezier(.04,.79,.49,.93) forwards;
       }
 
       & .generador__generar:hover {
@@ -206,7 +207,8 @@ html {
       margin-top: 25px;
       background: linear-gradient(270deg, var(--azul-flojo-1), var(--azul-flojo-2));
       opacity: 0;
-      animation: text-animate 1s 2s cubic-bezier(.04,.79,.49,.93) forwards;
+      animation: text-animate 1s 1.5s cubic-bezier(.04,.79,.49,.93) forwards;
+      z-index: -1;
 
       & .info__explicacion {
         width: 90vw;
@@ -300,6 +302,7 @@ html {
     box-shadow: 0px -5px 10px 0px rgba(0, 0, 0, 0.25);
     display: flex;
     justify-content: center;
+    z-index: 0;
 
     & .footer__bg {
       display: flex;
@@ -365,7 +368,7 @@ html {
   gap: 10px;
   margin-bottom: 15px;
   opacity: 0;
-  animation: text-animate 1s 1.5s cubic-bezier(.04,.79,.49,.93) forwards;
+  animation: text-animate 1s 1s cubic-bezier(.04,.79,.49,.93) forwards;
 
   & .length__slider {
     width: 100%;
@@ -400,7 +403,7 @@ html {
     box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.25);
     cursor: pointer;
     opacity: 0;
-    animation: text-animate 1s 2s cubic-bezier(.04,.79,.49,.93) forwards;
+    animation: text-animate 1s 1.25s cubic-bezier(.04,.79,.49,.93) forwards;
   }
 
   & .generador__guardar:hover {
@@ -414,7 +417,7 @@ html {
   display: flex;
   gap: 15px;
   opacity: 0;
-  animation: text-animate 1s 1.5s cubic-bezier(.04,.79,.49,.93) forwards;
+  animation: text-animate 1s 0.75s cubic-bezier(.04,.79,.49,.93) forwards;
 
   & .setting {
     position: relative;
@@ -524,8 +527,6 @@ html {
     justify-content: center;
     align-items: center;
     gap: 20px;
-    opacity: 0;
-    animation: text-animate 1s 1s cubic-bezier(.04,.79,.49,.93) forwards;
 
     & input {
       width: 400px;
@@ -567,8 +568,6 @@ html {
     font-size: 25px;
     font-weight: 400;
     border-bottom: 2px solid var(--gris-texto);
-    opacity: 0;
-    animation: text-animate 1s 0.5s cubic-bezier(.04,.79,.49,.93) forwards;
   }
 
   & .main__passwords {
@@ -591,8 +590,6 @@ html {
       background-color: white;
       transition: transform 0.2s linear;
       box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.25);
-      opacity: 0;
-      animation: text-animate 1s 1s cubic-bezier(.04,.79,.49,.93) forwards;
 
       & .passdiv__nombre, .passdiv__password {
         font-size: 14px;
@@ -627,7 +624,12 @@ html {
   margin-top: 25px;
   margin-bottom: 25px;
   text-align: justify;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
   flex: 1;
+  opacity: 0;
+      animation: text-animate 1s 0.5s cubic-bezier(.04,.79,.49,.93) forwards;
 }
 
 /* Overlays Login, Registrarse y Guardar Contraseña */
@@ -750,9 +752,11 @@ html {
   from {
     transform: translateY(150px);
     opacity: 0;
+    z-index: -1;
   }
   to {
     transform: translateY(0px);
     opacity: 1;
+    z-index: 0;
   }
 }

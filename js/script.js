@@ -394,7 +394,7 @@ function guardarPass() {
             data: {password: randompass, nombre: nombrepass},
             success: function(response) {
                 if(response === "Insert realizado") {
-                    window.location.reload();
+                    window.location.href = "passwords.php";
                 } else {
                     alert(response);
                 }
