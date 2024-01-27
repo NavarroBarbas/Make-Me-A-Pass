@@ -12,6 +12,10 @@ function openOverlay(event) {
         let overlay = document.getElementById("savepass");
         overlay.style.opacity = "1";
         overlay.style.visibility = "visible";
+    } else if (event.target.id == "deleteClick") { //Overlay Guardar Contraseña
+        let overlay = document.getElementById("deletepass");
+        overlay.style.opacity = "1";
+        overlay.style.visibility = "visible";
     }
 }
 
@@ -51,6 +55,13 @@ function closeOverlay(event) {
         if (event.target === overlay && !formulario.contains(event.target)) {
             login(event);
         }
+    }  else if (event.target.id == "deletepass") { //Cierra Overlay Registro al clickar fuera del form
+        let overlay = document.getElementById("deletepass");
+        let formulario = document.querySelector(".overlay__box");
+
+        if (event.target === overlay && !formulario.contains(event.target)) {
+            login(event);
+        }
     }
 }
 
@@ -65,8 +76,14 @@ function login(event) {
         let overlay = document.getElementById("registro");
         overlay.style.opacity = "0";
         overlay.style.visibility = "hidden";
+
     } else if (event.target.id == "savepass") { //Quita la visibilidad del overlay Guardar Contraseña
         let overlay = document.getElementById("savepass");
+        overlay.style.opacity = "0";
+        overlay.style.visibility = "hidden";
+
+    } else if (event.target.id == "deletepass") { //Quita la visibilidad del overlay Eliminar Contraseña
+        let overlay = document.getElementById("deletepass");
         overlay.style.opacity = "0";
         overlay.style.visibility = "hidden";
     }
@@ -137,8 +154,6 @@ function validarFormRegistro() {
             data: { emailregistro: email, passregistro: pass, passverify:  pass_verify},
             success: function(response) {
                 if(response === 'Añadiendo usuario') {
-                    alert("Añadiendo usuario");
-                    //Continuar para crear sesión
                     window.location.reload();
                 } else if(response === "Este usuario ya existe en el sistema") {
                     passVerifyError.innerHTML = response;
@@ -214,6 +229,7 @@ function cerrarSesion() {
     });
 }
 
+//Falta
 function cambiarPass() {
     let password = document.getElementById("new_pass");
     let pass_verify = document.getElementById("pass_verify_change");
@@ -351,8 +367,12 @@ function generarPass() {
     });
 }
 
-function copiar() {
-    let texto = document.getElementById('randompass').innerText;
+function copiar(idelement) {
+    let texto = document.getElementById(idelement).innerText;
+
+    if(texto === "Click Generar") {
+        exit;
+    }
 
     // Crear un elemento de input oculto
     let input = document.createElement('input');
@@ -373,6 +393,7 @@ function guardarPass() {
     let randompass = document.getElementById("randompass").innerText;
     let nombrepass = document.getElementById("nombrepass").value;
     let errorPass = document.getElementById("save-error-savepass");
+    let regex = /^[a-zA-Z0-9 ]+$/;
     let error = 0;
 
     errorPass.innerHTML = "";
@@ -382,6 +403,9 @@ function guardarPass() {
         error = 1;
     } else if (randompass == "Click Generar") {
         errorPass.innerHTML = "Debes generar una contraseña";
+        error = 1;
+    } else if (!regex.test(nombrepass)) {
+        errorPass.innerHTML = "El nombre no puede contener carácteres especiales";
         error = 1;
     }
 
@@ -405,4 +429,26 @@ function guardarPass() {
         });
         return false;
     }
+}
+
+function eliminarPass(idpass, namepass) {
+    let pass = document.getElementById(idpass).innerText;
+    let name = document.getElementById(namepass).innerText;
+
+    $.ajax ({
+        type: 'POST',
+        url: 'php/deletepass.php',
+        data: {password: pass, nombrepass: name, passid: namepass},
+        success: function(response) {
+            if(response === "Contraseña Eliminada") {
+                alert(response);
+                window.location.reload();
+            } else {
+                alert(response);
+            }
+        },
+        error: function() {
+            alert("Operación no válida");
+        }
+    });
 }

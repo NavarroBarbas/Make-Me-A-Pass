@@ -1,8 +1,7 @@
 <header class="header">
     <a href="index.php" class="header__nombre">
-        <h2>Make Me</h2>
         <img class="nombre__logo" src="img/desktop/logo.webp">
-        <h2>A Pass</h2>
+        <h2>Make Me A Pass</h2>
     </a>
 
     <nav class="header__nav">

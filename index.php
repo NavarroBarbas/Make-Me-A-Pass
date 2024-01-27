@@ -82,7 +82,7 @@
 
           <section class="generador__result">
             <div class="result__box" id="randompass">Click Generar</div>
-            <a class="result__copy" onclick="copiar()" id="btncopy">Copiar</a>
+            <a class="result__copy" onclick="copiar('randompass')" id="btncopy">Copiar</a>
           </section>
 
           <?php if (isset($_SESSION["email"])) { ?>
@@ -99,6 +99,7 @@
 
           <?php if (isset($_SESSION["email"])) { ?>
             <a class="generador__guardar" id="guardarclick" onclick="openOverlay(event)">Guardar Contraseña</a>
+            </div>
             <div id="savepass" class="overlay" onclick="closeOverlay(event)">
               <div class="overlay__box">
                 <form class="box__form" method="POST" onsubmit="return guardarPass()" novalidate>
@@ -109,10 +110,8 @@
                   <input class="botonenviar savepass" type="submit" value="Enviar">
                 </form>
               </div>
-            </div>
-          <?php } ?>
-
           </div>
+          <?php } ?>
         </section>
 
         <section class="main__info">

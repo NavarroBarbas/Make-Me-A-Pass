@@ -64,7 +64,6 @@ html {
     justify-content: space-between;
     align-items: center;
     padding: 0 200px;
-    background: linear-gradient(270deg, var(--azul-flojo-1), var(--azul-flojo-2));
 
     & .header__nombre {
       text-decoration: none;
@@ -171,12 +170,13 @@ html {
           box-shadow: 0px 3px 5px 0px rgba(0, 0, 0, 0.15);
           font-size: 14px;
           cursor: pointer;
+          transition: transform 0.2s linear;
         }
 
         & .result__copy:hover {
           background: var(--azul-normal);
           transform: scale(1.2);
-          transition: transform 0.2s linear;
+          
         }
       }
 
@@ -188,14 +188,13 @@ html {
         border-radius: 15px;
         box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.25);
         cursor: pointer;
-        opacity: 0;
-        animation: text-animate 1s 1.25s cubic-bezier(.04,.79,.49,.93) forwards;
+        
+        transition: transform 0.2s linear;
       }
 
       & .generador__generar:hover {
         background: var(--azul-normal);
         transform: scale(1.1);
-        transition: transform 0.2s linear;
       }
     }
 
@@ -394,6 +393,8 @@ html {
 .generador__botones {
   display: flex;
   gap: 50px;
+  opacity: 0;
+  animation: text-animate 1s 1.25s cubic-bezier(.04,.79,.49,.93) forwards;
 
   & .generador__guardar {
     background: linear-gradient(265deg, var(--verde-deg-1), var(--verde-deg-2));
@@ -402,8 +403,7 @@ html {
     color: white;
     box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.25);
     cursor: pointer;
-    opacity: 0;
-    animation: text-animate 1s 1.25s cubic-bezier(.04,.79,.49,.93) forwards;
+    
   }
 
   & .generador__guardar:hover {
@@ -575,42 +575,70 @@ html {
     flex-wrap: wrap;
     padding: 10px;
     justify-content: center;
-    gap: 15px;
+    gap: 25px;
     margin: 15px 0;
 
     & .passwords__passdiv {
-      width: 150px;
-      height: 100px;
+      width: 300px;
+      height: 120px;
       border-radius: 15px;
       display: flex;
       flex-direction: column;
-      justify-content: center;
-      padding: 15px;
+      justify-content: space-between;
       gap: 10px;
       background-color: white;
       transition: transform 0.2s linear;
-      box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.25);
+      box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.25);
+      font-size: 14px;
+      color: var(--gris-texto);  
 
       & .passdiv__nombre, .passdiv__password {
-        font-size: 14px;
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
+        padding: 0 15px;
       }
 
-      &.passdiv__password {
-        font-size: 12px;
+      & .passdiv__nombre {
+        padding-top: 10px;
+        font-size: 16px;
+      }
+
+      & .passdiv__password {
         font-weight: 400;
+      }
+
+      & .passdiv__nav {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 12px;
+        background: linear-gradient(265deg, var(--azul-normal-2), var(--azul-normal));
+        /*background-color: var(--gris-texto);*/
+        padding:15px;
+        border-radius: 0 0 15px 15px;
+        color: white;
+        box-shadow: 5px 0px 5px 0px rgba(0, 0, 0, 0.25);
+
+        & .nav__eliminar {
+          cursor: pointer;
+        }
+
+        & .nav__copiar {
+          cursor: pointer;
+        }
       }
     }
 
     & .passwords__passdiv:hover {
-      transform: scale(1.2);
+      transform: scale(1.1);
+      gap: 0;
+      box-shadow: 0px 5px 5px 0px rgba(0, 0, 0, 0.25);
 
-      & .passdiv__password {
+      & .passdiv__nombre, & .passdiv__password {
         white-space: normal;
         overflow: visible; 
-        text-overflow: clip;
         word-wrap: break-word;
       }
     }
@@ -629,7 +657,7 @@ html {
   gap: 15px;
   flex: 1;
   opacity: 0;
-      animation: text-animate 1s 0.5s cubic-bezier(.04,.79,.49,.93) forwards;
+  animation: text-animate 1s 0.5s cubic-bezier(.04,.79,.49,.93) forwards;
 }
 
 /* Overlays Login, Registrarse y Guardar Contraseña */
@@ -722,6 +750,10 @@ html {
       & .savepass:hover {
         background: #3aab53;
       }
+
+      & .deletebtn {
+        background: linear-gradient(265deg, #e7615d, #f4504a);
+      }
     }
   }
 }
@@ -750,7 +782,7 @@ html {
 
 @keyframes text-animate {
   from {
-    transform: translateY(150px);
+    transform: translateY(50px);
     opacity: 0;
     z-index: -1;
   }
