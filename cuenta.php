@@ -33,7 +33,7 @@
     <!-- icono de acceso para IOS -->
     <link rel="apple-touch-icon" href="icon.png" />
     <!-- Recordar que favicon.ico tiene que estar en el directorio inicial -->
-
+    <link rel="icon" href="img/desktop/logo.webp" type="image/x-icon">
     <!-- links de estilos -->
     <link rel="stylesheet" href="css/style.css" />
     
@@ -71,11 +71,11 @@
           <a class="sessionout" onclick="cerrarSesion()">Cerrar Sesión</a>
         </div>
 
-        <form class="main__cambiopass">
-          <input type="password" id="new_pass" name="pass" placeholder="Nueva Contraseña">
+        <form class="main__cambiopass" method="POST" onsubmit="return cambiarPass()" novalidate>
+          <input type="password" id="new_pass" name="pass_change" placeholder="Nueva Contraseña">
           <div id="pass-error-change" class="label-error"></div>
 
-          <input type="password" id="pass_verify_change" name="pass_verify" placeholder="Confirmar Contraseña">
+          <input type="password" id="pass_verify_change" name="pass_verify_change" placeholder="Confirmar Contraseña">
           <div id="passvfy-error-change" class="label-error"></div>
 
           <input type="email" id="email" name="email"  placeholder="Email">

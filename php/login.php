@@ -18,7 +18,7 @@
             }
 
             if(password_verify($pass, $hashedPass)) {
-                $_SESSION['email'] = $email;
+                $_SESSION['email'] = strtolower($email);
                 echo "Login Correcto";
             } else {
                 echo "Datos de usuario incorrectos";

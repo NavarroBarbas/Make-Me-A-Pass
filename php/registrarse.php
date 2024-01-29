@@ -21,7 +21,7 @@
 
             mysqli_query($conexion, $addUser);
 
-            $_SESSION['email'] = $email;
+            $_SESSION['email'] = strtolower($email);
             echo "Añadiendo usuario";
         }
     } else {

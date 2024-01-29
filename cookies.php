@@ -33,7 +33,7 @@
     <!-- icono de acceso para IOS -->
     <link rel="apple-touch-icon" href="icon.png" />
     <!-- Recordar que favicon.ico tiene que estar en el directorio inicial -->
-
+    <link rel="icon" href="img/desktop/logo.webp" type="image/x-icon">
     <!-- links de estilos -->
     <link rel="stylesheet" href="css/style.css" />
     

@@ -231,9 +231,9 @@ function cerrarSesion() {
 
 //Falta
 function cambiarPass() {
-    let password = document.getElementById("new_pass");
-    let pass_verify = document.getElementById("pass_verify_change");
-    let email = document.getElementById("email");
+    let password = document.getElementById("new_pass").value;
+    let pass_verify = document.getElementById("pass_verify_change").value;
+    let email = document.getElementById("email").value;
     
     let passError = document.getElementById("pass-error-change");
     let passVfyError = document.getElementById("passvfy-error-change");
@@ -242,7 +242,7 @@ function cambiarPass() {
     let error = 0;
 
     passError.innerHTML = "";
-    passVfyError = "";
+    passVfyError.innerHTML = "";
     emailError.innerHTML = "";
 
     if (password.length == 0 || password == null) {
@@ -259,8 +259,17 @@ function cambiarPass() {
         error = 1;
     }
 
+    //Validar que sean iguales
+    if(password != pass_verify) {
+        passVfyError.innerHTML = "Las contraseñas deben coincidir";
+        error = 1;
+    }
+
     if (email.length == 0 || email == null) {
         emailError.innerHTML = "Email es obligatorio";
+        error = 1;
+    } else if(!(/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/.test(email))) {
+        emailError.innerHTML = "Email es incorrecto";
         error = 1;
     }
 
@@ -270,16 +279,20 @@ function cambiarPass() {
         $.ajax ({
             type: 'POST',
             url: 'php/changepass.php',
-            data: { email: email, changepass: password, passvfy:  pass_verify},
+            data: { email: email, changepass: password},
             success: function(response) {
-                if(response === "") {
-
+                if(response === "Password Changed") {
+                    alert("La contraseña ha sido cambiada");
+                    window.location.reload();
+                } else {
+                    emailError.innerHTML = response;
                 }
             },
-            error: function(response) {
+            error: function() {
                 emailError.innerHTML = "Error al procesar la solicitud";
             }
         });
+        return false;
     }
 }
 
