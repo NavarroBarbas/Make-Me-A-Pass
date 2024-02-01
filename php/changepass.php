@@ -12,11 +12,14 @@
         if($emailPost != $email) {
             echo ("El email debe ser igual al del usuario");
         } else {
-            $sqlchangepass = 'UPDATE usuarios 
-                SET password = "' . $hashed_pass . '" 
-                WHERE email = "' . $email . '"';
+            $pdo = new Conexion();
+            $update = $pdo->prepare('UPDATE usuarios 
+                SET password = :pass
+                WHERE email = :email');
 
-            mysqli_query($conexion, $sqlchangepass);
+            $update->bindValue(':email', $email);
+            $update->bindValue(':pass', $hashed_pass);
+            $update->execute();
 
             echo "Password Changed";
         }

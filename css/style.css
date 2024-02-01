@@ -487,7 +487,7 @@ html {
   & .main__barra {
     margin: 0;
     padding: 0;
-    width: 200px;
+    width: 500px;
     height: calc(100vh - 302px);
     min-height: 365px;
     background-color: #f4f4f4;

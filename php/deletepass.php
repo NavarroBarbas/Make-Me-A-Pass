@@ -8,16 +8,14 @@
         $passid = $_POST['passid'];
         $email = $_SESSION['email'];
 
-        $sqlid = 'SELECT user_id FROM usuarios WHERE email = "' . $email . '"';
-        $resid = mysqli_query($conexion, $sqlid);
-        $column = $resid -> fetch_assoc();
-        $userid = $column['user_id'];
+        $pdo = new Conexion();
+        $sql = $pdo->prepare('DELETE FROM saved_passwords 
+            WHERE password_id = :passid 
+            AND nombre_pass = :nombrepass');
 
-        $sqldel = 'DELETE FROM saved_passwords 
-            WHERE password_id = "' . $passid . '" 
-            AND nombre_pass = "' . $nombrepass . '"';
-
-        mysqli_query($conexion, $sqldel);
+        $sql->bindValue(':passid', $passid);
+        $sql->bindValue(':nombrepass', $nombrepass);
+        $sql->execute();
         
         echo "Contraseña Eliminada";
     } else {
