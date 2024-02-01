@@ -30,23 +30,6 @@
         } else {
             echo "Datos de usuario incorrectos"; 
         }
-
-        /*if($result->num_rows > 0) {
-
-            while($row = $result->fetch_assoc()) {
-                $hashedPass = $row['Password'];
-            }
-
-            if(password_verify($pass, $hashedPass)) {
-                $_SESSION['email'] = strtolower($email);
-                echo "Login Correcto";
-            } else {
-                echo "Datos de usuario incorrectos";
-            }
-
-        } else {
-            echo "Datos de usuario incorrectos"; 
-        }*/
     } else {
         echo "Error: Método no permitido.";
     }

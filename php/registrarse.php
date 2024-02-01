@@ -7,19 +7,23 @@
         $email = $_POST['emailregistro'];
         $pass = $_POST['passregistro'];
         $pass_verify = $_POST['passverify'];
-
         $hash_pass = password_hash($pass, PASSWORD_DEFAULT);
 
-        $vfyEmail = 'SELECT * FROM usuarios WHERE email = "' . $email . '"';
-        $result = mysqli_query($conexion, $vfyEmail);
-        
-        if($result->num_rows > 0) {
+        $pdo = new Conexion();
+        $sql = $pdo->prepare('SELECT * FROM usuarios WHERE email =:email');
+        $sql->bindValue(':email', $email);
+        $sql->execute();
+        $numrows = $sql->rowCount();
+        $sql->setFetchMode(PDO::FETCH_ASSOC);
+
+        if($numrows > 0) {
             echo "Este usuario ya existe en el sistema";
         } else {
-            $addUser = 'INSERT INTO usuarios (email, password)
-                    VALUES ("'. $email .'", "' . $hash_pass . '")';
-
-            mysqli_query($conexion, $addUser);
+            $adduser = $pdo->prepare('INSERT INTO usuarios (email, password)
+                VALUES (:email, :hashedpass)');
+            $adduser->bindValue(':email', $email);
+            $adduser->bindValue(':hashedpass', $hash_pass);
+            $adduser->execute();
 
             $_SESSION['email'] = strtolower($email);
             echo "Añadiendo usuario";
