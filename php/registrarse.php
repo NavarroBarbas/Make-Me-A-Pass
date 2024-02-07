@@ -31,4 +31,3 @@
     } else {
         echo "Error: Método no permitido.";
     }
-?>

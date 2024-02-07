@@ -1,3 +1,4 @@
+// Abrir Overlay Login, Registro, GuardarPass, BorrarPass
 function openOverlay(event) {
     //Overlay Login
     if(event.target.id == "loginclick") {
@@ -12,13 +13,14 @@ function openOverlay(event) {
         let overlay = document.getElementById("savepass");
         overlay.style.opacity = "1";
         overlay.style.visibility = "visible";
-    } else if (event.target.id == "deleteClick") { //Overlay Guardar Contraseña
+    } else if (event.target.id == "deleteClick") { //Overlay Borrar Contraseña
         let overlay = document.getElementById("deletepass");
         overlay.style.opacity = "1";
         overlay.style.visibility = "visible";
     }
 }
 
+// Cerrar Overlay Login, Registro, GuardarPass, BorrarPass
 function closeOverlay(event) {
     //Cierra Overlay Login al clickar fuera del form
     if(event.target.id == "login") {
@@ -30,7 +32,7 @@ function closeOverlay(event) {
         passError.innerHTML = "";
 
         if (event.target === overlay && !formulario.contains(event.target)) {
-            login(event);
+            atributosOverlay(event);
         }
     } else if (event.target.id == "registro") { //Cierra Overlay Registro al clickar fuera del form
         let overlay = document.getElementById("registro");
@@ -43,7 +45,7 @@ function closeOverlay(event) {
         passVerifyError.innerHTML = "";
 
         if (event.target === overlay && !formulario.contains(event.target)) {
-            login(event);
+            atributosOverlay(event);
         }
     }  else if (event.target.id == "savepass") { //Cierra Overlay Registro al clickar fuera del form
         let overlay = document.getElementById("savepass");
@@ -53,19 +55,20 @@ function closeOverlay(event) {
 
 
         if (event.target === overlay && !formulario.contains(event.target)) {
-            login(event);
+            atributosOverlay(event);
         }
     }  else if (event.target.id == "deletepass") { //Cierra Overlay Registro al clickar fuera del form
         let overlay = document.getElementById("deletepass");
         let formulario = document.querySelector(".overlay__box");
 
         if (event.target === overlay && !formulario.contains(event.target)) {
-            login(event);
+            atributosOverlay(event);
         }
     }
 }
 
-function login(event) { 
+// Estilos de visibilidad para el Overlay
+function atributosOverlay(event) { 
     //Quita la visibilidad del overlay login
     if(event.target.id == "login") {
         let overlay = document.getElementById("login");
@@ -89,6 +92,7 @@ function login(event) {
     }
 }
 
+//Valor del slider la longitud de contraseña deseada
 function numLength() {
     var slider = document.getElementById("length");
     var output = document.getElementById("valor");
@@ -99,6 +103,7 @@ function numLength() {
     }
 }
 
+//Registro Usuario
 function validarFormRegistro() {
     // Obtener referencias a los campos y mensajes de error
     let email = document.getElementById("email-registro").value;
@@ -145,17 +150,19 @@ function validarFormRegistro() {
         error = 1;
     }
 
-    if(error == 1) {
+    if(error == 1) { // Si hay errores
         return false;
-    } else {
+    } else { // Si no hay errores
         $.ajax({
             type: 'POST',
             url: 'php/registrarse.php',
             data: { emailregistro: email, passregistro: pass, passverify:  pass_verify},
             success: function(response) {
+                // Añadir usuario
                 if(response === 'Añadiendo usuario') {
                     window.location.reload();
                 } else if(response === "Este usuario ya existe en el sistema") {
+                    // Usuario existente
                     passVerifyError.innerHTML = response;
                 }
             } ,
@@ -167,6 +174,7 @@ function validarFormRegistro() {
     }
 }
 
+//Login Usuario
 function validarFormLogin() {
     let email = document.getElementById("email-login").value;
     let pass = document.getElementById("pass-login").value;
@@ -179,6 +187,7 @@ function validarFormLogin() {
     emailError.innerHTML = "";
     passError.innerHTML = "";
 
+    // Validación de email correcto y obligatorio
     if (email.length == 0 || email == null) {
         emailError.innerHTML = "Email es obligatorio";
         error = 1;
@@ -187,6 +196,7 @@ function validarFormLogin() {
         error = 1;
     }
 
+    //Validación de contraseña obligatoria
     if (pass.length == 0 || pass == null) {
         passError.innerHTML = "Contraseña es obligatoria";
         error = 1;
@@ -200,9 +210,11 @@ function validarFormLogin() {
             url: 'php/login.php',
             data: { correo: email, password: pass },
             success: function(response) {
+                // Login
                 if(response === 'Login Correcto') {
                     window.location.reload();
                 } else {
+                    // Login error
                     passError.innerHTML = response;
                 }
             },
@@ -214,11 +226,13 @@ function validarFormLogin() {
     }
 }
 
+//Logout Usuario
 function cerrarSesion() {
     $.ajax ({
         type: 'POST',
         url: 'php/logout.php',
         success: function(response) {
+            // Cierra sesión
             if(response === 'Sesion Cerrada') {
                 window.location.href="index.php";
             }
@@ -229,12 +243,14 @@ function cerrarSesion() {
     });
 }
 
-//Falta
+// Cambiar contraseña Usuario cuenta.php
 function cambiarPass() {
+    // Valores formulario
     let password = document.getElementById("new_pass").value;
     let pass_verify = document.getElementById("pass_verify_change").value;
     let email = document.getElementById("email").value;
     
+    // Variables de error
     let passError = document.getElementById("pass-error-change");
     let passVfyError = document.getElementById("passvfy-error-change");
     let emailError = document.getElementById("email-error-change");
@@ -245,6 +261,7 @@ function cambiarPass() {
     passVfyError.innerHTML = "";
     emailError.innerHTML = "";
 
+    // Validar contraseña obligatoria y válida
     if (password.length == 0 || password == null) {
         passError.innerHTML = "Contraseña es obligatoria";
         error = 1;
@@ -265,6 +282,7 @@ function cambiarPass() {
         error = 1;
     }
 
+    // Validar email obligatorio y correcto
     if (email.length == 0 || email == null) {
         emailError.innerHTML = "Email es obligatorio";
         error = 1;
@@ -282,9 +300,11 @@ function cambiarPass() {
             data: { email: email, changepass: password},
             success: function(response) {
                 if(response === "Password Changed") {
+                    // Cambio de contraseña del usuario
                     alert("La contraseña ha sido cambiada");
                     window.location.reload();
                 } else {
+                    // Error email incorrecto o no es posible cambiarla
                     emailError.innerHTML = response;
                 }
             },
@@ -296,15 +316,18 @@ function cambiarPass() {
     }
 }
 
+// Generar contraseña index.php
 function generarPass() {
     let randompass = document.getElementById("randompass");
 
+    // Variables con los strings y array necesarios
     let caracteresEspeciales = "!@#$%^&*()_-+=<>?/{}[]";
     let letrasMayusculas = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     let letrasMinusculas = "abcdefghijklmnopqrstuvwxyz";
     let numeros = "0123456789";
     let caracteres = [letrasMayusculas, letrasMinusculas, numeros, caracteresEspeciales];
 
+    // Índice inicial del array caracteres
     function obtenerIndiceCaracter() {
         let indice = Math.floor(Math.random() * caracteres.length);      
         return indice;
@@ -317,13 +340,15 @@ function generarPass() {
         success: function(response) {
             let password = "";
 
-            if(response === 'Sesion iniciada') {
+            if(response === 'Sesion iniciada') { // Login hecho
+                // Valor de la longitud escogida y checkbox de las opciones
                 let length = document.getElementById("length").value;
                 let uppercase = document.getElementById("uppercase");       //0
                 let lowercase = document.getElementById("lowercase");       //1            
                 let charNumeros = document.getElementById("numeros");       //2
                 let charEspeciales = document.getElementById("caracteres"); //3
 
+                // Verificación de las opciones marcadas del checkbox
                 if(!uppercase.checked) {
                     caracteres = caracteres.filter(elemento => elemento !== letrasMayusculas);
                 }
@@ -340,24 +365,30 @@ function generarPass() {
                     caracteres = caracteres.filter(elemento => elemento !== caracteresEspeciales);
                 }
 
+                // Indices del array caracteres
                 let indiceAnterior = obtenerIndiceCaracter();
                 let indiceNuevo = obtenerIndiceCaracter();
 
+                // Bucle para generar la contraseña con la longitud deseada
                 for (let index = 0; index < length; index++) {
                     if(caracteres.length > 1) {
+                        // Si el indice es igual al anterior vuelve a generar uno nuevo hasta que cambie
                         while(indiceAnterior == indiceNuevo) {
                             indiceNuevo = obtenerIndiceCaracter();
-                            //Saca menos caracteres de lo marcado a veces
                         }
                     }
+
+                    // Añadimos en la contraseña un caracter random del string del índice seleccionado
+                    // Y cambiamos el indice nuevo por el anterior y generamos uno nuevo
                     let caracter = caracteres[indiceNuevo].charAt(Math.floor(Math.random() * caracteres[indiceNuevo].length));
                     indiceAnterior = indiceNuevo;
                     indiceNuevo = obtenerIndiceCaracter();
                     password += caracter;
                 }
 
+                // Mostramos contraseña
                 randompass.innerHTML = password;
-            } else if(response === 'Sesion no iniciada'){
+            } else if(response === 'Sesion no iniciada'){ // Login no hecho
                 let indiceAnterior = obtenerIndiceCaracter();
                 let indiceNuevo = obtenerIndiceCaracter();
 
@@ -380,9 +411,12 @@ function generarPass() {
     });
 }
 
+// Copiar contraseña
 function copiar(idelement) {
+    //Valor de la contraseña
     let texto = document.getElementById(idelement).innerText;
 
+    // Si no hay contraseñ generada no la copia
     if(texto === "Click Generar") {
         exit;
     }
@@ -402,7 +436,9 @@ function copiar(idelement) {
     document.body.removeChild(input);
 }
 
+// Guardar Contraseña
 function guardarPass() {
+    // Variables necesarias
     let randompass = document.getElementById("randompass").innerText;
     let nombrepass = document.getElementById("nombrepass").value;
     let errorPass = document.getElementById("save-error-savepass");
@@ -411,6 +447,7 @@ function guardarPass() {
 
     errorPass.innerHTML = "";
 
+    // Validaciones necesarias de email y contraseña
     if (nombrepass.length == 0 || nombrepass == null) {
         errorPass.innerHTML = "Nombre es obligatorio";
         error = 1;
@@ -424,12 +461,13 @@ function guardarPass() {
 
     if(error == 1) {
         return false;
-    } else {
+    } else { // Sin errores
         $.ajax ({
             type: 'POST',
             url: 'php/guardarpass.php',
             data: {password: randompass, nombre: nombrepass},
             success: function(response) {
+                // Guardamos contraseña
                 if(response === "Insert realizado") {
                     window.location.href = "passwords.php";
                 } else {
@@ -444,7 +482,9 @@ function guardarPass() {
     }
 }
 
+// Eliminar contraseña
 function eliminarPass(idpass, namepass) {
+    // Desde el HTML se le pasan los datos necesarios y cogemos sus valores
     let pass = document.getElementById(idpass).innerText;
     let name = document.getElementById(namepass).innerText;
 
@@ -453,8 +493,8 @@ function eliminarPass(idpass, namepass) {
         url: 'php/deletepass.php',
         data: {password: pass, nombrepass: name, passid: namepass},
         success: function(response) {
+            // Eliminamos contraseña
             if(response === "Contraseña Eliminada") {
-                alert(response);
                 window.location.reload();
             } else {
                 alert(response);

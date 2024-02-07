@@ -204,7 +204,6 @@ html {
       align-items: center;
       width: 100vw;
       margin-top: 25px;
-      background: linear-gradient(270deg, var(--azul-flojo-1), var(--azul-flojo-2));
       opacity: 0;
       animation: text-animate 1s 1.5s cubic-bezier(.04,.79,.49,.93) forwards;
       z-index: -1;
