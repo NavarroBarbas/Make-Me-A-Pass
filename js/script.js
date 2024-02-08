@@ -445,7 +445,7 @@ function guardarPass() {
     let randompass = document.getElementById("randompass").innerText;
     let nombrepass = document.getElementById("nombrepass").value;
     let errorPass = document.getElementById("save-error-savepass");
-    let regex = /^[a-zA-Z0-9 ]+$/;
+    let regex = /^[a-zA-Z0-9 @.]+$/;
     let error = 0;
 
     errorPass.innerHTML = "";
@@ -459,6 +459,9 @@ function guardarPass() {
         error = 1;
     } else if (!regex.test(nombrepass)) {
         errorPass.innerHTML = "El nombre no puede contener carácteres especiales";
+        error = 1;
+    } else if (nombrepass.length > 30) {
+        errorPass.innerHTML = "El nombre no puede tener mas de 30 carácteres";
         error = 1;
     }
 
@@ -508,10 +511,7 @@ function eliminarPass(idpass, namepass) {
             // Eliminamos contraseña
             if(response === "Contraseña Eliminada") {
                 // Recargamos solo el apartado de las contraseñas
-                $.get('passwords.php', function(data) {
-                    let contenidoContrasenas = $(data).find('#contrasenas').html();
-                    $('#contrasenas').html(contenidoContrasenas);
-                });
+                $("#contrasenas").load("passwords.php #savedpass");
             } else {
                 alert(response);
             }

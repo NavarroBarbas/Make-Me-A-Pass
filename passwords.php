@@ -85,7 +85,7 @@
             $password = $row["generated_pass"];
             $passid = $row["password_id"];
 
-            echo '<div class="passwords__passdiv">
+            echo '<div id="savedpass" class="passwords__passdiv">
                     <h4 class="passdiv__nombre" id="' . $passid . '">' . $nombrePass . '</h4>
                     <a class="passdiv__password" id="' . $password . '">' . $password . '</a>
                     <nav class="passdiv__nav">
