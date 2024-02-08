@@ -302,7 +302,7 @@ function cambiarPass() {
             data: { email: email, changepass: password},
             success: function(response) {
                 if(response === "Password Changed") {
-                    // Cambio de contraseña del usuario
+                    // Cambio de contraseña del usuario y popup de confirmación
                     Swal.fire({
                         position: "center",
                         icon: "success",
@@ -311,6 +311,7 @@ function cambiarPass() {
                         timer: 1500
                     });
                     
+                    //Recarga el formulario para tenerlo en blanco
                     formulario.reset();
                 } else {
                     // Error email incorrecto o no es posible cambiarla
@@ -342,13 +343,40 @@ function generarPass() {
         return indice;
     }
 
+    // Generador de la contraseña
+    function generador(length) {
+        let password = "";
+
+        // Indices del array caracteres
+        let indiceAnterior = obtenerIndiceCaracter();
+        let indiceNuevo = obtenerIndiceCaracter();
+
+        // Bucle para generar la contraseña con la longitud deseada
+        for (let index = 0; index < length; index++) {
+            if(caracteres.length > 1) {
+                // Si el indice es igual al anterior vuelve a generar uno nuevo hasta que cambie
+                while(indiceAnterior == indiceNuevo) {
+                    indiceNuevo = obtenerIndiceCaracter();
+                }
+            }
+
+            // Añadimos en la contraseña un caracter random del string del índice seleccionado
+            // Y cambiamos el indice nuevo por el anterior y generamos uno nuevo
+            let caracter = caracteres[indiceNuevo].charAt(Math.floor(Math.random() * caracteres[indiceNuevo].length));
+            indiceAnterior = indiceNuevo;
+            indiceNuevo = obtenerIndiceCaracter();
+            password += caracter;
+        }
+
+        // Mostramos contraseña
+        randompass.innerHTML = password;
+    }
+
     $.ajax ({
         type: 'POST',
         url: 'php/passlength.php',
         data: {length: length},
         success: function(response) {
-            let password = "";
-
             if(response === 'Sesion iniciada') { // Login hecho
                 // Valor de la longitud escogida y checkbox de las opciones
                 let length = document.getElementById("length").value;
@@ -374,44 +402,10 @@ function generarPass() {
                     caracteres = caracteres.filter(elemento => elemento !== caracteresEspeciales);
                 }
 
-                // Indices del array caracteres
-                let indiceAnterior = obtenerIndiceCaracter();
-                let indiceNuevo = obtenerIndiceCaracter();
+                generador(length);
 
-                // Bucle para generar la contraseña con la longitud deseada
-                for (let index = 0; index < length; index++) {
-                    if(caracteres.length > 1) {
-                        // Si el indice es igual al anterior vuelve a generar uno nuevo hasta que cambie
-                        while(indiceAnterior == indiceNuevo) {
-                            indiceNuevo = obtenerIndiceCaracter();
-                        }
-                    }
-
-                    // Añadimos en la contraseña un caracter random del string del índice seleccionado
-                    // Y cambiamos el indice nuevo por el anterior y generamos uno nuevo
-                    let caracter = caracteres[indiceNuevo].charAt(Math.floor(Math.random() * caracteres[indiceNuevo].length));
-                    indiceAnterior = indiceNuevo;
-                    indiceNuevo = obtenerIndiceCaracter();
-                    password += caracter;
-                }
-
-                // Mostramos contraseña
-                randompass.innerHTML = password;
             } else if(response === 'Sesion no iniciada'){ // Login no hecho
-                let indiceAnterior = obtenerIndiceCaracter();
-                let indiceNuevo = obtenerIndiceCaracter();
-
-                for (let index = 0; index < 8; index++) {
-                    while(indiceAnterior == indiceNuevo) {
-                        indiceNuevo = obtenerIndiceCaracter();
-                    }
-                    let caracter = caracteres[indiceNuevo].charAt(Math.floor(Math.random() * caracteres[indiceNuevo].length));
-                    indiceAnterior = indiceNuevo;
-                    indiceNuevo = obtenerIndiceCaracter();
-                    password += caracter;
-                }
-
-                randompass.innerHTML = password;
+                generador(8);
             }
         },
         error: function() {
@@ -476,7 +470,7 @@ function guardarPass() {
             url: 'php/guardarpass.php',
             data: {password: randompass, nombre: nombrepass},
             success: function(response) {
-                // Guardamos contraseña
+                // Guardamos contraseña y pop up de confirmación
                 if(response === "Insert realizado") {
                     Swal.fire({
                         position: "center",
@@ -485,6 +479,8 @@ function guardarPass() {
                         showConfirmButton: false,
                         timer: 1500
                     });
+
+                    //Cerramos overlay
                     atributosOverlay("savepass");
                 } else {
                     alert(response);
@@ -511,8 +507,9 @@ function eliminarPass(idpass, namepass) {
         success: function(response) {
             // Eliminamos contraseña
             if(response === "Contraseña Eliminada") {
+                // Recargamos solo el apartado de las contraseñas
                 $.get('passwords.php', function(data) {
-                    var contenidoContrasenas = $(data).find('#contrasenas').html();
+                    let contenidoContrasenas = $(data).find('#contrasenas').html();
                     $('#contrasenas').html(contenidoContrasenas);
                 });
             } else {

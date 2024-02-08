@@ -126,7 +126,7 @@
 
           <section class="info__buenaspracticas">
             <section class="buenaspracticas__izq">
-              <h1>¿Qué es un generador de contraseñas?</h1>
+              <h1>Buenas prácticas con las contraseñas</h1>
               <p><b>Gestor de Contraseñas:</b> Considera el uso de un gestor de contraseñas para generar, almacenar y gestionar contraseñas de forma segura.</p>
               <p><b>Conciencia de Phishing:</b> en cuidado con los intentos de phishing, donde los atacantes intentan engañarte para revelar tus credenciales. Verifica siempre la autenticidad de los correos electrónicos y enlaces antes de proporcionar información confidencial.</p>
               <div class="izq__padlock"></div>
