@@ -32,7 +32,7 @@ function closeOverlay(event) {
         passError.innerHTML = "";
 
         if (event.target === overlay && !formulario.contains(event.target)) {
-            atributosOverlay(event);
+            atributosOverlay(event.target.id);
         }
     } else if (event.target.id == "registro") { //Cierra Overlay Registro al clickar fuera del form
         let overlay = document.getElementById("registro");
@@ -45,9 +45,10 @@ function closeOverlay(event) {
         passVerifyError.innerHTML = "";
 
         if (event.target === overlay && !formulario.contains(event.target)) {
-            atributosOverlay(event);
+            atributosOverlay(event.target.id);
         }
-    }  else if (event.target.id == "savepass") { //Cierra Overlay Registro al clickar fuera del form
+    }  else if (event.target.id == "savepass") { //Cierra Overlay Guardar Contraseña al clickar fuera del form
+        console.log(event.target.id);
         let overlay = document.getElementById("savepass");
         let formulario = document.querySelector(".overlay__box");
         let saveError = document.getElementById("save-error-savepass");
@@ -55,37 +56,37 @@ function closeOverlay(event) {
 
 
         if (event.target === overlay && !formulario.contains(event.target)) {
-            atributosOverlay(event);
+            atributosOverlay(event.target.id);
         }
-    }  else if (event.target.id == "deletepass") { //Cierra Overlay Registro al clickar fuera del form
+    }  else if (event.target.id == "deletepass") { //Cierra Overlay Borrar Contraseña al clickar fuera del form
         let overlay = document.getElementById("deletepass");
         let formulario = document.querySelector(".overlay__box");
 
         if (event.target === overlay && !formulario.contains(event.target)) {
-            atributosOverlay(event);
+            atributosOverlay(event.target.id);
         }
     }
 }
 
 // Estilos de visibilidad para el Overlay
-function atributosOverlay(event) { 
+function atributosOverlay(id) { 
     //Quita la visibilidad del overlay login
-    if(event.target.id == "login") {
+    if(id == "login") {
         let overlay = document.getElementById("login");
         overlay.style.opacity = "0";
         overlay.style.visibility = "hidden";
 
-    } else if (event.target.id == "registro") { //Quita la visibilidad del overlay registro
+    } else if (id == "registro") { //Quita la visibilidad del overlay registro
         let overlay = document.getElementById("registro");
         overlay.style.opacity = "0";
         overlay.style.visibility = "hidden";
 
-    } else if (event.target.id == "savepass") { //Quita la visibilidad del overlay Guardar Contraseña
+    } else if (id == "savepass") { //Quita la visibilidad del overlay Guardar Contraseña
         let overlay = document.getElementById("savepass");
         overlay.style.opacity = "0";
         overlay.style.visibility = "hidden";
 
-    } else if (event.target.id == "deletepass") { //Quita la visibilidad del overlay Eliminar Contraseña
+    } else if (id == "deletepass") { //Quita la visibilidad del overlay Eliminar Contraseña
         let overlay = document.getElementById("deletepass");
         overlay.style.opacity = "0";
         overlay.style.visibility = "hidden";
@@ -246,6 +247,7 @@ function cerrarSesion() {
 // Cambiar contraseña Usuario cuenta.php
 function cambiarPass() {
     // Valores formulario
+    let formulario = document.getElementById("formcambiopass");
     let password = document.getElementById("new_pass").value;
     let pass_verify = document.getElementById("pass_verify_change").value;
     let email = document.getElementById("email").value;
@@ -301,8 +303,15 @@ function cambiarPass() {
             success: function(response) {
                 if(response === "Password Changed") {
                     // Cambio de contraseña del usuario
-                    alert("La contraseña ha sido cambiada");
-                    window.location.reload();
+                    Swal.fire({
+                        position: "center",
+                        icon: "success",
+                        title: "Contraseña Cambiada",
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                    
+                    formulario.reset();
                 } else {
                     // Error email incorrecto o no es posible cambiarla
                     emailError.innerHTML = response;
@@ -469,7 +478,14 @@ function guardarPass() {
             success: function(response) {
                 // Guardamos contraseña
                 if(response === "Insert realizado") {
-                    window.location.href = "passwords.php";
+                    Swal.fire({
+                        position: "center",
+                        icon: "success",
+                        title: "Contraseña Guardada",
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                    atributosOverlay("savepass");
                 } else {
                     alert(response);
                 }
@@ -495,7 +511,10 @@ function eliminarPass(idpass, namepass) {
         success: function(response) {
             // Eliminamos contraseña
             if(response === "Contraseña Eliminada") {
-                window.location.reload();
+                $.get('passwords.php', function(data) {
+                    var contenidoContrasenas = $(data).find('#contrasenas').html();
+                    $('#contrasenas').html(contenidoContrasenas);
+                });
             } else {
                 alert(response);
             }

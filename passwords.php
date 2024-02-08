@@ -65,7 +65,7 @@
       <main class="passwords__main">
         <h2 class="main__titulo">Contraseñas</h2>
 
-        <section class="main__passwords">
+        <section id="contrasenas" class="main__passwords">
           <?php 
 
           $pdo = new Conexion();
@@ -85,40 +85,17 @@
             $password = $row["generated_pass"];
             $passid = $row["password_id"];
 
-              echo '<div class="passwords__passdiv">
-                      <h4 class="passdiv__nombre" id="' . $passid . '">' . $nombrePass . '</h4>
-                      <a class="passdiv__password" id="' . $password . '">' . $password . '</a>
-                      <nav class="passdiv__nav">
-                      <a class="nav__eliminar" id="deleteClick" onclick="eliminarPass(\'' . $password . '\', \'' . $passid . '\')">Eliminar</a>
-                      <a class="nav__copiar" onclick="copiar(\'' . $password . '\')">Copiar</a>
-                      </nav>
-                    </div>
+            echo '<div class="passwords__passdiv">
+                    <h4 class="passdiv__nombre" id="' . $passid . '">' . $nombrePass . '</h4>
+                    <a class="passdiv__password" id="' . $password . '">' . $password . '</a>
+                    <nav class="passdiv__nav">
+                    <a class="nav__eliminar" id="deleteClick" onclick="eliminarPass(\'' . $password . '\', \'' . $passid . '\')">Eliminar</a>
+                    <a class="nav__copiar" onclick="copiar(\'' . $password . '\')">Copiar</a>
+                    </nav>
+                  </div>
 
-                    ';
+                  ';
           }
-
-            /*$sqlPasswords = 'SELECT password_id, generated_pass, nombre_pass FROM saved_passwords AS sp
-              INNER JOIN usuarios AS u ON sp.user_id = u.user_id
-              WHERE u.email = "' . $_SESSION['email'] . '" ORDER BY nombre_pass ASC';
-            
-            $resPasswords = mysqli_query($conexion, $sqlPasswords);
-
-            while($row = $resPasswords -> fetch_assoc()) {
-              $nombrePass = $row["nombre_pass"];
-              $password = $row["generated_pass"];
-              $passid = $row["password_id"];
-
-              echo '<div class="passwords__passdiv">
-                      <h4 class="passdiv__nombre" id="' . $passid . '">' . $nombrePass . '</h4>
-                      <a class="passdiv__password" id="' . $password . '">' . $password . '</a>
-                      <nav class="passdiv__nav">
-                      <a class="nav__eliminar" id="deleteClick" onclick="eliminarPass(\'' . $password . '\', \'' . $passid . '\')">Eliminar</a>
-                      <a class="nav__copiar" onclick="copiar(\'' . $password . '\')">Copiar</a>
-                      </nav>
-                    </div>
-
-                    ';
-            }*/
           ?>
         </section>
         

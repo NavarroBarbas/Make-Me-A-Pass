@@ -45,6 +45,7 @@
     <script src="preloader.js"></script>
     <script src="js/scroll.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="js/script.js"></script>
   </head>
   <body>
@@ -71,7 +72,7 @@
           <a class="sessionout" onclick="cerrarSesion()">Cerrar Sesión</a>
         </div>
 
-        <form class="main__cambiopass" method="POST" onsubmit="return cambiarPass()" novalidate>
+        <form id="formcambiopass" class="main__cambiopass" method="POST" onsubmit="return cambiarPass()" novalidate>
           <input type="password" id="new_pass" name="pass_change" placeholder="Nueva Contraseña">
           <div id="pass-error-change" class="label-error"></div>
 
