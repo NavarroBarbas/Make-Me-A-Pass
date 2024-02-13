@@ -1,8 +1,24 @@
 <?php 
+    /**
+     * This script handles the registration process.
+     * It receives the user's email, password, and password verification from a POST request.
+     * It checks if the user already exists in the database.
+     * If the user does not exist, it adds the user to the database with the hashed password.
+     * It also starts a session and stores the user's email in the session.
+     * Finally, it outputs a message indicating the result of the registration process.
+     *
+     * @param string $_POST['emailregistro'] The user's email from the registration form.
+     * @param string $_POST['passregistro'] The user's password from the registration form.
+     * @param string $_POST['passverify'] The user's password verification from the registration form.
+     * @return void
+     * 
+     * JS FUNCTION: validarFormRegistro()
+     */
+
     include '../bbdd/conexiones.php';
 
     session_start();
-    
+
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $email = $_POST['emailregistro'];
         $pass = $_POST['passregistro'];

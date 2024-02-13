@@ -1,4 +1,16 @@
 <?php
+
+    /**
+     * This script is responsible for saving a password in the database.
+     * It receives the password details through a POST request and inserts them into the 'saved_passwords' table.
+     * The user ID is retrieved from the 'usuarios' table based on the user's email stored in the session.
+     * 
+     * @param string $_POST['nombre'] The name of the password.
+     * @param string $_POST['password'] The generated password.
+     * @param string $_SESSION['email'] The user's email stored in the session.
+     * 
+     * JS FUNCTION: guardarPass()
+     */
     include '../bbdd/conexiones.php';
     session_start();
 

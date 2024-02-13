@@ -1,6 +1,14 @@
 <?php
+    /**
+     * This code handles the login functionality.
+     *
+     * @param string $_POST['correo'] The email entered by the user.
+     * @param string $_POST['password'] The password entered by the user.
+     *
+     * JS FUNCTION: validarFormLogin()
+     */
     include '../bbdd/conexiones.php';
-    
+
     session_start();
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
