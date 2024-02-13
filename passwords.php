@@ -53,11 +53,13 @@
       include 'bbdd/conexiones.php';
       
       if (!isset($_SESSION["email"])){
-        echo "<br/><h2>Mensaje de Rechazo</h2>
+        echo "<div class='errorsesion'>
+        <br/><h2>Mensaje de Rechazo</h2>
         <br/>
         Lo siento, NO tiene privilegios para entrar en esta página, por favor vuelva a la página principal e ingrese un nombre de usuario y apellido.
         <br /><br />
-        <a href='index.php'>Volver a página de Inicio </a>";
+        <a href='./'>Volver a página de Inicio </a>
+        </div>";
       } else {
 
       ?>

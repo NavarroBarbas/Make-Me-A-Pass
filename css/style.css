@@ -763,6 +763,15 @@ html {
   margin-top: 5px; /* Espaciado superior para separar los mensajes del campo */
 }
 
+/* Error al intentar entrar sin sesión */
+.errorsesion {
+  height: calc(100vh - 302px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
 @keyframes headerBackground {
   0%{background-position:0% 50%}
   50%{background-position:100% 50%}
