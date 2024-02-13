@@ -1,5 +1,5 @@
 <header class="header">
-    <a href="index.php" class="header__nombre">
+    <a href="./" class="header__nombre">
         <img class="nombre__logo" src="img/desktop/logo.webp">
         <h2>Make Me A Pass</h2>
     </a>

@@ -235,7 +235,7 @@ function cerrarSesion() {
         success: function(response) {
             // Cierra sesión
             if(response === 'Sesion Cerrada') {
-                window.location.href="index.php";
+                window.location.href="./";
             }
         },
         error: function() {

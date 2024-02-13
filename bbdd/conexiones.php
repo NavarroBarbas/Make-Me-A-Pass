@@ -1,10 +1,10 @@
 <?php
 
     class Conexion extends PDO {
-        private $hostBD = "localhost";
-        private $nombreBD = "makemeapass";
-        private $usuarioBD = "edib";
-        private $passwordBD = "edib";
+        private $hostBD = "bbdd.javiernavarroedib.com";
+        private $nombreBD = "ddb219193";
+        private $usuarioBD = "ddb219193";
+        private $passwordBD = "r5D,f}?mN#+@5(";
 
         public function __construct() {
 
