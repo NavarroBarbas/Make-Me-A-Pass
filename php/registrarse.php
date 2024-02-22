@@ -22,7 +22,6 @@
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $email = $_POST['emailregistro'];
         $pass = $_POST['passregistro'];
-        $pass_verify = $_POST['passverify'];
         $hash_pass = password_hash($pass, PASSWORD_DEFAULT);
 
         $pdo = new Conexion();

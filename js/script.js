@@ -13,10 +13,6 @@ function openOverlay(event) {
         let overlay = document.getElementById("savepass");
         overlay.style.opacity = "1";
         overlay.style.visibility = "visible";
-    } else if (event.target.id == "deleteClick") { //Overlay Borrar Contraseña
-        let overlay = document.getElementById("deletepass");
-        overlay.style.opacity = "1";
-        overlay.style.visibility = "visible";
     }
 }
 
@@ -58,13 +54,6 @@ function closeOverlay(event) {
         if (event.target === overlay && !formulario.contains(event.target)) {
             atributosOverlay(event.target.id);
         }
-    }  else if (event.target.id == "deletepass") { //Cierra Overlay Borrar Contraseña al clickar fuera del form
-        let overlay = document.getElementById("deletepass");
-        let formulario = document.querySelector(".overlay__box");
-
-        if (event.target === overlay && !formulario.contains(event.target)) {
-            atributosOverlay(event.target.id);
-        }
     }
 }
 
@@ -86,10 +75,6 @@ function atributosOverlay(id) {
         overlay.style.opacity = "0";
         overlay.style.visibility = "hidden";
 
-    } else if (id == "deletepass") { //Quita la visibilidad del overlay Eliminar Contraseña
-        let overlay = document.getElementById("deletepass");
-        overlay.style.opacity = "0";
-        overlay.style.visibility = "hidden";
     }
 }
 
@@ -157,7 +142,7 @@ function validarFormRegistro() {
         $.ajax({
             type: 'POST',
             url: 'php/registrarse.php',
-            data: { emailregistro: email, passregistro: pass, passverify:  pass_verify},
+            data: { emailregistro: email, passregistro: pass},
             success: function(response) {
                 // Añadir usuario
                 if(response === 'Añadiendo usuario') {
@@ -374,8 +359,7 @@ function generarPass() {
 
     $.ajax ({
         type: 'POST',
-        url: 'php/passlength.php',
-        data: {length: length},
+        url: 'php/confirmarsesion.php',
         success: function(response) {
             if(response === 'Sesion iniciada') { // Login hecho
                 // Valor de la longitud escogida y checkbox de las opciones
@@ -419,24 +403,14 @@ function copiar(idelement) {
     //Valor de la contraseña
     let texto = document.getElementById(idelement).innerText;
 
-    // Si no hay contraseñ generada no la copia
+    // Si no hay contraseña generada no la copia
     if(texto === "Click Generar") {
         exit;
     }
 
-    // Crear un elemento de input oculto
-    let input = document.createElement('input');
-    input.value = texto;
-    document.body.appendChild(input);
-
-    // Seleccionar el contenido del input
-    input.select();
-
-    // Intentar copiar el contenido al portapapeles
-    document.execCommand('copy');
-
-    // Eliminar el elemento de input creado
-    document.body.removeChild(input);
+    // Copiar al portapapeles
+    navigator.clipboard.writeText(texto);
+    
 }
 
 // Guardar Contraseña
@@ -486,7 +460,7 @@ function guardarPass() {
                     //Cerramos overlay
                     atributosOverlay("savepass");
                 } else {
-                    alert(response);
+                    errorPass.innerHTML = response;
                 }
             },
             error: function() {
