@@ -399,17 +399,40 @@ function generarPass() {
 }
 
 // Copiar contraseña
-function copiar(idelement) {
-    //Valor de la contraseña
+function copiar(elementId) {
+    /*//Valor de la contraseña
     let texto = document.getElementById(idelement).innerText;
+
+    // Copiar al portapapeles
+    navigator.clipboard.writeText(texto);*/
+    let texto = document.getElementById(elementId).innerText;
 
     // Si no hay contraseña generada no la copia
     if(texto === "Click Generar") {
         exit;
     }
+    
+    // Crea un elemento de textarea temporal para copiar el texto
+    let textarea = document.createElement('textarea');
+    textarea.value = texto;
+    textarea.style.position = 'fixed'; // asegura que no se mueva de su posición
+    document.body.appendChild(textarea);
+    
+    // Selecciona y copia el texto dentro del textarea
+    textarea.select();
+    document.execCommand('copy');
+    
+    // Elimina el textarea temporal
+    document.body.removeChild(textarea);
 
-    // Copiar al portapapeles
-    navigator.clipboard.writeText(texto);
+    // Popup de confirmación
+    Swal.fire({
+        position: "center",
+        icon: "success",
+        title: "Contraseña Copiada",
+        showConfirmButton: false,
+        timer: 1500
+    });
     
 }
 
@@ -494,4 +517,14 @@ function eliminarPass(idpass, namepass) {
             alert("Operación no válida");
         }
     });
+}
+
+function openMenu() {
+    let menu = document.getElementById("headermenu");
+    menu.style.height = "100px";
+}
+
+function cerrarMenu() {
+    let menu = document.getElementById("headermenu");
+    menu.style.height = "0vh";
 }

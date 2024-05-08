@@ -82,8 +82,13 @@
           <?php } ?> 
 
           <section class="generador__result">
-            <div class="result__box" id="randompass">Click Generar</div>
-            <a class="result__copy" onclick="copiar('randompass')" id="btncopy">Copiar</a>
+            <div  class="result__box">
+              <div class="box__text-container">
+                <div class="box__text" id="randompass">Click Generar</div>
+              </div>
+              <a class="result__copybtn" onclick="copiar('randompass')" id="btncopy"><img src="./svg/copy.svg"></a>
+            </div>
+            <!--<a class="result__copy" onclick="copiar('randompass')" id="btncopy">Copiar</a>-->
           </section>
 
           <?php if (isset($_SESSION["email"])) { ?>
@@ -118,24 +123,30 @@
         <section class="main__info">
           <section class="info__explicacion">
             <div class="explicacion__cajafuerte"></div>
-            <h1>¿Qué es un generador de contraseñas?</h1>
-            <p>Un generador de contraseñas es una herramienta que crea automáticamente contraseñas seguras y aleatorias.</p>
-            <p>Estas contraseñas suelen cumplir con ciertos criterios de seguridad, como la inclusión de letras mayúsculas y minúsculas, números y caracteres especiales. </p>
-            <p>La función principal de un generador de contraseñas es mejorar la seguridad al crear contraseñas robustas que sean difíciles de adivinar o descifrar mediante métodos de fuerza bruta o ataques de diccionario.</p>
+            <section class="explicacion__texto">
+            <h2>¿Qué es un generador de contraseñas?</h2>
+              <p>Un generador de contraseñas es una herramienta que crea automáticamente contraseñas seguras y aleatorias.</p>
+              <p>Estas contraseñas suelen cumplir con ciertos criterios de seguridad, como la inclusión de letras mayúsculas y minúsculas, números y caracteres especiales. </p>
+              <p>La función principal de un generador de contraseñas es mejorar la seguridad al crear contraseñas robustas que sean difíciles de adivinar o descifrar mediante métodos de fuerza bruta o ataques de diccionario.</p>
+            </section>
           </section>
 
           <section class="info__buenaspracticas">
             <section class="buenaspracticas__izq">
-              <h1>Buenas prácticas con las contraseñas</h1>
-              <p><b>Gestor de Contraseñas:</b> Considera el uso de un gestor de contraseñas para generar, almacenar y gestionar contraseñas de forma segura.</p>
-              <p><b>Conciencia de Phishing:</b> en cuidado con los intentos de phishing, donde los atacantes intentan engañarte para revelar tus credenciales. Verifica siempre la autenticidad de los correos electrónicos y enlaces antes de proporcionar información confidencial.</p>
+              <section class="izq__texto">
+                <h2>Buenas prácticas con las contraseñas</h2>
+                <p><b>Gestor de Contraseñas:</b> Considera el uso de un gestor de contraseñas para generar, almacenar y gestionar contraseñas de forma segura.</p>
+                <p><b>Conciencia de Phishing:</b> en cuidado con los intentos de phishing, donde los atacantes intentan engañarte para revelar tus credenciales. Verifica siempre la autenticidad de los correos electrónicos y enlaces antes de proporcionar información confidencial.</p>
+              </section>
               <div class="izq__padlock"></div>
             </section>
             
             <section class="buenaspracticas__der">
               <div class="der__padlock"></div>
-              <p><b>Autenticación de dos factores (2FA):</b> Habilita la autenticación de dos factores siempre que sea posible. Esto proporciona una capa adicional de seguridad al requerir un segundo método de verificación, como un código enviado a tu teléfono.</p>
-              <p><b>Una contraseña para cada sitio:</b> Reutilizar la misma contraseña es muy arriesgado. Si un pirata informático puede averiguar su contraseña para una cuenta, muy bien podría acceder a todas sus cuentas que comparten esa contraseña</p>
+              <section class="der__texto">
+                <p><b>Autenticación de dos factores (2FA):</b> Habilita la autenticación de dos factores siempre que sea posible. Esto proporciona una capa adicional de seguridad al requerir un segundo método de verificación, como un código enviado a tu teléfono.</p>
+                <p><b>Una contraseña para cada sitio:</b> Reutilizar la misma contraseña es muy arriesgado. Si un pirata informático puede averiguar su contraseña para una cuenta, muy bien podría acceder a todas sus cuentas que comparten esa contraseña</p>
+              </section>
             </section>
           </section>
         </section>

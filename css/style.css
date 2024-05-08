@@ -59,23 +59,29 @@ html {
   animation-duration: 1s;
 
   & .header {
-    width: 100%;
+    width: 100vw;
+    max-width: 1200px;
+    padding: 0 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 200px;
 
     & .header__nombre {
       text-decoration: none;
       display: flex;
+      text-align: center;
       align-items: center;
+      justify-items: center;
       gap: 10px;
-      font-size: 18px;
       color: #18486b;
       font-family: "VeraSerif";
 
       & .nombre__logo {
-        width: 75px;
+        max-width: 75px;
+      }
+
+      & .nombre__titulo {
+        font-size: 18px;
       }
     }
 
@@ -91,7 +97,6 @@ html {
         padding: 10px 15px;
         color: var(--azul-oscuro);
         cursor: pointer;
-        
       }
 
       & .nav__registrarse {
@@ -110,27 +115,100 @@ html {
         background-size: 400% 400%;
       }
     }
+
+    & .header__menubtn {
+      display: none;
+    }
+
+    .header__menu {
+      height: 0vh;
+      width: 100vw;
+      position: fixed;
+      z-index: 1;
+      top: 0;
+      left: 0;
+      background-color: var(--gris-texto);
+      overflow-y: hidden;
+      transition: 0.5s;
+      box-shadow: 0px 10px 10px 0px rgba(0, 0, 0, 0.25);
+
+      & .menu__nav {
+        position: relative;
+        height: 100px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        gap: 30px;
+
+        & .menunav__login {
+          text-decoration: none;
+          color: var(--blanco-gris);
+          font-size: 14px;
+          border-bottom: 1px solid var(--blanco-gris);
+          cursor: pointer;
+        }
+
+        & .menunav__registrarse {
+          max-width: 200px;
+          text-decoration: none;
+          padding: 10px 20px;
+          background: linear-gradient(265deg, var(--azul-normal-2), var(--azul-normal));
+          color: white;
+          border-radius: 25px;
+          font-family: "GoBold";
+          cursor: pointer;
+          overflow-x: hidden;
+          text-overflow: ellipsis;
+        }
+
+        & .nav__cerrar {
+          width: 25px;
+        }
+      }
+    }
+  }
+
+  @media only screen and (max-width: 575px) {
+    .header {
+      justify-content: center;
+      gap: 50px;
+
+      .header__nav {
+        display: none;
+      }
+
+      .header__menubtn {
+        display: block;
+        width: 35px;
+      }
+    }
   }
 
   & .main {
     display: flex;
     flex-direction: column;
     align-items: center;
+    width: 100vw;
+    max-width: 1000px;
 
     & .main__generador {
-      margin-top: 75px;
+      margin-top: 35px;
       display: flex;
       flex-direction: column;
       align-items: center;
       color: var(--gris-texto);
 
       & .generador__titulo {
+        text-align: center;
         font-size: 2.7rem;
         opacity: 0;
         animation: text-animate 1s 0.5s cubic-bezier(.04,.79,.49,.93) forwards;
       }
 
       & .generador__frase {
+        text-align: center;
+        flex-wrap: wrap;
         margin-top: 2rem;
         font-weight: 400;
         opacity: 0;
@@ -139,30 +217,56 @@ html {
 
       & .generador__result {
         display: flex;
+        flex-direction: column;
         justify-content: center;
         align-items: center;
-        gap: 50px;
-        margin-left: 175px;
+        gap: 10px;
+        margin-bottom: 20px;
         font-family: "GoBold";
         opacity: 0;
         animation: text-animate 1s 1s cubic-bezier(.04,.79,.49,.93) forwards;
 
         & .result__box {
-          width: 500px;
-          text-align: center;
+          position: relative;
+          overflow-x: auto;
+          width: 90vw;
+          max-width: 500px;
+          height: 50px;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
           font-size: 18px;
           margin: 25px 0;
           background: linear-gradient(265deg, #669fd0, #0073c7);
           background-size: 400% 400%;
           animation: headerBackground 20s ease infinite;
           color: var(--blanco-gris);
-          padding: 10px 50px;
+          padding-left: 20px;
+          padding-right: 50px;
           border-radius: 15px;
           box-shadow: 0px 3px 5px 0px rgba(0, 0, 0, 0.15);
           
+          & .box__text {
+            white-space: nowrap;
+          }
+
+          & .box__text-container {
+            overflow: auto; /* permite el desplazamiento horizontal y vertical solo en este contenedor */
         }
 
-        & .result__copy {
+          & .result__copybtn {
+            position: absolute;
+            right: 0;
+            display: flex;
+            justify-content: center;
+            height: 50px;
+            width: 50px;
+            padding: 10px;
+            cursor: pointer;
+          }
+        }
+
+        /*& .result__copy {
           background: linear-gradient(265deg, var(--azul-normal-2), var(--azul-normal));
           color: white;
           padding: 10px 40px;
@@ -177,7 +281,7 @@ html {
           background: var(--azul-normal);
           transform: scale(1.2);
           
-        }
+        }*/
       }
 
       & .generador__generar {
@@ -202,6 +306,7 @@ html {
       display: flex;
       flex-direction: column;
       align-items: center;
+      gap: 25px;
       width: 100vw;
       margin-top: 25px;
       opacity: 0;
@@ -209,81 +314,131 @@ html {
       z-index: -1;
 
       & .info__explicacion {
-        width: 90vw;
+        width: 100vw;
         max-width: 1000px;
-        display: grid;
-        grid-template-columns: 35% 65%;
-        grid-template-rows: repeat(4, 1fr);
-        row-gap: 10px;
-        padding: 25px 0;
+        display: flex;
+        flex-wrap: wrap;
         text-align: justify;
+        align-items: center;
+        justify-content: center;
+        gap: 20px;
+        padding: 0 20px;
         
         & .explicacion__cajafuerte {
           background-image: url("../img/desktop/cajafuerte.webp");
           background-position: center;
           background-repeat: no-repeat;
           background-size: cover;
-          grid-column: 1/2;
-          grid-row: 1/5;
           border-radius: 15px;
-          margin-right: 25px;
-          height: 100%;
+          width: 100vw;
+          max-width: 610px;
+          height: 100vw;
+          max-height: 330px;
           box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.25);
         }
-  
-        & .explicacion__informacion {
+
+        @media only screen and (min-width:1000px) {
+          .explicacion__cajafuerte {
+            max-width: 330px;
+          }
+        }
+
+        & .explicacion__texto {
+          width: 100vw;
+          max-width: 610px;
           display: flex;
           flex-direction: column;
-          justify-content: space-between;
+          justify-content: center;
+          flex-wrap: wrap;
+          gap: 20px;
         }
       }
 
       & .info__buenaspracticas {
         max-width: 1000px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 25px;
+        padding: 20px 0;
 
         & .buenaspracticas__izq {
-          text-align: justify;
-          display: grid;
-          grid-template-columns: 65% 35%;
-          grid-template-rows: repeat(3, 1fr);
-          row-gap: 10px;
-          padding: 25px 0;
+          width: 100vw;
+          max-width: 1000px;
+          display: flex;
+          flex-wrap: wrap;
+          align-items: center;
+          justify-content: center;
+          gap: 20px;
+          padding: 0 20px;
+
+          & .izq__texto {
+            width: 100vw;
+            max-width: 610px;
+            display: flex;
+            text-align: justify;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+          }
 
           & .izq__padlock {
             background-image: url("../img/desktop/padlock.webp");
             background-position: center;
             background-repeat: no-repeat;
             background-size: cover;
-            height: 100%;
-            grid-column: 2/3;
-            grid-row: 1/4;
-            margin-left: 25px;
             border-radius: 15px;
+            width: 90vw;
+            max-width: 610px;
+            height: 100vw;
+            max-height: 200px;
             box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.25);
 
+          }
+
+          @media only screen and (min-width:1000px) {
+            .izq__padlock {
+              max-width: 330px;
+            }
           }
         }
 
         & .buenaspracticas__der {
-          text-align: justify;
-          display: grid;
-          grid-template-columns: 35% 65%;
-          grid-template-rows: repeat(2, 1fr);
-          row-gap: 35px;
-          padding: 25px 0;
-          margin-bottom: 35px;
+          width: 100vw;
+          max-width: 1000px;
+          display: flex;
+          flex-wrap: wrap;
+          align-items: center;
+          justify-content: center;
+          gap: 20px;
+          padding: 0 20px;
 
           & .der__padlock {
             background-image: url("../img/desktop/padlock2.webp");
             background-position: center;
             background-repeat: no-repeat;
             background-size: cover;
-            height: 100%;
-            grid-column: 1/2;
-            grid-row: 1/3;
-            margin-right: 25px;
             border-radius: 15px;
+            width: 90vw;
+            max-width: 610px;
+            height: 100vw;
+            max-height: 200px;
             box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.25);
+          }
+
+          @media only screen and (min-width:1000px) {
+            .der__padlock {
+              max-width: 330px;
+            }
+          }
+
+          & .der__texto {
+            width: 100vw;
+            max-width: 610px;
+            display: flex;
+            text-align: justify;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
           }
         }
       }
@@ -359,7 +514,9 @@ html {
 
 /* OPCIONES GENERADOR SESION INICIADA */
 .generador__length {
-  width: 375px;
+  min-width: 100px;
+  max-width: 375px;
+  width: 80vw;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -390,8 +547,12 @@ html {
 }
 
 .generador__botones {
+  width: 90vw;
   display: flex;
-  gap: 50px;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 35px;
   opacity: 0;
   animation: text-animate 1s 1.25s cubic-bezier(.04,.79,.49,.93) forwards;
 
@@ -414,18 +575,19 @@ html {
 
 .settings {
   display: flex;
-  gap: 15px;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
   opacity: 0;
   animation: text-animate 1s 0.75s cubic-bezier(.04,.79,.49,.93) forwards;
 
   & .setting {
     position: relative;
-    width: 120px;
+    width: 150px;
     height: 40px;
     border-radius: 15px;
     display: flex;
-    align-items: center;
-    padding: 10px 25px;
+    padding: 10px 40px;
     margin-bottom: 8px;
     margin-top: 15px;
   
@@ -433,6 +595,7 @@ html {
       opacity: 0;
       position: absolute;
       + label {
+        margin-right: 15px;
         user-select: none;
         &::before,
         &::after {
@@ -680,7 +843,8 @@ html {
     position: absolute;
     font-size: 50px;
     color: white;
-    width: 600px;
+    width: 90vw;
+    max-width: 600px;
     padding: 50px 0;
     border-radius: 20px;
     background-color: white;
@@ -752,6 +916,12 @@ html {
 
       & .deletebtn {
         background: linear-gradient(265deg, #e7615d, #f4504a);
+      }
+    }
+
+    @media only screen and (max-width: 575px) {
+      .box__form {
+        gap: 10px;
       }
     }
   }
