@@ -2,10 +2,12 @@
 function openOverlay(event) {
     //Overlay Login
     if(event.target.id == "loginclick") {
+        cerrarMenu();
         let overlay = document.getElementById("login");
         overlay.style.opacity = "1";
         overlay.style.visibility = "visible";
     } else if (event.target.id == "registroclick") { // Overlay Registro
+        cerrarMenu();
         let overlay = document.getElementById("registro");
         overlay.style.opacity = "1";
         overlay.style.visibility = "visible";
@@ -521,7 +523,7 @@ function eliminarPass(idpass, namepass) {
 
 function openMenu() {
     let menu = document.getElementById("headermenu");
-    menu.style.height = "100px";
+    menu.style.height = "100vh";
 }
 
 function cerrarMenu() {

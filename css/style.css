@@ -122,11 +122,11 @@ html {
 
     .header__menu {
       height: 0vh;
-      width: 100vw;
+      width: 55vw;
       position: fixed;
       z-index: 1;
       top: 0;
-      left: 0;
+      right: 0;
       background-color: var(--gris-texto);
       overflow-y: hidden;
       transition: 0.5s;
@@ -134,23 +134,25 @@ html {
 
       & .menu__nav {
         position: relative;
-        height: 100px;
+        height: 100vh;
         display: flex;
-        justify-content: center;
-        align-items: center;
+        flex-direction: column;
+        align-items: end;
         color: white;
-        gap: 30px;
+        gap: 40px;
+        padding-right: 30px;
+        padding-top: 30px;
 
         & .menunav__login {
           text-decoration: none;
           color: var(--blanco-gris);
-          font-size: 14px;
+          font-size: 16px;
           border-bottom: 1px solid var(--blanco-gris);
           cursor: pointer;
         }
 
         & .menunav__registrarse {
-          max-width: 200px;
+          max-width: 80%;
           text-decoration: none;
           padding: 10px 20px;
           background: linear-gradient(265deg, var(--azul-normal-2), var(--azul-normal));
@@ -161,6 +163,18 @@ html {
           overflow-x: hidden;
           text-overflow: ellipsis;
         }
+
+        /*& .menunav__logout {
+          text-decoration: none;
+          width: 80%;
+          padding: 10px 20px;
+          background: linear-gradient(265deg, rgb(240, 73, 73), rgb(228, 139, 139));
+          color: white;
+          border-radius: 25px;
+          font-family: "GoBold";
+          overflow-x: hidden;
+          text-overflow: ellipsis;
+        }*/
 
         & .nav__cerrar {
           width: 25px;
@@ -639,7 +653,7 @@ html {
 
 /* CUENTA DE USUARIO */
 .cuenta__main {
-  width: 90vw;
+  width: 100vw;
   max-width: 1000px;
   display: flex;
   justify-content: start;
@@ -649,7 +663,8 @@ html {
   & .main__barra {
     margin: 0;
     padding: 0;
-    width: 500px;
+    width: 20vw;
+    max-width: 500px;
     height: calc(100vh - 302px);
     min-height: 365px;
     background-color: #f4f4f4;
@@ -845,7 +860,7 @@ html {
     color: white;
     width: 90vw;
     max-width: 600px;
-    padding: 50px 0;
+    padding: 50px 0 0 0;
     border-radius: 20px;
     background-color: white;
     color: var(--gris-texto);
@@ -859,8 +874,9 @@ html {
       margin-top: 15px;
 
       & .logo__nombre {
-        color: var(--azul-normal);
-        font-weight: 400;
+        color: #18486b;
+        font-weight: 700;
+        font-family: "VeraSerif";
       }
 
       & .logo__imagen {
@@ -877,7 +893,8 @@ html {
       gap: 20px;
 
       & .input {
-        width: 65%;
+        width: 85%;
+        max-width: 350px;
         padding: 15px 0;
         font-size: 16px;
         border: none;
@@ -892,13 +909,13 @@ html {
 
       & .botonenviar {
         margin-top: 15px;
-        width: 65%;
+        width: 100%;
         border: none;
-        border-radius: 15px;
-        padding: 5px 0;
+        padding: 15px 0;
         color: white;
         background: linear-gradient(265deg, #2f6fb3fb, #4e50da);
         box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.25);
+        border-radius: 0 0 20px 20px;
         cursor: pointer;
       }
 

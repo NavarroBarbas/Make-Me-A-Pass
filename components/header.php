@@ -7,14 +7,15 @@
     <a class="header__menubtn" id="menubtn" onclick="openMenu()"><img src="svg/menu.svg"></a>
     <nav class="header__menu" id="headermenu">
         <div class="menu__nav">
-            <?php if (isset($_SESSION["email"])) {
-                echo '<a id="contraseñas" href="passwords.php" class="menunav__login">Contraseñas</a>';
-                echo '<a id="cuenta" href="cuenta.php" class="menunav__registrarse">' . $_SESSION['email'] . '</a>';
-            } else { ?>
-            <a id="loginclick" onclick="openOverlay(event)" class="menunav__login">Iniciar Sesión</a>
-            <a id="registroclick" onclick="openOverlay(event)" class="menunav__registrarse">Registrarse</a>
-            <?php } ?>
             <a class="nav__cerrar" id="cerrar-menu" onclick="cerrarMenu()"><img src="svg/cerrarmenu.svg"></a>
+            <?php if (isset($_SESSION["email"])) {
+                echo '<a id="cuenta" href="cuenta.php" class="menunav__registrarse">' . $_SESSION['email'] . '</a>';
+                echo '<a id="contraseñas" href="passwords.php" class="menunav__login">Contraseñas</a>';
+                //echo '<a id="logout" onclick=cerrarSesion() class="menunav__logout">Cerrar Sesión</a>';
+            } else { ?>
+            <a id="registroclick" onclick="openOverlay(event)" class="menunav__registrarse">Registrarse</a>
+            <a id="loginclick" onclick="openOverlay(event)" class="menunav__login">Iniciar Sesión</a>
+            <?php } ?>
         </div>
     </nav>
     <nav class="header__nav">
@@ -31,8 +32,8 @@
 <div id="login" class="overlay" onclick="closeOverlay(event)">
     <div class="overlay__box">
         <section class="box__logo">
-            <h4 class="logo__nombre">Make Me A Pass</h4>
             <img class="logo__imagen" src="img/desktop/logo.webp">
+            <h4 class="logo__nombre">Make Me A Pass</h4>
         </section>
 
         <form class="box__form" method="POST" onsubmit="return validarFormLogin()" novalidate>
@@ -51,8 +52,8 @@
 <div id="registro" class="overlay" onclick="closeOverlay(event)">
     <div class="overlay__box">
         <section class="box__logo">
-            <h4 class="logo__nombre">Make Me A Pass</h4>
             <img class="logo__imagen" src="img/desktop/logo.webp">
+            <h4 class="logo__nombre">Make Me A Pass</h4>
         </section>
 
         <form class="box__form" method="POST" onsubmit="return validarFormRegistro()" novalidate>
