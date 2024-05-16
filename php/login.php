@@ -7,7 +7,7 @@
      *
      * JS FUNCTION: validarFormLogin()
      */
-    include '../bbdd/conexiones.php';
+    include_once(__DIR__."/../bbdd/usuario.php");
 
     session_start();
 
@@ -16,7 +16,19 @@
         $pass = $_POST['password'];
         $hashedPass = "";
 
-        $pdo = new Conexion();
+        $u=new Usuario();
+        $u->setEmail($email);
+        $u->setPassword($pass);
+        if ($u->login()){
+            $_SESSION['usuarioID']=$u->getIdUsuario();
+            $_SESSION['isAuth']=true;
+            $_SESSION['email'] = strtolower($u->getEmail());
+            echo "Login Correcto";
+        } else{
+            echo "Datos de usuario incorrectos";
+        }
+
+        /*$pdo = new Conexion();
         $sql = $pdo->prepare('SELECT * FROM usuarios WHERE email =:email LIMIT 1');
         $sql->bindValue(':email', $email);
         $sql->execute();
@@ -37,7 +49,7 @@
             }
         } else {
             echo "Datos de usuario incorrectos"; 
-        }
+        }*/
     } else {
         echo "Error: Método no permitido.";
     }

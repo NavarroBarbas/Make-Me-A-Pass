@@ -42,7 +42,6 @@
     <!-- Código de las plataformas de Análisis -->
     <script></script>
     <!-- Scripts a cargar antes de la renderización -->
-    <script src="preloader.js"></script>
     <script src="js/scroll.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -67,27 +66,86 @@
       <main class="cuenta__main">
         <div class="main__barra">
           <section class="barra__datos">
-            <a><u><?php echo $_SESSION["email"] ?></u></a>
-            <a>Datos de Usuario</a>
+            <a class="datos__email"><u><?php echo $_SESSION["email"] ?></u></a>
+            <div class="datos__opcion selected" id="opcionUsuario" onclick="selectedOption(event)">
+              <a>Nombre de Usuario</a>
+              <img src="svg/arrowright.svg" alt="Flecha derecha" />
+            </div>
+
+            <div class="datos__opcion"  id="opcionPassword" onclick="selectedOption()">
+              <a>Cambiar Contraseña</a>
+              <img src="svg/arrowright.svg" alt="Flecha derecha" />
+            </div>
+
+            <div class="datos__opcion datos__delete" id="opcionDelete">
+              <a>Eliminar Cuenta</a>
+              <img src="svg/arrowright.svg" alt="Flecha derecha" />
+            </div>
           </section>
 
           <a class="sessionout" onclick="cerrarSesion()">Cerrar Sesión</a>
         </div>
 
-        <form id="formcambiopass" class="main__cambiopass" method="POST" onsubmit="return cambiarPass()" novalidate>
+        <form id="form-nickname" class="main__form" method="POST" onsubmit="return newNickname()" novalidate>
+          <input type="text" id="new-nickname" name="nickname" placeholder="Nombre de Usuario">
+          <div id="text-error-nickname" class="label-error"></div>
+
+          <input type="password" id="old-pass-nickname" name="old_pass"  placeholder="Contraseña Antigua">
+          <div id="oldpass-error-nickname" class="label-error"></div>
+
+          <input class="botonenviar" type="submit" value="Enviar">
+        </form>
+
+        <form id="formcambiopass" class="main__form" method="POST" onsubmit="return cambiarPass()" style="display:none" novalidate>
           <input type="password" id="new_pass" name="pass_change" placeholder="Nueva Contraseña">
           <div id="pass-error-change" class="label-error"></div>
 
           <input type="password" id="pass_verify_change" name="pass_verify_change" placeholder="Confirmar Contraseña">
           <div id="passvfy-error-change" class="label-error"></div>
 
-          <input type="email" id="email" name="email"  placeholder="Email">
-          <div id="email-error-change" class="label-error"></div>
+          <input type="password" id="old_pass" name="old_pass"  placeholder="Contraseña Antigua">
+          <div id="oldpass-error-change" class="label-error"></div>
 
           <input class="botonenviar" type="submit" value="Enviar">
         </form>
       </main>
 
+      <!--<main class="cuenta__mainmobile">
+        <a class="mainmobile__email"><u><?php echo $_SESSION["email"] ?></u></a>
+        <div class="mainmobile__tab" id="usuario_name" onclick="nicknameForm()">
+          <a>Nombre de Usuario</a>
+          <img src="svg/arrowdown.svg" alt="Flecha derecha" id="arrowright" />
+        </div>
+        <form class="mainmobile__form" id="formnewnickname" method="POST" onsubmit="return cambiarPass()" novalidate>
+          <input type="text" id="new_nickname" name="new_nickname" placeholder="Nuevo Usuario">
+          <div id="user-error-mobile" class="label-error"></div>
+
+          <input type="password" id="pass_verify" name="pass_verify" placeholder="Confirmar Contraseña">
+          <div id="passvfy-error-mobile" class="label-error"></div>
+
+          <input class="botonenviar" type="submit" value="Enviar">
+        </form>
+        
+        <div class="mainmobile__tab" id="usuario_newpass" onclick="newpassForm()">
+          <a>Cambiar Contraseña</a>
+          <img src="svg/arrowdown.svg" alt="Flecha derecha" id="arrowright" />
+        </div>
+        <form class="mainmobile__form" id="formcambiopass" method="POST" onsubmit="return cambiarPass()" novalidate>
+          <input type="password" id="new_pass" name="pass_change" placeholder="Nueva Contraseña">
+          <div id="pass-error-mobile" class="label-error"></div>
+
+          <input type="password" id="pass_verify_change" name="pass_verify_change" placeholder="Confirmar Contraseña">
+          <div id="passvfy-error-mobile" class="label-error"></div>
+
+          <input type="password" id="old_pass" name="old_pass"  placeholder="Contraseña Antigua">
+          <div id="oldpass-error-mobile" class="label-error"></div>
+
+          <input class="botonenviar" type="submit" value="Enviar">
+        </form>
+        
+        <a class="sessionout" onclick="cerrarSesion()">Cerrar Sesión</a>
+      </main>-->
+      
       <?php } ?>
       
       <?php include 'components/footer.php' ?>

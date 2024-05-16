@@ -231,24 +231,51 @@ function cerrarSesion() {
     });
 }
 
+//Cuenta Usuario Opción Seleccionada
+function selectedOption() {
+    let opcionUsuario = document.getElementById("opcionUsuario");
+    let opcionPassword = document.getElementById("opcionPassword");
+    let formNickname = document.getElementById("form-nickname");
+    let formPassword = document.getElementById("formcambiopass");
+
+    if(!opcionUsuario.classList.contains("selected")) {
+        opcionUsuario.classList.add("selected");
+        opcionPassword.classList.remove("selected");
+        opcionDelete.classList.remove("selected");
+        formNickname.style.display = "flex";
+        formPassword.style.display = "none";
+        document.getElementById("text-error-nickname").innerHTML = "";
+        document.getElementById("oldpass-error-nickname").innerHTML = "";
+    } else if(!opcionPassword.classList.contains("selected")) {
+        opcionPassword.classList.add("selected");
+        opcionUsuario.classList.remove("selected");
+        opcionDelete.classList.remove("selected");
+        formNickname.style.display = "none";
+        formPassword.style.display = "flex";
+        document.getElementById("pass-error-change").innerHTML = "";
+        document.getElementById("passvfy-error-change").innerHTML = "";
+        document.getElementById("oldpass-error-change").innerHTML = "";
+    }
+}
+
 // Cambiar contraseña Usuario cuenta.php
 function cambiarPass() {
     // Valores formulario
     let formulario = document.getElementById("formcambiopass");
     let password = document.getElementById("new_pass").value;
     let pass_verify = document.getElementById("pass_verify_change").value;
-    let email = document.getElementById("email").value;
+    let oldPass = document.getElementById("old_pass").value;
     
     // Variables de error
     let passError = document.getElementById("pass-error-change");
     let passVfyError = document.getElementById("passvfy-error-change");
-    let emailError = document.getElementById("email-error-change");
+    let oldPassError = document.getElementById("oldpass-error-change");
 
     let error = 0;
 
     passError.innerHTML = "";
     passVfyError.innerHTML = "";
-    emailError.innerHTML = "";
+    oldPassError.innerHTML = "";
 
     // Validar contraseña obligatoria y válida
     if (password.length == 0 || password == null) {
@@ -271,12 +298,9 @@ function cambiarPass() {
         error = 1;
     }
 
-    // Validar email obligatorio y correcto
-    if (email.length == 0 || email == null) {
-        emailError.innerHTML = "Email es obligatorio";
-        error = 1;
-    } else if(!(/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/.test(email))) {
-        emailError.innerHTML = "Email es incorrecto";
+    // Validar que la contraseña antigua sea obligatoria
+    if (oldPass.length == 0 || oldPass == null) {
+        oldPassError.innerHTML = "La antigua contraseña es obligatoria";
         error = 1;
     }
 
@@ -286,7 +310,7 @@ function cambiarPass() {
         $.ajax ({
             type: 'POST',
             url: 'php/changepass.php',
-            data: { email: email, changepass: password},
+            data: { oldpass: oldPass, changepass: password},
             success: function(response) {
                 if(response === "Password Changed") {
                     // Cambio de contraseña del usuario y popup de confirmación
@@ -302,14 +326,48 @@ function cambiarPass() {
                     formulario.reset();
                 } else {
                     // Error email incorrecto o no es posible cambiarla
-                    emailError.innerHTML = response;
+                    oldPassError.innerHTML = response;
                 }
             },
             error: function() {
-                emailError.innerHTML = "Error al procesar la solicitud";
+                oldPassError.innerHTML = "Error al procesar la solicitud";
             }
         });
         return false;
+    }
+}
+
+function newNickname() {
+    let nickname = document.getElementById("new-nickname").value;
+    let oldPass = document.getElementById("old-pass-nickname").value;
+
+    let newNicknameError = document.getElementById("text-error-nickname");
+    let oldPassError = document.getElementById("oldpass-error-nickname");
+
+    let error = 0;
+
+    newNicknameError.innerHTML = "";
+    oldPassError.innerHTML = "";
+
+    if(nickname.length == 0 || nickname == null) {
+        newNicknameError.innerHTML = "El nombre de Usuario es obligatorio";
+        error = 1;
+    } else if(nickname.length > 16) {
+        newNicknameError.innerHTML = "El nombre de Usuario no puede tener más de 16 carácteres";
+        error = 1;
+
+    }
+
+    // Validar que la contraseña antigua sea obligatoria
+    if (oldPass.length == 0 || oldPass == null) {
+        oldPassError.innerHTML = "La antigua contraseña es obligatoria";
+        error = 1;
+    }
+
+    if(error == 1) {
+        return false;
+    } else {
+
     }
 }
 
@@ -350,9 +408,13 @@ function generarPass() {
             // Añadimos en la contraseña un caracter random del string del índice seleccionado
             // Y cambiamos el indice nuevo por el anterior y generamos uno nuevo
             let caracter = caracteres[indiceNuevo].charAt(Math.floor(Math.random() * caracteres[indiceNuevo].length));
+            if(caracter == "<") {
+                caracter = "&lt;"
+            }
             indiceAnterior = indiceNuevo;
             indiceNuevo = obtenerIndiceCaracter();
             password += caracter;
+            console.log(password);
         }
 
         // Mostramos contraseña
@@ -521,11 +583,13 @@ function eliminarPass(idpass, namepass) {
     });
 }
 
+//Open Menu Movil
 function openMenu() {
     let menu = document.getElementById("headermenu");
     menu.style.height = "100vh";
 }
 
+//Close Menu Movil
 function cerrarMenu() {
     let menu = document.getElementById("headermenu");
     menu.style.height = "0vh";
