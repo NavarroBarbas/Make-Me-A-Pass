@@ -1,4 +1,5 @@
 <?php
+    error_reporting(E_ALL ^ E_NOTICE);
 
     class Conexion {
         private $driver =  "mysql";
@@ -6,14 +7,14 @@
         private $nombreBD = "ddb219193";
         private $usuarioBD = "ddb219193";
         private $passwordBD = "r5D,f}?mN#+@5(";
-        private $errCode=null;
-        private $errMsg=null;
+        public $errCode=null;
+        public $errMsg=null;
         private static $pdo;
 
         public function __construct() {
             try{
-                if ($this->pdo==null) {
-                    $this->pdo=new PDO("{$this->driver}:host={$this->hostBD};dbname={$this->nombreBD};charset=utf8",$this->usuarioBD, $this->passwordBD);
+                if (Conexion::$pdo==null) {
+                    Conexion::$pdo=new PDO("{$this->driver}:host={$this->hostBD};dbname={$this->nombreBD};charset=utf8",$this->usuarioBD, $this->passwordBD);
                 }
             } catch (PDOException $e) {
                 die($e->getMessage());
@@ -34,6 +35,6 @@
         }
         
         public function getPdo(){
-            return $this->pdo;
+            return Conexion::$pdo;
         }
     }

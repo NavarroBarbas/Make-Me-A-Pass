@@ -9,7 +9,13 @@
         <div class="menu__nav">
             <a class="nav__cerrar" id="cerrar-menu" onclick="cerrarMenu()"><img src="svg/cerrarmenu.svg"></a>
             <?php if (isset($_SESSION["email"])) {
-                echo '<a id="cuenta" href="cuenta.php" class="menunav__registrarse">' . $_SESSION['email'] . '</a>';
+                echo '<a id="cuenta" href="cuenta.php" class="menunav__registrarse">';
+                if(isset($_SESSION['nickname'])) {
+                    echo $_SESSION['nickname'];
+                } else {
+                    echo $_SESSION['email'];
+                }
+                echo '</a>';
                 echo '<a id="contraseñas" href="passwords.php" class="menunav__login">Contraseñas</a>';
                 //echo '<a id="logout" onclick=cerrarSesion() class="menunav__logout">Cerrar Sesión</a>';
             } else { ?>
@@ -18,10 +24,16 @@
             <?php } ?>
         </div>
     </nav>
-    <nav class="header__nav">
+    <nav class="header__nav" id="headernav">
         <?php if (isset($_SESSION["email"])) {
             echo '<a id="contraseñas" href="passwords.php" class="nav__login">Contraseñas</a>';
-            echo '<a id="cuenta" href="cuenta.php" class="nav__registrarse">' . $_SESSION['email'] . '</a>';
+            echo '<a id="cuenta" href="cuenta.php" class="nav__registrarse">';
+                if(isset($_SESSION['nickname'])) {
+                    echo $_SESSION['nickname'];
+                } else {
+                    echo $_SESSION['email'];
+                }
+            echo '</a>';
         } else { ?>
         <a id="loginclick" onclick="openOverlay(event)" class="nav__login">Iniciar Sesión</a>
         <a id="registroclick" onclick="openOverlay(event)" class="nav__registrarse">Registrarse</a>
@@ -43,6 +55,10 @@
 
             <input class="input" type="password" id="pass-login" placeholder="Contraseña">
             <div id="pass-error-login" class="label-error"></div>
+
+            <a class="form__resetpass" id="resetclick" onclick="openOverlay(event)">
+                ¿Has olvidado tu contraseña?
+            </a>
 
             <input class="botonenviar" type="submit" value="Enviar">
         </form>
@@ -66,6 +82,24 @@
 
             <input class="input" type="password" id="pass_verify" name="passverify" placeholder="Confirmar Contraseña">
             <div id="passverify-error-registro" class="label-error"></div>
+
+            <input class="botonenviar" type="submit" value="Enviar">
+        </form>
+    </div>
+</div>
+
+<div id="resetpass" class="overlay" onclick="closeOverlay(event)">
+<div class="overlay__box">
+        <section class="box__logo">
+            <img class="logo__imagen" src="img/desktop/logo.webp">
+            <h4 class="logo__nombre">Make Me A Pass</h4>
+        </section>
+
+        <form class="box__form" method="POST" onsubmit="return resetPassword()" novalidate>
+            <h4 class="form__titulo">¿Olvidaste tu Contraseña?</h4>
+
+            <input class="input" type="email" id="email-reset" name="emailreset" placeholder="Email">
+            <div id="reset-pass-msg" class="label-error"></div>
 
             <input class="botonenviar" type="submit" value="Enviar">
         </form>

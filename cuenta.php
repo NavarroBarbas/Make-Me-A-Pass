@@ -77,7 +77,7 @@
               <img src="svg/arrowright.svg" alt="Flecha derecha" />
             </div>
 
-            <div class="datos__opcion datos__delete" id="opcionDelete">
+            <div class="datos__opcion datos__delete" id="opcionDelete" onclick="deleteUser()">
               <a>Eliminar Cuenta</a>
               <img src="svg/arrowright.svg" alt="Flecha derecha" />
             </div>
@@ -90,7 +90,7 @@
           <input type="text" id="new-nickname" name="nickname" placeholder="Nombre de Usuario">
           <div id="text-error-nickname" class="label-error"></div>
 
-          <input type="password" id="old-pass-nickname" name="old_pass"  placeholder="Contraseña Antigua">
+          <input type="password" id="old-pass-nickname" name="old_pass"  placeholder="Contraseña">
           <div id="oldpass-error-nickname" class="label-error"></div>
 
           <input class="botonenviar" type="submit" value="Enviar">

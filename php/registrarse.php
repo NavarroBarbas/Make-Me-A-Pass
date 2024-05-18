@@ -15,7 +15,8 @@
      * JS FUNCTION: validarFormRegistro()
      */
 
-    include '../bbdd/conexiones.php';
+    include_once(__DIR__."/../bbdd/usuario.php");
+    include_once(__DIR__."/../bbdd/email.php");
 
     session_start();
 
@@ -24,24 +25,23 @@
         $pass = $_POST['passregistro'];
         $hash_pass = password_hash($pass, PASSWORD_DEFAULT);
 
-        $pdo = new Conexion();
-        $sql = $pdo->prepare('SELECT * FROM usuarios WHERE email =:email');
-        $sql->bindValue(':email', $email);
-        $sql->execute();
-        $numrows = $sql->rowCount();
-        $sql->setFetchMode(PDO::FETCH_ASSOC);
-
-        if($numrows > 0) {
-            echo "Este usuario ya existe en el sistema";
-        } else {
-            $adduser = $pdo->prepare('INSERT INTO usuarios (email, password)
-                VALUES (:email, :hashedpass)');
-            $adduser->bindValue(':email', $email);
-            $adduser->bindValue(':hashedpass', $hash_pass);
-            $adduser->execute();
-
+        $u=new Usuario();
+        $u->setEmail($email);
+        $u->setPassword($hash_pass);
+        $u->setToken(rand(100000000,900000000));
+        if ($u->registro()) {
+            sendEmail(
+                $u->getEmail(), 
+                "Registro de Usuario", 
+                "<p>para finalizar el registro visite: http://localhost/verificar.php?id={$u->getIdUsuario()}&token={$u->getToken()}</p>");
             $_SESSION['email'] = strtolower($email);
             echo "Añadiendo usuario";
+        } else {
+            sendEmail(
+                $u->getEmail(), 
+                "Registro de Usuario", 
+                "<p>Alguien esta intentando registrarse con su email</p>");
+            echo "Este usuario ya existe en el sistema";
         }
     } else {
         echo "Error: Método no permitido.";

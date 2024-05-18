@@ -15,6 +15,11 @@ function openOverlay(event) {
         let overlay = document.getElementById("savepass");
         overlay.style.opacity = "1";
         overlay.style.visibility = "visible";
+    } else if(event.target.id == "resetclick") {
+        let overlay = document.getElementById("resetpass");
+        overlay.style.opacity = "1";
+        overlay.style.visibility = "visible";
+        atributosOverlay("login");
     }
 }
 
@@ -45,14 +50,22 @@ function closeOverlay(event) {
         if (event.target === overlay && !formulario.contains(event.target)) {
             atributosOverlay(event.target.id);
         }
-    }  else if (event.target.id == "savepass") { //Cierra Overlay Guardar Contraseña al clickar fuera del form
+    } else if (event.target.id == "savepass") { //Cierra Overlay Guardar Contraseña al clickar fuera del form
         console.log(event.target.id);
         let overlay = document.getElementById("savepass");
         let formulario = document.querySelector(".overlay__box");
         let saveError = document.getElementById("save-error-savepass");
         saveError.innerHTML = "";
 
-
+        if (event.target === overlay && !formulario.contains(event.target)) {
+            atributosOverlay(event.target.id);
+        }
+    } else if (event.target.id == "resetpass") { //Cierra Overlay Guardar Contraseña al clickar fuera del form
+        console.log(event.target.id);
+        let overlay = document.getElementById("resetpass");
+        let formulario = document.querySelector(".overlay__box");
+        let resetpassmsg = document.getElementById("reset-pass-msg");
+        resetpassmsg.innerHTML = "";
         if (event.target === overlay && !formulario.contains(event.target)) {
             atributosOverlay(event.target.id);
         }
@@ -76,7 +89,10 @@ function atributosOverlay(id) {
         let overlay = document.getElementById("savepass");
         overlay.style.opacity = "0";
         overlay.style.visibility = "hidden";
-
+    } else if (id == "resetpass") { //Quita la visibilidad del overlay Guardar Contraseña
+        let overlay = document.getElementById("resetpass");
+        overlay.style.opacity = "0";
+        overlay.style.visibility = "hidden";
     }
 }
 
@@ -148,10 +164,10 @@ function validarFormRegistro() {
             success: function(response) {
                 // Añadir usuario
                 if(response === 'Añadiendo usuario') {
-                    window.location.reload();
+                    passVerifyError.innerHTML = "Revise su email para confirmar su cuenta";
                 } else if(response === "Este usuario ya existe en el sistema") {
                     // Usuario existente
-                    passVerifyError.innerHTML = response;
+                    passVerifyError.innerHTML = "Revise su email para confirmar su cuenta";
                 }
             } ,
             error: function() {
@@ -338,6 +354,7 @@ function cambiarPass() {
 }
 
 function newNickname() {
+    let formulario = document.getElementById("form-nickname");
     let nickname = document.getElementById("new-nickname").value;
     let oldPass = document.getElementById("old-pass-nickname").value;
 
@@ -352,10 +369,12 @@ function newNickname() {
     if(nickname.length == 0 || nickname == null) {
         newNicknameError.innerHTML = "El nombre de Usuario es obligatorio";
         error = 1;
+    } else if(nickname.length < 6) {
+        newNicknameError.innerHTML = "El nombre de Usuario no puede tener menos de 6 carácteres";
+        error = 1;
     } else if(nickname.length > 16) {
         newNicknameError.innerHTML = "El nombre de Usuario no puede tener más de 16 carácteres";
         error = 1;
-
     }
 
     // Validar que la contraseña antigua sea obligatoria
@@ -367,8 +386,83 @@ function newNickname() {
     if(error == 1) {
         return false;
     } else {
-
+        $.ajax ({
+            type: 'POST',
+            url: 'php/changenickname.php',
+            data: { oldpass: oldPass, nickname: nickname},
+            success: function(response) {
+                if(response === "Nickname Changed") {
+                    // Cambio de contraseña del usuario y popup de confirmación
+                    Swal.fire({
+                        position: "center",
+                        icon: "success",
+                        title: "Usuario Actualizado",
+                        showConfirmButton: false,
+                        timer: 1500
+                    }).then(() => {
+                        window.location.reload();
+                    });
+                    
+                    //Recarga el formulario para tenerlo en blanco
+                    formulario.reset();
+                } else if(response === "Contraseña incorrecta") {
+                    oldPassError.innerHTML = response;
+                } else {
+                    // Error email incorrecto o no es posible cambiarla
+                    newNicknameError.innerHTML = response;
+                }
+            },
+            error: function() {
+                oldPassError.innerHTML = "Error al procesar la solicitud";
+            }
+        });
+        return false;
     }
+}
+
+function deleteUser() {
+    Swal.fire({
+        title: "¿Está seguro de eliminar su cuenta?",
+        text: "No se podrá revertir esta acción!",
+        showCancelButton: true,
+        confirmButtonColor: "#0073c7",
+        cancelButtonColor: "#d33",
+        cancelButtonText: "Cancelar",
+        confirmButtonText: "Si, Eliminar Cuenta!"
+    }).then((result) => {
+        if (result.isConfirmed) {
+            $.ajax ({
+                type: 'POST',
+                url: 'php/deleteuser.php',
+                success: function(response) {
+                    if(response === "Usuario eliminado") {
+                        // Usuario eliminado y popup de confirmación
+                        Swal.fire({
+                            position: "center",
+                            icon: "success",
+                            title: "Usuario Eliminado",
+                            showConfirmButton: true,
+                            confirmButtonColor: "#0073c7",
+                        }).then((result) => {
+                            if(result.isConfirmed) {
+                                window.location.href = "./";
+                            }
+                        });
+                    } else {
+                        Swal.fire({
+                            icon: "error",
+                            title: "Oops...",
+                            text: "Algo fue mal!",
+                            footer: 'No se puedo eliminar la cuenta'
+                        });
+                    }
+                },
+                error: function() {
+                    oldPassError.innerHTML = "Error al procesar la solicitud";
+                }
+            });
+        }
+    });
 }
 
 // Generar contraseña index.php

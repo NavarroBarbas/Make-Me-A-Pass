@@ -23,33 +23,11 @@
             $_SESSION['usuarioID']=$u->getIdUsuario();
             $_SESSION['isAuth']=true;
             $_SESSION['email'] = strtolower($u->getEmail());
+            $_SESSION['nickname'] = $u->getNickname();
             echo "Login Correcto";
         } else{
-            echo "Datos de usuario incorrectos";
+            echo "Datos de usuario incorrectos o sin confirmar";
         }
-
-        /*$pdo = new Conexion();
-        $sql = $pdo->prepare('SELECT * FROM usuarios WHERE email =:email LIMIT 1');
-        $sql->bindValue(':email', $email);
-        $sql->execute();
-        $numrows = $sql->rowCount();
-        $sql->setFetchMode(PDO::FETCH_ASSOC);
-
-        if($numrows > 0) {
-            $resultado = $sql->fetchAll();
-            foreach($resultado as $row) {
-                $hashedPass = $row['Password'];
-            }
-
-            if(password_verify($pass, $hashedPass)) {
-                $_SESSION['email'] = strtolower($email);
-                echo "Login Correcto";
-            } else {
-                echo "Datos de usuario incorrectos";
-            }
-        } else {
-            echo "Datos de usuario incorrectos"; 
-        }*/
     } else {
         echo "Error: Método no permitido.";
     }
