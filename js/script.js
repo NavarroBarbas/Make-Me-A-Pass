@@ -751,6 +751,7 @@ function guardarPass() {
     }
 }
 
+// Buscar Contraseña a tiempo real
 function buscarPassword() {
     let searchTerm = document.getElementById("buscador").value;
     
@@ -804,4 +805,106 @@ function openMenu() {
 function cerrarMenu() {
     let menu = document.getElementById("headermenu");
     menu.style.height = "0vh";
+}
+
+//Mobile Content
+function createMobileCuentaMain(windowWidth) {
+    // Crear el contenedor principal
+    const main = document.createElement('main');
+    if(windowWidth > 575) {
+        main.className = 'cuenta__main';
+        main.innerHTML = `
+        <div class="main__barra">
+          <section class="barra__datos">
+            <a class="datos__email"><u><?php echo $_SESSION["email"] ?></u></a>
+            <div class="datos__opcion selected" id="opcionUsuario" onclick="selectedOption(event)">
+              <a>Nombre de Usuario</a>
+              <img src="svg/arrowright.svg" alt="Flecha derecha" />
+            </div>
+
+            <div class="datos__opcion"  id="opcionPassword" onclick="selectedOption()">
+              <a>Cambiar Contraseña</a>
+              <img src="svg/arrowright.svg" alt="Flecha derecha" />
+            </div>
+
+            <div class="datos__opcion datos__delete" id="opcionDelete" onclick="deleteUser()">
+              <a>Eliminar Cuenta</a>
+              <img src="svg/arrowright.svg" alt="Flecha derecha" />
+            </div>
+          </section>
+
+          <a class="sessionout" onclick="cerrarSesion()">Cerrar Sesión</a>
+        </div>
+
+        <form id="form-nickname" class="main__form" method="POST" onsubmit="return newNickname()" novalidate>
+          <input type="text" id="new-nickname" name="nickname" placeholder="Nombre de Usuario">
+          <div id="text-error-nickname" class="label-error"></div>
+
+          <input type="password" id="old-pass-nickname" name="old_pass"  placeholder="Contraseña">
+          <div id="oldpass-error-nickname" class="label-error"></div>
+
+          <input class="botonenviar" type="submit" value="Enviar">
+        </form>
+
+        <form id="formcambiopass" class="main__form" method="POST" onsubmit="return cambiarPass()" style="display:none" novalidate>
+          <input type="password" id="new_pass" name="pass_change" placeholder="Nueva Contraseña">
+          <div id="pass-error-change" class="label-error"></div>
+
+          <input type="password" id="pass_verify_change" name="pass_verify_change" placeholder="Confirmar Contraseña">
+          <div id="passvfy-error-change" class="label-error"></div>
+
+          <input type="password" id="old_pass" name="old_pass"  placeholder="Contraseña Antigua">
+          <div id="oldpass-error-change" class="label-error"></div>
+
+          <input class="botonenviar" type="submit" value="Enviar">
+        </form>
+        `;
+
+    } else {
+        main.className = 'cuenta__mainmobile';
+        // Crear el contenido
+        main.innerHTML = `
+        <a class="mainmobile__email"><u><?php echo $_SESSION["email"] ?></u></a>
+        <div class="mainmobile__tab" id="usuario_name">
+            <a>Nombre de Usuario</a>
+            <img src="svg/arrowdown.svg" alt="Flecha derecha" id="arrowright" />
+        </div>
+        <form class="mainmobile__form" id="formnewnickname" method="POST" onsubmit="return newNickname()" novalidate>
+            <input type="text" id="new-nickname" name="nickname" placeholder="Nombre de Usuario">
+            <div id="text-error-nickname" class="label-error"></div>
+            <input type="password" id="old-pass-nickname" name="old_pass" placeholder="Contraseña">
+            <div id="oldpass-error-nickname" class="label-error"></div>
+            <input class="botonenviar" type="submit" value="Enviar">
+        </form>
+        <div class="mainmobile__tab" id="usuario_newpass">
+            <a>Cambiar Contraseña</a>
+            <img src="svg/arrowdown.svg" alt="Flecha derecha" id="arrowright" />
+        </div>
+        <form class="mainmobile__form" id="formcambiopass" method="POST" onsubmit="return cambiarPass()" novalidate>
+            <input type="password" id="new_pass" name="pass_change" placeholder="Nueva Contraseña">
+            <div id="pass-error-change" class="label-error"></div>
+            <input type="password" id="pass_verify_change" name="pass_verify_change" placeholder="Confirmar Contraseña">
+            <div id="passvfy-error-change" class="label-error"></div>
+            <input type="password" id="old_pass" name="old_pass" placeholder="Contraseña Antigua">
+            <div id="oldpass-error-change" class="label-error"></div>
+            <input class="botonenviar" type="submit" value="Enviar">
+        </form>
+        <a class="sessionout" onclick="cerrarSesion()">Cerrar Sesión</a>
+        `;
+    }
+
+    const resetpass = document.getElementById("resetpass");
+    resetpass.insertAdjacentElement("afterend", main);
+
+    checkScreenSize(); // Verificar tamaño de la pantalla después de agregar el contenido
+}
+
+function checkScreenSize() {
+    const main = document.querySelector('.cuenta__mainmobile');
+
+    if (window.innerWidth < 575) {
+        if (main) main.style.display = 'flex';
+    } else {
+        if (main) main.style.display = 'none';
+    }
 }
