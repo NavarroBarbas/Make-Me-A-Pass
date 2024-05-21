@@ -33,8 +33,9 @@
             sendEmail(
                 $u->getEmail(), 
                 "Registro de Usuario", 
-                "<p>para finalizar el registro visite: http://localhost/verificar.php?id={$u->getIdUsuario()}&token={$u->getToken()}</p>");
-            $_SESSION['email'] = strtolower($email);
+                "<p>para finalizar el registro visite: 
+                <a href='http://localhost/Make-Me-A-Pass/verificar.php?type=vfyemail&id={$u->getIdUsuario()}&token={$u->getToken()}'>
+                http://localhost/Make-Me-A-Pass/verificar.php?type=vfyemail&id={$u->getIdUsuario()}&token={$u->getToken()}</a></p>");
             echo "Añadiendo usuario";
         } else {
             sendEmail(

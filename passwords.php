@@ -51,7 +51,7 @@
     <div class="container">
       <?php 
       include 'components/header.php';
-      include 'bbdd/conexiones.php';
+      include_once(__DIR__."/bbdd/passwords.php");
       
       if (!isset($_SESSION["email"])){
         echo "<div class='errorsesion'>
@@ -66,44 +66,20 @@
       ?>
     
       <main class="passwords__main">
-        <h2 class="main__titulo">Contraseñas</h2>
+        <div class="main__headpass">
+        <h2 class="headpass__titulo">Contraseñas</h2>
+        <input type="text" id="buscador" name="buscador" placeholder="Buscar..." class="headpass__buscador" onkeyup="buscarPassword()">
+        </div>
 
         <section id="contrasenas" class="main__passwords">
-          <?php 
-
-          $pdo = new Conexion();
-
-          $sql = $pdo->prepare('SELECT password_id, generated_pass, nombre_pass FROM saved_passwords AS sp
-            INNER JOIN usuarios AS u ON sp.user_id = u.user_id
-            WHERE u.email =:email ORDER BY nombre_pass ASC');
-          
-          $sql->bindValue(':email', $_SESSION['email']);
-          $sql->execute();
-          $sql->setFetchMode(PDO::FETCH_ASSOC);
-          
-
-          $resultado = $sql->fetchAll();
-          foreach($resultado as $row) {
-            $nombrePass = $row["nombre_pass"];
-            $password = $row["generated_pass"];
-            $passid = $row["password_id"];
-
-            echo '<div id="savedpass" class="passwords__passdiv">
-                    <h4 class="passdiv__nombre" id="' . $passid . '">' . $nombrePass . '</h4>
-                    <a class="passdiv__password" id="' . $password . '">' . $password . '</a>
-                    <nav class="passdiv__nav">
-                    <a class="nav__eliminar" id="deleteClick" onclick="eliminarPass(\'' . $password . '\', \'' . $passid . '\')">Eliminar</a>
-                    <a class="nav__copiar" onclick="copiar(\'' . $password . '\')">Copiar</a>
-                    </nav>
-                  </div>
-
-                  ';
-          }
+          <?php
+            $userID = $_SESSION['usuarioID'];
+            $passwords = new Password();
+            $passwords->setIdUsuario($userID);
+            $passwords->load();
           ?>
         </section>
-        
       </main>
-
       <?php } ?>
 
       <?php include 'components/footer.php' ?>

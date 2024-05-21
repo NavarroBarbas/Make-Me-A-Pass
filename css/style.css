@@ -859,11 +859,24 @@ html {
   margin-top: 25px;
   flex: 1;
 
-  & .main__titulo {
+  & .main__headpass {
     padding-bottom: 15px;
-    font-size: 25px;
     font-weight: 400;
     border-bottom: 2px solid var(--gris-texto);
+    display: flex;
+    justify-content: space-between;
+
+    & .headpass__titulo {
+      color: var(--gris-texto);
+    }
+
+    & .headpass__buscador {
+      outline: none;
+      border: none;
+      width: 30%;
+      color: var(--gris-texto);
+      background-color: var(--blanco-gris);
+    }
   }
 
   & .main__passwords {
@@ -1022,6 +1035,12 @@ html {
         cursor: pointer;
       }
 
+      & .form__resetpass {
+        max-width: 350px;
+        font-size: 14px;
+        cursor: pointer;
+      }
+
       & .nombrepass {
         border-bottom: 2px solid var(--verde-light);
       }
@@ -1049,10 +1068,6 @@ html {
       & .savepass:hover {
         background: #3aab53;
       }
-
-      & .deletebtn {
-        background: linear-gradient(265deg, #e7615d, #f4504a);
-      }
     }
 
     @media only screen and (max-width: 575px) {
@@ -1067,6 +1082,48 @@ html {
   color: #ff0000; /* Color rojo para destacar el error */
   font-size: 12px; /* Tamaño de fuente más pequeño para los mensajes de error */
   margin-top: 5px; /* Espaciado superior para separar los mensajes del campo */
+}
+
+/* Resetear Password */
+.reset__main {
+  height: calc(100vh - 302px);
+  display: flex;
+
+  & .main__form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 20px;
+    align-self: flex-start;
+    margin-top: 50px;
+
+    & input {
+      width: 90vw;
+      max-width: 500px;
+      padding: 15px 0;
+      border: none;
+      border-bottom: 2px solid var(--azul-marino);
+      outline: none;
+      color: var(--gris-texto);
+      background-color: var(--blanco-gris);
+    }
+
+    & .botonenviar {
+      width: 90vw;
+      max-width: 500px;
+      padding: 10px;
+      border-radius: 15px;
+      border: none;
+      background-color: var(--azul-normal);
+      cursor: pointer;
+      color: white;
+      box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    }
+
+    & .botonenviar:hover {
+      background-color: var(--azul-normal-2);
+    }
+  }
 }
 
 /* Error al intentar entrar sin sesión */

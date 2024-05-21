@@ -57,7 +57,7 @@ class Usuario extends Conexion {
 
     public function load($id){
 		$this->clearErr();
-		if ($id) {
+		if (is_numeric($id)) {
 			try{
 				$stm=$this->getPdo()->prepare("Select * from usuarios where user_id=?");
 				$stm->bindParam(1, $id);
@@ -77,7 +77,26 @@ class Usuario extends Conexion {
 				$this->errMsg=$e->getMessage();
 				return false;
 			}
-			
+		} else {
+			try{
+				$stm=$this->getPdo()->prepare("Select * from usuarios where Email=?");
+				$stm->bindParam(1, $id);
+				$stm->execute();
+				
+				$result = $stm->fetch(PDO::FETCH_ASSOC);
+				if ($result) {
+					$this->idUsuario=	$result['user_id'];
+					$this->email=		$result['Email'];
+					$this->nickname=	$result['nickname'];
+					$this->password=	$result['Password'];
+					$this->token=		$result['token'];
+					return true;
+				}
+			} catch (PDOException $e){
+				$this->errCode=$e->getCode();
+				$this->errMsg=$e->getMessage();
+				return false;
+			}
 		}
 		return false;
 	}
@@ -166,7 +185,7 @@ class Usuario extends Conexion {
 
 	public function update() {
 		$this->clearErr();
-		if ($this->idUsuario) {
+		if ($this->existeEmail()) {
 			try{
 				$stm=$this->getPdo()->prepare("update usuarios set nickname=?, Email=?, Password=?, token=? where user_id=?");
 				$stm->bindParam(1, $this->nickname);

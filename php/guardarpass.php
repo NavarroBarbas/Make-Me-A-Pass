@@ -11,15 +11,26 @@
      * 
      * JS FUNCTION: guardarPass()
      */
-    include '../bbdd/conexiones.php';
+    include '../bbdd/passwords.php';
     session_start();
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $nombrepass = $_POST['nombre'];
         $randompass = $_POST['password'];
-        $email = $_SESSION['email'];
+        $userID = $_SESSION['usuarioID'];
 
-        $pdo = new Conexion();
+        $u = new Password();
+        $u->setGeneratedPass($randompass);
+        $u->setNombrePass($nombrepass);
+        $u->setIdUsuario($userID);
+        if ($u->savePass()) {
+            echo "Insert realizado";
+        } else {
+            echo "Error al insertar la contraseña";
+        }
+
+
+        /*$pdo = new Conexion();
         $resid = $pdo->prepare('SELECT user_id FROM usuarios WHERE email =:email');
         $resid->bindValue(':email', $email);
         $resid->execute();
@@ -35,7 +46,7 @@
         $insert->bindValue(':nombrepass', $nombrepass);
         $insert->bindValue(':userid', $userid);
         $insert->execute();
-        echo "Insert realizado";
+        echo "Insert realizado";*/
     } else {
         echo "Error: Método no permitido.";
     }

@@ -17,7 +17,7 @@
      * JS FUNCTION: eliminarPass()
      */
 
-    include '../bbdd/conexiones.php';
+    include_once '../bbdd/passwords.php';
     session_start();
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -26,14 +26,8 @@
         $passid = $_POST['passid'];
         $email = $_SESSION['email'];
 
-        $pdo = new Conexion();
-        $sql = $pdo->prepare('DELETE FROM saved_passwords 
-            WHERE password_id = :passid 
-            AND nombre_pass = :nombrepass');
-
-        $sql->bindValue(':passid', $passid);
-        $sql->bindValue(':nombrepass', $nombrepass);
-        $sql->execute();
+        $password = new Password();
+        $password->deletePass($passid);
         
         echo "Contraseña Eliminada";
     } else {
