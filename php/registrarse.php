@@ -34,8 +34,8 @@
                 $u->getEmail(), 
                 "Registro de Usuario", 
                 "<p>para finalizar el registro visite: 
-                <a href='http://localhost/Make-Me-A-Pass/verificar.php?type=vfyemail&id={$u->getIdUsuario()}&token={$u->getToken()}'>
-                http://localhost/Make-Me-A-Pass/verificar.php?type=vfyemail&id={$u->getIdUsuario()}&token={$u->getToken()}</a></p>");
+                <a href='http://makemeapass.javiernavarroedib.com/verificar.php?id={$u->getIdUsuario()}&token={$u->getToken()}'>
+                http://makemeapass.javiernavarroedib.com/verificar.php?id={$u->getIdUsuario()}&token={$u->getToken()}</a></p>");
             echo "Añadiendo usuario";
         } else {
             sendEmail(

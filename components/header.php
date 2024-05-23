@@ -72,7 +72,7 @@
             <h4 class="logo__nombre">Make Me A Pass</h4>
         </section>
 
-        <form class="box__form" method="POST" onsubmit="return validarFormRegistro()" novalidate>
+        <form class="box__form" id="formRegistro" method="POST" onsubmit="return validarFormRegistro()" novalidate>
             <h4 class="form__titulo">Regístrate</h4>
             <input class="input" type="email" id="email-registro" name="emailregistro" placeholder="Email">
             <div id="email-error-registro" class="label-error"></div>

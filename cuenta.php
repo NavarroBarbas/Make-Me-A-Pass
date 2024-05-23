@@ -68,12 +68,12 @@
         if (windowWidth > 575) {
           createMobileCuentaMain(windowWidth);
         } else {
-            createMobileCuentaMain(windowWidth);
+          createMobileCuentaMain(windowWidth);
         }
 
         window.addEventListener('resize', function() {
         if (!document.querySelector('.cuenta__mainmobile') && window.innerWidth < 575) {
-            createMobileCuentaMain();
+          createMobileCuentaMain();
         } else {
           checkScreenSize();
         }});

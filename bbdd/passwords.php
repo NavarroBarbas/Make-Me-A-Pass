@@ -60,7 +60,7 @@ class Password extends Conexion {
         
         foreach ($result as $row) {
             $nombrePass = $row["nombre_pass"];
-            $password = $row["generated_pass"];
+            $password = htmlspecialchars($row["generated_pass"]);
             $passid = $row["password_id"];
 
             echo '<div id="savedpass" class="passwords__passdiv">

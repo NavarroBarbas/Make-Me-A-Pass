@@ -108,7 +108,7 @@
             </div>
             <div id="savepass" class="overlay" onclick="closeOverlay(event)">
               <div class="overlay__box">
-                <form class="box__form" method="POST" onsubmit="return guardarPass()" novalidate>
+                <form class="box__form" id="form-savepass" method="POST" onsubmit="return guardarPass()" novalidate>
                   <h4 class="form__titulo">Ponga un nombre a la contraseña</h4>
                 
                   <input class="input nombrepass" type="text" id="nombrepass" placeholder="Nombre">

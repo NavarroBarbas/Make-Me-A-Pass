@@ -27,6 +27,7 @@ function openOverlay(event) {
 function closeOverlay(event) {
     //Cierra Overlay Login al clickar fuera del form
     if(event.target.id == "login") {
+        let formLogin = document.getElementById("formLogin");
         let overlay = document.getElementById("login");
         let formulario = document.querySelector(".overlay__box");
         let emailError = document.getElementById("email-error-login");
@@ -35,9 +36,11 @@ function closeOverlay(event) {
         passError.innerHTML = "";
 
         if (event.target === overlay && !formulario.contains(event.target)) {
+            formLogin.reset();
             atributosOverlay(event.target.id);
         }
     } else if (event.target.id == "registro") { //Cierra Overlay Registro al clickar fuera del form
+        let formRegistro = document.getElementById("formRegistro");
         let overlay = document.getElementById("registro");
         let formulario = document.querySelector(".overlay__box");
         let emailError = document.getElementById("email-error-registro");
@@ -48,16 +51,18 @@ function closeOverlay(event) {
         passVerifyError.innerHTML = "";
 
         if (event.target === overlay && !formulario.contains(event.target)) {
+            formRegistro.reset();
             atributosOverlay(event.target.id);
         }
     } else if (event.target.id == "savepass") { //Cierra Overlay Guardar Contraseña al clickar fuera del form
-        console.log(event.target.id);
+        let formSavePass = document.getElementById("form-savepass");
         let overlay = document.getElementById("savepass");
         let formulario = document.querySelector(".overlay__box");
         let saveError = document.getElementById("save-error-savepass");
         saveError.innerHTML = "";
 
         if (event.target === overlay && !formulario.contains(event.target)) {
+            formSavePass.reset();
             atributosOverlay(event.target.id);
         }
     } else if (event.target.id == "resetpass") { //Cierra Overlay Guardar Contraseña al clickar fuera del form
@@ -696,6 +701,7 @@ function copiar(elementId) {
 // Guardar Contraseña
 function guardarPass() {
     // Variables necesarias
+    let formulario = document.getElementById("form-savepass");
     let randompass = document.getElementById("randompass").innerText;
     let nombrepass = document.getElementById("nombrepass").value;
     let errorPass = document.getElementById("save-error-savepass");
@@ -737,8 +743,10 @@ function guardarPass() {
                         timer: 1500
                     });
 
+                    formulario.reset();
                     //Cerramos overlay
                     atributosOverlay("savepass");
+
                 } else {
                     errorPass.innerHTML = response;
                 }
@@ -815,48 +823,48 @@ function createMobileCuentaMain(windowWidth) {
         main.className = 'cuenta__main';
         main.innerHTML = `
         <div class="main__barra">
-          <section class="barra__datos">
-            <a class="datos__email"><u><?php echo $_SESSION["email"] ?></u></a>
-            <div class="datos__opcion selected" id="opcionUsuario" onclick="selectedOption(event)">
-              <a>Nombre de Usuario</a>
-              <img src="svg/arrowright.svg" alt="Flecha derecha" />
-            </div>
+            <section class="barra__datos">
+                <a class="datos__email"><u><?php echo $_SESSION["email"] ?></u></a>
+                <div class="datos__opcion selected" id="opcionUsuario" onclick="selectedOption(event)">
+                    <a>Nombre de Usuario</a>
+                    <img src="svg/arrowright.svg" alt="Flecha derecha" />
+                </div>
 
-            <div class="datos__opcion"  id="opcionPassword" onclick="selectedOption()">
-              <a>Cambiar Contraseña</a>
-              <img src="svg/arrowright.svg" alt="Flecha derecha" />
-            </div>
+                <div class="datos__opcion"  id="opcionPassword" onclick="selectedOption()">
+                    <a>Cambiar Contraseña</a>
+                    <img src="svg/arrowright.svg" alt="Flecha derecha" />
+                </div>
 
-            <div class="datos__opcion datos__delete" id="opcionDelete" onclick="deleteUser()">
-              <a>Eliminar Cuenta</a>
-              <img src="svg/arrowright.svg" alt="Flecha derecha" />
-            </div>
-          </section>
+                <div class="datos__opcion datos__delete" id="opcionDelete" onclick="deleteUser()">
+                    <a>Eliminar Cuenta</a>
+                    <img src="svg/arrowright.svg" alt="Flecha derecha" />
+                </div>
+            </section>
 
-          <a class="sessionout" onclick="cerrarSesion()">Cerrar Sesión</a>
+            <a class="sessionout" onclick="cerrarSesion()">Cerrar Sesión</a>
         </div>
 
         <form id="form-nickname" class="main__form" method="POST" onsubmit="return newNickname()" novalidate>
-          <input type="text" id="new-nickname" name="nickname" placeholder="Nombre de Usuario">
-          <div id="text-error-nickname" class="label-error"></div>
+            <input type="text" id="new-nickname" name="nickname" placeholder="Nombre de Usuario">
+            <div id="text-error-nickname" class="label-error"></div>
 
-          <input type="password" id="old-pass-nickname" name="old_pass"  placeholder="Contraseña">
-          <div id="oldpass-error-nickname" class="label-error"></div>
+            <input type="password" id="old-pass-nickname" name="old_pass"  placeholder="Contraseña">
+            <div id="oldpass-error-nickname" class="label-error"></div>
 
-          <input class="botonenviar" type="submit" value="Enviar">
-        </form>
+            <input class="botonenviar" type="submit" value="Enviar">
+            </form>
 
-        <form id="formcambiopass" class="main__form" method="POST" onsubmit="return cambiarPass()" style="display:none" novalidate>
-          <input type="password" id="new_pass" name="pass_change" placeholder="Nueva Contraseña">
-          <div id="pass-error-change" class="label-error"></div>
+            <form id="formcambiopass" class="main__form" method="POST" onsubmit="return cambiarPass()" style="display:none" novalidate>
+            <input type="password" id="new_pass" name="pass_change" placeholder="Nueva Contraseña">
+            <div id="pass-error-change" class="label-error"></div>
 
-          <input type="password" id="pass_verify_change" name="pass_verify_change" placeholder="Confirmar Contraseña">
-          <div id="passvfy-error-change" class="label-error"></div>
+            <input type="password" id="pass_verify_change" name="pass_verify_change" placeholder="Confirmar Contraseña">
+            <div id="passvfy-error-change" class="label-error"></div>
 
-          <input type="password" id="old_pass" name="old_pass"  placeholder="Contraseña Antigua">
-          <div id="oldpass-error-change" class="label-error"></div>
+            <input type="password" id="old_pass" name="old_pass"  placeholder="Contraseña Antigua">
+            <div id="oldpass-error-change" class="label-error"></div>
 
-          <input class="botonenviar" type="submit" value="Enviar">
+            <input class="botonenviar" type="submit" value="Enviar">
         </form>
         `;
 
@@ -890,6 +898,7 @@ function createMobileCuentaMain(windowWidth) {
             <input class="botonenviar" type="submit" value="Enviar">
         </form>
         <a class="sessionout" onclick="cerrarSesion()">Cerrar Sesión</a>
+        <a class="eliminarCuenta" onclick="deleteUser()">Eliminar Cuenta</a>
         `;
     }
 

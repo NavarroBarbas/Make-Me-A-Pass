@@ -339,7 +339,7 @@ html {
         padding: 0 20px;
         
         & .explicacion__cajafuerte {
-          background-image: url("../img/desktop/cajafuerte.webp");
+          background-image: url("../img/desktop/padlock.webp");
           background-position: center;
           background-repeat: no-repeat;
           background-size: cover;
@@ -396,7 +396,7 @@ html {
           }
 
           & .izq__padlock {
-            background-image: url("../img/desktop/padlock.webp");
+            background-image: url("../img/desktop/cajafuerte.webp");
             background-position: center;
             background-repeat: no-repeat;
             background-size: cover;
@@ -676,7 +676,7 @@ html {
   & .main__barra {
     width: 30vw;
     max-width: 250px;
-    height: calc(100vh - 302px);
+    height: 70vh;
     min-height: 365px;
     display: flex;
     flex-direction: column;
@@ -755,6 +755,7 @@ html {
     width: 40vw;
     align-self: flex-start;
     margin-top: 55px;
+    padding-bottom: 20px;
 
     & input {
       width: 50vw;
@@ -848,6 +849,17 @@ html {
       color: white;
       border-radius: 10px;
       text-align: center;
+    }
+
+    & .eliminarCuenta {
+      width: 100%;
+      padding: 10px 0;
+      color: white;
+      text-align: center;
+      background: rgb(249,68,68);
+      background: linear-gradient(90deg, rgba(249,68,68,1) 0%, rgba(237,3,120,1) 100%);
+      color: var(--blanco-gris);
+      border-radius: 10px;
     }
   }
 }
