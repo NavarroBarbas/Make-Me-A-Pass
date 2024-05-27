@@ -15,31 +15,29 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $u->getEmail(), 
                 "Recuperar Contraseña", 
                 "<p>para recuperar su contraseña visite: 
-                <a href='http://localhost/Make-Me-A-Pass/verificar.php?type=reset&id={$u->getIdUsuario()}&token={$u->getToken()}'>
-                http://localhost/Make-Me-A-Pass/verificar.php?type=reset&id={$u->getIdUsuario()}&token={$u->getToken()}</a></p>");
+                <a href='http://makemeapass.javiernavarroedib.com/reestablecer-pass.php?&id={$u->getIdUsuario()}&token={$u->getToken()}'>
+                http://makemeapass.javiernavarroedib.com/reestablecer-pass.php?&id={$u->getIdUsuario()}&token={$u->getToken()}</a></p>");
             echo "Email enviado";
         } else {
             echo "Este usuario no existe en el sistema";
         }
     } else if($_POST['action'] == 'resetPass') {
-        $email = $_POST['emailregistro']; //TODO
+        $newpass = $_POST['newpass'];
+        $id = $_POST['id'];
+        $token = $_POST['token'];
 
-        $u=new Usuario();
-        $u->setEmail($email);
-        $u->setToken(rand(100000000,900000000));
-        if ($u->registro()) {
-            sendEmail(
-                $u->getEmail(), 
-                "Registro de Usuario", 
-                "<p>para finalizar el registro visite: ");
-            
-            echo "Añadiendo usuario";
+        $u=new Usuario($id);
+        if ($token == $u->getToken()) {
+            $newpass =  password_hash($newpass, PASSWORD_DEFAULT);
+            $u->setPassword($newpass);
+            $u->setToken(null);
+            if ($u->update()) {
+                echo "Contraseña cambiada";
+            } else {
+                echo "Error al cambiar contraseña";
+            }
         } else {
-            sendEmail(
-                $u->getEmail(), 
-                "Registro de Usuario", 
-                "<p>Alguien esta intentando registrarse con su email</p>");
-            echo "Este usuario ya existe en el sistema";
+            echo "Error al cambiar contraseña";
         }
     }
 } else {

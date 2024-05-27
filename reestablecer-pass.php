@@ -1,4 +1,11 @@
 <?php
+include_once(__DIR__."/bbdd/usuario.php");
+if($_GET["id"] == null || $_GET["token"] == null) {
+    header("Location: index.php");
+}
+$id=$_GET['id'];
+$token=$_GET['token'];
+$u=new Usuario($id);
 if ($token == $u->getToken()) {
 ?>
     <!DOCTYPE html>
@@ -8,7 +15,7 @@ if ($token == $u->getToken()) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <!-- SEO = Básico -->
         <!-- Cada página del sitio tiene que ser diferente el título y la descripción -->
-        <title>Make Me A Pass - Contraseñas</title>
+        <title>Make Me A Pass - Reset Pass</title>
         <meta name="description" content="" />
         <meta name="keywords" content="" />
 
@@ -39,6 +46,7 @@ if ($token == $u->getToken()) {
         <!-- Scripts a cargar antes de la renderización -->
         <script src="js/scroll.js"></script>
         <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <script src="js/script.js"></script>
     </head>
 
@@ -46,14 +54,17 @@ if ($token == $u->getToken()) {
         <div class="container">
             <?php include 'components/header.php'; ?>
             <main class="reset__main">
-                <form class="main__form" method="POST" onsubmit="return resetPassword()" novalidate>
+                <form class="main__form" method="POST" onsubmit="return resetPass()" novalidate>
                     <h2 class="main__titulo">Nueva Contraseña</h2>
 
-                    <input class="input" type="password" id="pass-reset" name="passregistro" placeholder="Contraseña">
-                    <div id="pass-error-msg" class="label-error"></div>
+                    <input class="input" type="password" id="new-pass-reset" name="passregistro" placeholder="Nueva Contraseña">
+                    <div id="reset-newpass-msg" class="label-error"></div>
 
-                    <input class="input" type="password" id="passvfy-reset" name="passregistro" placeholder="Repite la contraseña">
-                    <div id="passvfy-error-msg" class="label-error"></div>
+                    <input class="input" type="password" id="newpass-verify-reset" name="passregistro" placeholder="Repite la contraseña">
+                    <div id="reset-newpassvfy-msg" class="label-error"></div>
+                    
+                    <input type="hidden" type="text" id="id" value="<?php echo $id; ?>">
+                    <input type="hidden" type="text" id="token" value="<?php echo $token; ?>">
 
                     <input class="botonenviar" type="submit" value="Enviar">
                 </form>

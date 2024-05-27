@@ -88,7 +88,6 @@
               </div>
               <a class="result__copybtn" onclick="copiar('randompass')" id="btncopy"><img src="./svg/copy.svg"></a>
             </div>
-            <!--<a class="result__copy" onclick="copiar('randompass')" id="btncopy">Copiar</a>-->
           </section>
 
           <?php if (isset($_SESSION["email"])) { ?>

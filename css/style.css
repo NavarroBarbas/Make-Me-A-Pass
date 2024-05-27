@@ -1094,6 +1094,7 @@ html {
   color: #ff0000; /* Color rojo para destacar el error */
   font-size: 12px; /* Tamaño de fuente más pequeño para los mensajes de error */
   margin-top: 5px; /* Espaciado superior para separar los mensajes del campo */
+  text-align: center;
 }
 
 /* Resetear Password */

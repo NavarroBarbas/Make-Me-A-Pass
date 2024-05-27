@@ -16,6 +16,14 @@
         $pass = $_POST['password'];
         $hashedPass = "";
 
+        if(strlen($email) == 0 || strlen($email) == null) {
+            echo "Email es obligatorio";
+            return;
+        } else if(!preg_match('/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/',$email)) {
+            echo "Email es incorrecto";
+            return;
+        }
+
         $u=new Usuario();
         $u->setEmail($email);
         $u->setPassword($pass);

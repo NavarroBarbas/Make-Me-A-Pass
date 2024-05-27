@@ -165,7 +165,7 @@ function validarFormRegistro() {
         $.ajax({
             type: 'POST',
             url: 'php/registrarse.php',
-            data: { emailregistro: email, passregistro: pass},
+            data: { emailregistro: email, passregistro: pass, passvfy: pass_verify},
             success: function(response) {
                 // Añadir usuario
                 if(response === 'Añadiendo usuario') {
@@ -173,6 +173,12 @@ function validarFormRegistro() {
                 } else if(response === "Este usuario ya existe en el sistema") {
                     // Usuario existente
                     passVerifyError.innerHTML = "Revise su email para confirmar su cuenta";
+                } else if(response === "Email es obligatorio" || response === "Email es inválido") {
+                    emailError.innerHTML = response;
+                } else if(response === "Contraseña es obligatoria" || response === "Contraseña debe tener mínimo 8 carácteres") {
+                    passError.innerHTML = response;
+                } else if(response === "Confirmar contraseña es obligatorio" || response === "Las contraseñas deben coincidir") {
+                    passVerifyError.innerHTML = response;
                 }
             } ,
             error: function() {
@@ -263,10 +269,10 @@ function sendEmailResetPass() {
             success: function(response) {
                 // Resetear contraseña
                 if(response === 'Email enviado') {
-                    emailError.innerHTML = "Revise su email para restablecer su contraseña";
+                    emailError.innerHTML = "Revise su email para restablecer su contraseña.<br>Si no existe no se enviará nada.";
                 } else {
                     // Error al resetear contraseña
-                    emailError.innerHTML = response;
+                    emailError.innerHTML = "Revise su email para restablecer su contraseña. Si no existe no se enviará nada.";
                 }
             },
             error: function() {
@@ -279,10 +285,12 @@ function sendEmailResetPass() {
 }
 
 function resetPass() {
-    let pass = document.getElementById("new_pass_reset").value;
-    let pass_verify = document.getElementById("pass_verify_reset").value;
-    let passError = document.getElementById("reset-pass-msg");
-    let passvfyError = document.getElementById("reset-passvfy-msg");
+    let id = document.getElementById("id").value;
+    let token = document.getElementById("token").value;
+    let pass = document.getElementById("new-pass-reset").value;
+    let pass_verify = document.getElementById("newpass-verify-reset").value;
+    let passError = document.getElementById("reset-newpass-msg");
+    let passvfyError = document.getElementById("reset-newpassvfy-msg");
 
     let error = 0;
     passError.innerHTML = "";
@@ -314,14 +322,19 @@ function resetPass() {
         $.ajax({
             type: 'POST',
             url: 'php/resetpass.php',
-            data: { changepass: pass, action: "resetPass"},
+            data: { newpass: pass, id: id, token: token, action: "resetPass"},
             success: function(response) {
                 // Resetear contraseña
-                if(response === 'Contraseña Cambiada') {
-                    passError.innerHTML = "Contraseña Restablecida";
-                } else {
-                    // Error al resetear contraseña
-                    passError.innerHTML = response;
+                if(response === 'Contraseña cambiada') {
+                    Swal.fire({
+                        position: "center",
+                        icon: "success",
+                        title: "Contraseña Reestablecida",
+                        showConfirmButton: false,
+                        timer: 1500
+                    }).then(() => {
+                        window.location.href = "./";
+                    });
                 }
             },
             error: function() {
@@ -760,22 +773,28 @@ function guardarPass() {
 }
 
 // Buscar Contraseña a tiempo real
+let timeout = null;
+
 function buscarPassword() {
-    let searchTerm = document.getElementById("buscador").value;
+    clearTimeout(timeout);
+    timeout = setTimeout(() => {
+        let searchTerm = document.getElementById("buscador").value;
     
-    $.ajax({
-        type: 'POST',
-        url: 'php/buscarpass.php',
-        data: { searchTerm: searchTerm },
-        success: function(response) {
-            // Handle the response from the PHP file
-            // Update the UI with the search results
-            document.getElementById("contrasenas").innerHTML = response;
-        },
-        error: function() {
-            // Handle any errors that occur during the AJAX request
-        }
-    });
+        $.ajax({
+            type: 'POST',
+            url: 'php/buscarpass.php',
+            data: { searchTerm: searchTerm },
+            success: function(response) {
+                // Handle the response from the PHP file
+                // Update the UI with the search results
+                document.getElementById("contrasenas").innerHTML = response;
+            },
+            error: function() {
+                // Handle any errors that occur during the AJAX request
+                document.getElementById("contrasenas").innerHTML = "Operación no válida";
+            }
+        });
+    }, 300);
 }
 
 // Eliminar contraseña
