@@ -20,6 +20,10 @@ function openOverlay(event) {
         overlay.style.opacity = "1";
         overlay.style.visibility = "visible";
         atributosOverlay("login");
+    } else if(event.target.id == "addpass") {
+        let overlay = document.getElementById("add-new-pass");
+        overlay.style.opacity = "1";
+        overlay.style.visibility = "visible";
     }
 }
 
@@ -74,6 +78,16 @@ function closeOverlay(event) {
         if (event.target === overlay && !formulario.contains(event.target)) {
             atributosOverlay(event.target.id);
         }
+    } else if (event.target.id == "add-new-pass") {
+        let overlay = document.getElementById("add-new-pass");
+        let formulario = document.querySelector(".overlay__box");
+        let namepassError = document.getElementById("save-error-namepassword");
+        let passmsgError = document.getElementById("save-error-newpassword");
+        namepassError.innerHTML = "";
+        passmsgError.innerHTML = "";
+        if (event.target === overlay && !formulario.contains(event.target)) {
+            atributosOverlay(event.target.id);
+        }
     }
 }
 
@@ -96,6 +110,10 @@ function atributosOverlay(id) {
         overlay.style.visibility = "hidden";
     } else if (id == "resetpass") { //Quita la visibilidad del overlay Guardar Contraseña
         let overlay = document.getElementById("resetpass");
+        overlay.style.opacity = "0";
+        overlay.style.visibility = "hidden";
+    } else if (id == "add-new-pass") {
+        let overlay = document.getElementById("add-new-pass");
         overlay.style.opacity = "0";
         overlay.style.visibility = "hidden";
     }
@@ -935,4 +953,67 @@ function checkScreenSize() {
     } else {
         if (main) main.style.display = 'none';
     }
+}
+
+function addNewPass() {
+    let formulario = document.getElementById("form-addnewpass");
+    let nombrePass = document.getElementById("nombrepass").value;
+    let pass = document.getElementById("newpassword").value;
+    let errorName = document.getElementById("save-error-namepassword");
+    let errorPass = document.getElementById("save-error-newpassword");
+    let regex = /^[a-zA-Z0-9 @.]+$/;
+    let error = 0;
+
+    errorName = "";
+    errorPass = "";
+
+    // Validaciones necesarias de email y contraseña
+    if (nombrePass.length == 0 || nombrePass == null) {
+        errorName.innerHTML = "Nombre es obligatorio";
+        error = 1;
+    }else if (!regex.test(nombrePass)) {
+        errorName.innerHTML = "El nombre no puede contener carácteres especiales";
+        error = 1;
+    } else if (nombrePass.length > 30) {
+        errorName.innerHTML = "El nombre no puede tener mas de 30 carácteres";
+        error = 1;
+    }
+
+    if(pass.length == 0 || pass == null) {
+        errorPass.innerHTML = "Contraseña es obligatoria";
+        error = 1;
+    }
+
+    if(error == 1) {
+        return false;
+    } /*else { // Sin errores
+        $.ajax ({
+            type: 'POST',
+            url: 'php/guardarpass.php',
+            data: {password: randompass, nombre: nombrepass},
+            success: function(response) {
+                // Guardamos contraseña y pop up de confirmación
+                if(response === "Insert realizado") {
+                    Swal.fire({
+                        position: "center",
+                        icon: "success",
+                        title: "Contraseña Guardada",
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+
+                    formulario.reset();
+                    //Cerramos overlay
+                    atributosOverlay("add-new-pass");
+
+                } else {
+                    errorPass.innerHTML = response;
+                }
+            },
+            error: function() {
+                errorPass.innerHTML = "Operación no válida";
+            }
+        });
+        return false;
+    }*/
 }

@@ -872,7 +872,7 @@ html {
   flex: 1;
 
   & .main__headpass {
-    padding-bottom: 15px;
+    padding-bottom: 10px;
     font-weight: 400;
     border-bottom: 2px solid var(--gris-texto);
     display: flex;
@@ -880,6 +880,17 @@ html {
 
     & .headpass__titulo {
       color: var(--gris-texto);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      
+      & .titulo__addpass {
+        cursor: pointer;
+        & img {
+          width: 45px;
+        }
+      }
     }
 
     & .headpass__buscador {

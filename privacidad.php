@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <!-- SEO = Básico -->
     <!-- Cada página del sitio tiene que ser diferente el título y la descripción -->
-    <title>Make Me A Pass - Contraseñas</title>
+    <title>Make Me A Pass - Privacidad</title>
     <meta name="description" content="" />
     <meta name="keywords" content="" />
 
