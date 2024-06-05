@@ -17,7 +17,7 @@
                 }
                 echo '</a>';
                 echo '<a id="contraseñas" href="passwords.php" class="menunav__login">Contraseñas</a>';
-                //echo '<a id="logout" onclick=cerrarSesion() class="menunav__logout">Cerrar Sesión</a>';
+                echo '<a id="logout" onclick=cerrarSesion() class="menunav__logout">Cerrar Sesión</a>';
             } else { ?>
             <a id="registroclick" onclick="openOverlay(event)" class="menunav__registrarse">Registrarse</a>
             <a id="loginclick" onclick="openOverlay(event)" class="menunav__login">Iniciar Sesión</a>
@@ -99,7 +99,7 @@
             <h4 class="form__titulo">¿Olvidaste tu Contraseña?</h4>
 
             <input class="input" type="email" id="email-reset" name="emailreset" placeholder="Email">
-            <div id="reset-pass-msg" class="label-error"></div>
+            <div id="reset-email-msg" class="label-error"></div>
 
             <input class="botonenviar" type="submit" value="Enviar">
         </form>

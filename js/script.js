@@ -73,7 +73,7 @@ function closeOverlay(event) {
         console.log(event.target.id);
         let overlay = document.getElementById("resetpass");
         let formulario = document.querySelector(".overlay__box");
-        let resetpassmsg = document.getElementById("reset-pass-msg");
+        let resetpassmsg = document.getElementById("reset-email-msg");
         resetpassmsg.innerHTML = "";
         if (event.target === overlay && !formulario.contains(event.target)) {
             atributosOverlay(event.target.id);
@@ -262,7 +262,7 @@ function validarFormLogin() {
 //Email para Resetear Contraseña
 function sendEmailResetPass() {
     let email = document.getElementById("email-reset").value;
-    let emailError = document.getElementById("reset-pass-msg");
+    let emailError = document.getElementById("reset-email-msg");
 
     let error = 0;
 
@@ -312,6 +312,7 @@ function resetPass() {
 
     let error = 0;
     passError.innerHTML = "";
+    passvfyError.innerHTML = "";
 
     // Validar Contraseña
     if (pass.length == 0 || pass == null) {
@@ -964,8 +965,8 @@ function addNewPass() {
     let regex = /^[a-zA-Z0-9 @.]+$/;
     let error = 0;
 
-    errorName = "";
-    errorPass = "";
+    errorName.innerHTML = "";
+    errorPass.innerHTML = "";
 
     // Validaciones necesarias de email y contraseña
     if (nombrePass.length == 0 || nombrePass == null) {
@@ -986,25 +987,26 @@ function addNewPass() {
 
     if(error == 1) {
         return false;
-    } /*else { // Sin errores
+    } else { // Sin errores
         $.ajax ({
             type: 'POST',
             url: 'php/guardarpass.php',
-            data: {password: randompass, nombre: nombrepass},
+            data: {password: pass, nombre: nombrePass},
             success: function(response) {
                 // Guardamos contraseña y pop up de confirmación
                 if(response === "Insert realizado") {
+                    //Cerramos overlay
+                    atributosOverlay("add-new-pass");
+                    formulario.reset();
                     Swal.fire({
                         position: "center",
                         icon: "success",
                         title: "Contraseña Guardada",
                         showConfirmButton: false,
                         timer: 1500
+                    }).then(() => {
+                        $("#contrasenas").load("passwords.php #savedpass");
                     });
-
-                    formulario.reset();
-                    //Cerramos overlay
-                    atributosOverlay("add-new-pass");
 
                 } else {
                     errorPass.innerHTML = response;
@@ -1015,5 +1017,5 @@ function addNewPass() {
             }
         });
         return false;
-    }*/
+    }
 }
