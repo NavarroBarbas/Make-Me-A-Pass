@@ -365,6 +365,11 @@ html {
           justify-content: center;
           flex-wrap: wrap;
           gap: 20px;
+          color: var(--gris-texto);
+
+          & h2, p {
+            color: var(--gris-texto);
+          }
         }
       }
 
@@ -393,6 +398,10 @@ html {
             align-items: center;
             flex-wrap: wrap;
             gap: 20px;
+
+            & h2, p {
+              color: var(--gris-texto);
+            }
           }
 
           & .izq__padlock {
@@ -453,6 +462,10 @@ html {
             align-items: center;
             flex-wrap: wrap;
             gap: 20px;
+            
+            & h2, p {
+              color: var(--gris-texto);
+            }
           }
         }
       }

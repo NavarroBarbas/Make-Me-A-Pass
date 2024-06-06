@@ -84,9 +84,9 @@
           <section class="generador__result">
             <div  class="result__box">
               <div class="box__text-container">
-                <div class="box__text" id="randompass">Click Generar</div>
+                <div class="box__text" id="randompass" data-cy="random-password">Click Generar</div>
               </div>
-              <a class="result__copybtn" onclick="copiar('randompass')" id="btncopy"><img src="./svg/copy.svg"></a>
+              <a class="result__copybtn" onclick="copiar('randompass')" id="btncopy" data-cy="btn-copy"><img src="./svg/copy.svg"></a>
             </div>
           </section>
 
@@ -100,7 +100,7 @@
           <?php } ?>
 
           <div class="generador__botones">
-          <a class="generador__generar" id="generar" onclick="generarPass()">Generar</a>
+          <a class="generador__generar" id="generar" onclick="generarPass()" data-cy="btn-generar">Generar</a>
 
           <?php if (isset($_SESSION["email"])) { ?>
             <a class="generador__guardar" id="guardarclick" onclick="openOverlay(event)">Guardar Contraseña</a>
@@ -123,7 +123,7 @@
           <section class="info__explicacion">
             <div class="explicacion__cajafuerte"></div>
             <section class="explicacion__texto">
-            <h2>¿Qué es un generador de contraseñas?</h2>
+            <h2 data-cy="info-explicacion-generador">¿Qué es un generador de contraseñas?</h2>
               <p>Un generador de contraseñas es una herramienta que crea automáticamente contraseñas seguras y aleatorias.</p>
               <p>Estas contraseñas suelen cumplir con ciertos criterios de seguridad, como la inclusión de letras mayúsculas y minúsculas, números y caracteres especiales. </p>
               <p>La función principal de un generador de contraseñas es mejorar la seguridad al crear contraseñas robustas que sean difíciles de adivinar o descifrar mediante métodos de fuerza bruta o ataques de diccionario.</p>
@@ -133,7 +133,7 @@
           <section class="info__buenaspracticas">
             <section class="buenaspracticas__izq">
               <section class="izq__texto">
-                <h2>Buenas prácticas con las contraseñas</h2>
+                <h2 data-cy="info-buenas-practicas">Buenas prácticas con las contraseñas</h2>
                 <p><b>Gestor de Contraseñas:</b> Considera el uso de un gestor de contraseñas para generar, almacenar y gestionar contraseñas de forma segura.</p>
                 <p><b>Conciencia de Phishing:</b> en cuidado con los intentos de phishing, donde los atacantes intentan engañarte para revelar tus credenciales. Verifica siempre la autenticidad de los correos electrónicos y enlaces antes de proporcionar información confidencial.</p>
               </section>

@@ -1,6 +1,6 @@
-    <footer class="footer">
+    <footer class="footer" data-cy="footer">
         <div class="footer__bg">
-            <nav class="footer__izq">
+            <nav class="footer__izq" data-cy="footer-links">
                 <a>Contacto</a>
                 <a class="coffee" href="https://www.buymeacoffee.com/navarrobarbas"><img src="svg/buymeacoffee.svg">Buy Me a Coffee</a>
                 <a href="privacidad.php">Privacidad</a>
@@ -9,7 +9,7 @@
             </nav>
 
             <nav class="footer__redes">
-                <h3><u>Redes Sociales</u></h3>
+                <h3><u data-cy="footer-redes">Redes Sociales</u></h3>
                 <a href="https://www.linkedin.com/in/javiernavarroweb/" class="redes__red"><img src="svg/linkedin.svg">Linked In</a>
                 <a href="https://github.com/NavarroBarbas" class="redes__red"><img src="svg/github.svg">GitHub</a>
                 <a href="https://twitter.com" class="redes__red"><img src="svg/twitter.svg">Twitter</a>

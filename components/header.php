@@ -1,7 +1,7 @@
-<header class="header">
+<header class="header" data-cy="header">
     <a href="./" class="header__nombre">
-        <img class="nombre__logo" src="img/desktop/logo.webp">
-        <h2 class="nombre__titulo">Make Me A Pass</h2>
+        <img class="nombre__logo" src="img/desktop/logo.webp" data-cy="header-logo">
+        <h2 class="nombre__titulo" data-cy="header-titulo">Make Me A Pass</h2>
     </a>
 
     <a class="header__menubtn" id="menubtn" onclick="openMenu()"><img src="svg/menu.svg"></a>
@@ -35,8 +35,8 @@
                 }
             echo '</a>';
         } else { ?>
-        <a id="loginclick" onclick="openOverlay(event)" class="nav__login">Iniciar Sesión</a>
-        <a id="registroclick" onclick="openOverlay(event)" class="nav__registrarse">Registrarse</a>
+        <a id="loginclick" onclick="openOverlay(event)" class="nav__login" data-cy="header-login">Iniciar Sesión</a>
+        <a id="registroclick" onclick="openOverlay(event)" class="nav__registrarse" data-cy="header-registro">Registrarse</a>
         <?php } ?>
     </nav>
 </header>
@@ -65,25 +65,25 @@
     </div>
 </div>
 
-<div id="registro" class="overlay" onclick="closeOverlay(event)">
-    <div class="overlay__box">
+<div id="registro" class="overlay" onclick="closeOverlay(event)" data-cy="modal-registro">
+    <div class="overlay__box" data-cy="overlay-box">
         <section class="box__logo">
-            <img class="logo__imagen" src="img/desktop/logo.webp">
-            <h4 class="logo__nombre">Make Me A Pass</h4>
+            <img class="logo__imagen" src="img/desktop/logo.webp" data-cy="modal-logo">
+            <h4 class="logo__nombre" data-cy="modal-titulo-web">Make Me A Pass</h4>
         </section>
 
         <form class="box__form" id="formRegistro" method="POST" onsubmit="return validarFormRegistro()" novalidate>
-            <h4 class="form__titulo">Regístrate</h4>
-            <input class="input" type="email" id="email-registro" name="emailregistro" placeholder="Email">
-            <div id="email-error-registro" class="label-error"></div>
+            <h4 class="form__titulo" data-cy="form-titulo-registro">Regístrate</h4>
+            <input class="input" type="email" id="email-registro" name="emailregistro" placeholder="Email" data-cy="input-email-registro">
+            <div id="email-error-registro" class="label-error" data-cy="email-error-registro"></div>
 
-            <input class="input" type="password" id="pass-registro" name="passregistro" placeholder="Contraseña">
-            <div id="pass-error-registro" class="label-error"></div>
+            <input class="input" type="password" id="pass-registro" name="passregistro" placeholder="Contraseña" data-cy="input-pass-registro">
+            <div id="pass-error-registro" class="label-error" data-cy="pass-error-registro"></div>
 
-            <input class="input" type="password" id="pass_verify" name="passverify" placeholder="Confirmar Contraseña">
-            <div id="passverify-error-registro" class="label-error"></div>
+            <input class="input" type="password" id="pass_verify" name="passverify" placeholder="Confirmar Contraseña" data-cy="input-passvfy-registro">
+            <div id="passverify-error-registro" class="label-error" data-cy="passvfy-error-registro"></div>
 
-            <input class="botonenviar" type="submit" value="Enviar">
+            <input class="botonenviar" type="submit" value="Enviar" data-cy="btn-submit-registro">
         </form>
     </div>
 </div>
