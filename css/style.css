@@ -1106,6 +1106,8 @@ html {
   font-size: 12px; /* Tamaño de fuente más pequeño para los mensajes de error */
   margin-top: 5px; /* Espaciado superior para separar los mensajes del campo */
   text-align: center;
+  width: 50vw;
+  max-width: 500px;
 }
 
 /* Resetear Password */

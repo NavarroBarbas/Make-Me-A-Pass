@@ -817,15 +817,12 @@ function buscarPassword() {
 }
 
 // Eliminar contraseña
-function eliminarPass(idpass, namepass) {
-    // Desde el HTML se le pasan los datos necesarios y cogemos sus valores
-    let pass = document.getElementById(idpass).innerText;
-    let name = document.getElementById(namepass).innerText;
+function eliminarPass(idpass) {
 
     $.ajax ({
         type: 'POST',
         url: 'php/deletepass.php',
-        data: {password: pass, nombrepass: name, passid: namepass},
+        data: {passid: idpass },
         success: function(response) {
             // Eliminamos contraseña
             if(response === "Contraseña Eliminada") {

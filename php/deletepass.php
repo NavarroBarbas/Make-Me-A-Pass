@@ -21,13 +21,11 @@
     session_start();
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        $password = $_POST['password'];
-        $nombrepass = $_POST['nombrepass'];
         $passid = $_POST['passid'];
-        $email = $_SESSION['email'];
+        $idUsuario = $_SESSION['usuarioID'];
 
         $password = new Password();
-        $password->deletePass($passid);
+        $password->deletePass($passid, $idUsuario);
         
         echo "Contraseña Eliminada";
     } else {

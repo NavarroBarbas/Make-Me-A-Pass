@@ -24,6 +24,11 @@
             return;
         }
 
+        if(strlen($pass) == 0 || strlen($pass) == null) {
+            echo "Contraseña es obligatoria";
+            return;
+        }
+
         $u=new Usuario();
         $u->setEmail($email);
         $u->setPassword($pass);
