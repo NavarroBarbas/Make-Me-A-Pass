@@ -53,12 +53,12 @@
       include_once(__DIR__."/bbdd/passwords.php");
       
       if (!isset($_SESSION["email"])){
-        echo "<div class='errorsesion'>
-        <br/><h2>Mensaje de Rechazo</h2>
+        echo "<div class='errorsesion' data-cy='no-login'>
+        <br/><h2 data-cy='no-login-titulo'>Mensaje de Rechazo</h2>
         <br/>
         Lo siento, NO tiene privilegios para entrar en esta página, por favor vuelva a la página principal e ingrese un nombre de usuario y apellido.
         <br /><br />
-        <a href='./'>Volver a página de Inicio </a>
+        <a href='./' data-cy='no-login-volver'>Volver a página de Inicio </a>
         </div>";
       } else {
 

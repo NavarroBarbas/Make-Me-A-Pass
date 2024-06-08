@@ -812,7 +812,6 @@ html {
     gap: 30px;
 
     & .mainmobile__email {
-      width: 100vw;
       text-align: center;
     }
 

@@ -1,7 +1,8 @@
 describe('Test Index Sin Login', () => {
+  const url = 'http://localhost:8888/Make-Me-A-Pass/';
 
   beforeEach(() => {
-    cy.visit('http://localhost:8888/Make-Me-A-Pass/');
+    cy.visit(url);
     cy.wait(2000);
   });
   it('El generador funciona y se ve correctamente, el Header, Generador, Main y Footer tiene los textos y estilos correctos', () => {
@@ -52,5 +53,35 @@ describe('Test Index Sin Login', () => {
     cy.get('[data-cy=footer-redes]').should('have.css', 'color', 'rgb(255, 255, 255)');
     cy.get('[data-cy=footer-redes]').should('have.css', 'font-size', '18.72px');
 
+  })
+
+  it('Checkea que al entrar a la página de la cuenta sin Login no deja acceder', () => {
+    cy.visit(`${url}cuenta.php`);
+    cy.url().should('include', '/cuenta.php');
+    cy.get('[data-cy=no-login]').should('exist').and('be.visible');
+
+    cy.get('[data-cy=no-login-titulo]').should('have.text', 'Mensaje de Rechazo');
+    cy.get('[data-cy=no-login-titulo]').should('have.css', 'color', 'rgb(0, 0, 0)');
+    cy.get('[data-cy=no-login-titulo]').should('have.css', 'font-size', '24px');
+
+    cy.get('[data-cy=no-login-volver]').should('exist').and('be.visible');
+    cy.get('[data-cy=no-login-volver]').contains('Volver a página de Inicio');
+    cy.get('[data-cy=no-login-volver]').click();
+    cy.url().should('eq', url);
+  })
+
+  it('Checkea que al entrar a la página de passwords sin login no deja acceder', () => {
+    cy.visit(`${url}passwords.php`);
+    cy.url().should('include', '/passwords.php');
+    cy.get('[data-cy=no-login]').should('exist').and('be.visible');
+
+    cy.get('[data-cy=no-login-titulo]').should('have.text', 'Mensaje de Rechazo');
+    cy.get('[data-cy=no-login-titulo]').should('have.css', 'color', 'rgb(0, 0, 0)');
+    cy.get('[data-cy=no-login-titulo]').should('have.css', 'font-size', '24px');
+
+    cy.get('[data-cy=no-login-volver]').should('exist').and('be.visible');
+    cy.get('[data-cy=no-login-volver]').contains('Volver a página de Inicio');
+    cy.get('[data-cy=no-login-volver]').click();
+    cy.url().should('eq', url);
   })
 })
