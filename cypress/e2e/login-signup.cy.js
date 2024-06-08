@@ -198,7 +198,7 @@ describe("Modal Login de Usuario", () => {
         cy.get("[data-cy=header-login]").click();
         cy.get("[data-cy=form-reset-pass-login]").click();
 
-        cy.get("[data-cy=input-email-reset-pass]").type("javier@hotmail.com");
+        cy.get("[data-cy=input-email-reset-pass]").type("javier4@hotmail.com");
         cy.intercept("POST", "**/php/resetpass.php").as("resetpass");
         cy.get("[data-cy=btn-submit-reset-pass]").click();
         cy.wait("@resetpass");

@@ -26,8 +26,8 @@
     </nav>
     <nav class="header__nav" id="headernav">
         <?php if (isset($_SESSION["email"])) {
-            echo '<a id="contraseñas" href="passwords.php" class="nav__login">Contraseñas</a>';
-            echo '<a id="cuenta" href="cuenta.php" class="nav__registrarse">';
+            echo '<a id="contraseñas" href="passwords.php" class="nav__login" data-cy="header-contrasenyas">Contraseñas</a>';
+            echo '<a id="cuenta" href="cuenta.php" class="nav__registrarse" data-cy="header-username">';
                 if(isset($_SESSION['nickname']) && $_SESSION['nickname'] != "") {
                     echo $_SESSION['nickname'];
                 } else {

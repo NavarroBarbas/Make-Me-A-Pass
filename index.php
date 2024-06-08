@@ -58,23 +58,23 @@
           <h3 class="generador__frase">Contraseñas seguras en segundos</h3>
 
           <?php if (isset($_SESSION["email"])) { ?>
-          <section class="settings">
-            <section class="setting">
+          <section class="settings" data-cy="generador-settings">
+            <section class="setting" data-cy="generador-setting">
               <input type="checkbox" id="uppercase" checked/>
               <label for="uppercase">A-Z</label>
             </section>
 
-            <section class="setting">
+            <section class="setting" data-cy="generador-setting">
               <input type="checkbox" id="lowercase" checked/>
               <label for="lowercase">a-z</label>
             </section>
 
-            <section class="setting">
+            <section class="setting" data-cy="generador-setting">
               <input type="checkbox" id="numeros" checked/>
               <label for="numeros">0-9</label>
             </section>
 
-            <section class="setting">
+            <section class="setting" data-cy="generador-setting">
               <input type="checkbox" id="caracteres" checked/>
               <label for="caracteres">!-#</label>
             </section>
@@ -91,7 +91,7 @@
           </section>
 
           <?php if (isset($_SESSION["email"])) { ?>
-            <section class="generador__length">
+          <section class="generador__length" data-cy="generador-length">
             <label for="length">Longitud:</label>
             <input class="length__slider" type="range" min="8" max="32" value="18" name="length" id="length">
             <span class="length__valor" id="valor"></span>
@@ -103,7 +103,7 @@
           <a class="generador__generar" id="generar" onclick="generarPass()" data-cy="btn-generar">Generar</a>
 
           <?php if (isset($_SESSION["email"])) { ?>
-            <a class="generador__guardar" id="guardarclick" onclick="openOverlay(event)">Guardar Contraseña</a>
+            <a class="generador__guardar" id="guardarclick" onclick="openOverlay(event)" data-cy="generador-savepass">Guardar Contraseña</a>
             </div>
             <div id="savepass" class="overlay" onclick="closeOverlay(event)">
               <div class="overlay__box">
