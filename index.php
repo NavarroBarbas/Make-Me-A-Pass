@@ -107,12 +107,12 @@
             </div>
             <div id="savepass" class="overlay" onclick="closeOverlay(event)">
               <div class="overlay__box">
-                <form class="box__form" id="form-savepass" method="POST" onsubmit="return guardarPass()" novalidate>
-                  <h4 class="form__titulo">Ponga un nombre a la contraseña</h4>
+                <form class="box__form" id="form-savepass" method="POST" onsubmit="return guardarPass()" novalidate data-cy="form-save-pass">
+                  <h4 class="form__titulo" data-cy="form-save-pass-titulo">Ponga un nombre a la contraseña</h4>
                 
-                  <input class="input nombrepass" type="text" id="nombrepass" placeholder="Nombre">
-                  <div id="save-error-savepass" class="label-error"></div>
-                  <input class="botonenviar savepass" type="submit" value="Enviar">
+                  <input class="input nombrepass" type="text" id="nombrepass" placeholder="Nombre" data-cy="input-name-save-pass">
+                  <div id="save-error-savepass" class="label-error" data-cy="error-save-pass"></div>
+                  <input class="botonenviar savepass" type="submit" value="Enviar" data-cy="btn-save-pass">
                 </form>
               </div>
           </div>
