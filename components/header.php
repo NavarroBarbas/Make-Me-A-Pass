@@ -41,26 +41,26 @@
     </nav>
 </header>
 
-<div id="login" class="overlay" onclick="closeOverlay(event)">
+<div id="login" class="overlay" onclick="closeOverlay(event)" data-cy="modal-login">
     <div class="overlay__box">
         <section class="box__logo">
-            <img class="logo__imagen" src="img/desktop/logo.webp">
-            <h4 class="logo__nombre">Make Me A Pass</h4>
+            <img class="logo__imagen" src="img/desktop/logo.webp" data-cy="modal-logo">
+            <h4 class="logo__nombre" data-cy="modal-titulo-web">Make Me A Pass</h4>
         </section>
 
         <form class="box__form" id="formLogin" method="POST" onsubmit="return validarFormLogin()" novalidate>
-            <h4 class="form__titulo">Iniciar Sesión</h4>
-            <input class="input" type="email" id="email-login"  placeholder="Email">
-            <div id="email-error-login" class="label-error"></div>
+            <h4 class="form__titulo" data-cy="form-titulo-login">Iniciar Sesión</h4>
+            <input class="input" type="email" id="email-login"  placeholder="Email" data-cy="input-email-login">
+            <div id="email-error-login" class="label-error" data-cy="email-error-login"></div>
 
-            <input class="input" type="password" id="pass-login" placeholder="Contraseña">
-            <div id="pass-error-login" class="label-error"></div>
+            <input class="input" type="password" id="pass-login" placeholder="Contraseña" data-cy="input-pass-login">
+            <div id="pass-error-login" class="label-error" data-cy="pass-error-login"></div>
 
-            <a class="form__resetpass" id="resetclick" onclick="openOverlay(event)">
+            <a class="form__resetpass" id="resetclick" onclick="openOverlay(event)" data-cy="form-reset-pass-login">
                 ¿Has olvidado tu contraseña?
             </a>
 
-            <input class="botonenviar" type="submit" value="Enviar">
+            <input class="botonenviar" type="submit" value="Enviar" data-cy="btn-submit-login">
         </form>
     </div>
 </div>
@@ -88,20 +88,20 @@
     </div>
 </div>
 
-<div id="resetpass" class="overlay" onclick="closeOverlay(event)">
+<div id="resetpass" class="overlay" onclick="closeOverlay(event)" data-cy="modal-reset-pass">
     <div class="overlay__box">
         <section class="box__logo">
-            <img class="logo__imagen" src="img/desktop/logo.webp">
-            <h4 class="logo__nombre">Make Me A Pass</h4>
+            <img class="logo__imagen" src="img/desktop/logo.webp" data-cy="modal-logo">
+            <h4 class="logo__nombre" data-cy="modal-titulo-web">Make Me A Pass</h4>
         </section>
 
         <form class="box__form" method="POST" onsubmit="return sendEmailResetPass()" novalidate>
-            <h4 class="form__titulo">¿Olvidaste tu Contraseña?</h4>
+            <h4 class="form__titulo" data-cy="form-titulo-reset-pass">¿Olvidaste tu Contraseña?</h4>
 
-            <input class="input" type="email" id="email-reset" name="emailreset" placeholder="Email">
-            <div id="reset-email-msg" class="label-error"></div>
+            <input class="input" type="email" id="email-reset" name="emailreset" placeholder="Email" data-cy="input-email-reset-pass">
+            <div id="reset-email-msg" class="label-error" data-cy="email-error-reset-pass"></div>
 
-            <input class="botonenviar" type="submit" value="Enviar">
+            <input class="botonenviar" type="submit" value="Enviar" data-cy="btn-submit-reset-pass">
         </form>
     </div>
 </div>
