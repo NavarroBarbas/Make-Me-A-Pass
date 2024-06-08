@@ -881,7 +881,7 @@ function createMobileCuentaMain(windowWidth, email) {
 
         <form id="form-nickname" class="main__form" method="POST" onsubmit="return newNickname()" novalidate data-cy="form-cambio-usuario">
             <input type="text" id="new-nickname" name="nickname" placeholder="Nombre de Usuario" data-cy="input-username-cambio-usuario">
-            <div id="text-error-nickname" class="label-error" data-cy="error-usename-cambio-usuario"></div>
+            <div id="text-error-nickname" class="label-error" data-cy="error-username-cambio-usuario"></div>
 
             <input type="password" id="old-pass-nickname" name="old_pass"  placeholder="Contraseña" data-cy="input-pass-cambio-usuario">
             <div id="oldpass-error-nickname" class="label-error" data-cy="error-pass-cambio-usuario"></div>
@@ -891,13 +891,13 @@ function createMobileCuentaMain(windowWidth, email) {
 
         <form id="formcambiopass" class="main__form" method="POST" onsubmit="return cambiarPass()" style="display:none" novalidate data-cy="form-cambio-password">
             <input type="password" id="new_pass" name="pass_change" placeholder="Nueva Contraseña" data-cy="input-newpass-cambio-password">
-            <div id="pass-error-change" class="label-error"></div>
+            <div id="pass-error-change" class="label-error" data-cy="error-newpass-cambio-password"></div>
 
             <input type="password" id="pass_verify_change" name="pass_verify_change" placeholder="Confirmar Contraseña" data-cy="input-confirmar-cambio-password">
-            <div id="passvfy-error-change" class="label-error"></div>
+            <div id="passvfy-error-change" class="label-error" data-cy="error-confirmar-cambio-password"></div>
 
             <input type="password" id="old_pass" name="old_pass"  placeholder="Contraseña Antigua" data-cy="input-oldpass-cambio-password">
-            <div id="oldpass-error-change" class="label-error"></div>
+            <div id="oldpass-error-change" class="label-error" data-cy="error-oldpass-cambio-password"></div>
 
             <input class="botonenviar" type="submit" value="Enviar" data-cy="btn-submit-cambio-password">
         </form>
