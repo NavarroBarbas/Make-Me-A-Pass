@@ -63,12 +63,12 @@ class Password extends Conexion {
             $password = htmlspecialchars($row["generated_pass"]);
             $passid = $row["password_id"];
 
-            echo '<div id="savedpass" class="passwords__passdiv">
-                    <h4 class="passdiv__nombre">' . $nombrePass . '</h4>
-                    <a class="passdiv__password">' . $password . '</a>
-                    <nav class="passdiv__nav">
-                    <a class="nav__eliminar" id="deleteClick" onclick="eliminarPass(\'' . $passid . '\')">Eliminar</a>
-                    <a class="nav__copiar" onclick="copiar(\'' . $password . '\')">Copiar</a>
+            echo '<div id="savedpass" class="passwords__passdiv" data-cy="list-password">
+                    <h4 class="passdiv__nombre" data-cy="password-nombre">' . $nombrePass . '</h4>
+                    <a class="passdiv__password" id="'. $password . '" data-cy="password-pass">' . $password . '</a>
+                    <nav class="passdiv__nav" data-cy="password-footer">
+                    <a class="nav__eliminar" id="deleteClick" onclick="eliminarPass(\'' . $passid . '\')" data-cy="password-eliminar">Eliminar</a>
+                    <a class="nav__copiar" onclick="copiar(\'' . $password . '\')" data-cy="password-copiar">Copiar</a>
                     </nav>
                 </div>';
         }

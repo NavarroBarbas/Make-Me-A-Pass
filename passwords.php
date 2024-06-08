@@ -66,27 +66,27 @@
     
       <main class="passwords__main">
         <div class="main__headpass">
-        <h2 class="headpass__titulo">
+        <h2 class="headpass__titulo" data-cy="passwords-titulo">
           Contraseñas
-          <a class="titulo__addpass"><img src="svg/add.svg" id="addpass" onclick="openOverlay(event)"></a>
+          <a class="titulo__addpass" data-cy="passwords-newpass"><img src="svg/add.svg" id="addpass" onclick="openOverlay(event)"></a>
         </h2>
-        <input type="text" id="buscador" name="buscador" placeholder="Buscar..." class="headpass__buscador" onkeyup="buscarPassword()">
+        <input type="text" id="buscador" name="buscador" placeholder="Buscar..." class="headpass__buscador" onkeyup="buscarPassword()" data-cy="passwords-buscador">
         </div>
         <div id="add-new-pass" class="overlay" onclick="closeOverlay(event)">
               <div class="overlay__box">
                 <form class="box__form" id="form-addnewpass" method="POST" onsubmit="return addNewPass()" novalidate>
-                  <h4 class="form__titulo">Añada una Contraseña</h4>
+                  <h4 class="form__titulo" data-cy="form-newpass-titulo">Añada una Contraseña</h4>
                 
-                  <input class="input" type="text" id="nombrepass" placeholder="Nombre">
+                  <input class="input" type="text" id="nombrepass" placeholder="Nombre" data-cy="form-newpass-nombre">
                   <div id="save-error-namepassword" class="label-error"></div>
-                  <input class="input" type="password" id="newpassword" placeholder="Contraseña">
+                  <input class="input" type="password" id="newpassword" placeholder="Contraseña" data-cy="form-newpass-password">
                   <div id="save-error-newpassword" class="label-error"></div>
-                  <input class="botonenviar" type="submit" value="Enviar">
+                  <input class="botonenviar" type="submit" value="Enviar" data-cy="btn-submit-newpass">
                 </form>
               </div>
           </div>
 
-        <section id="contrasenas" class="main__passwords">
+        <section id="contrasenas" class="main__passwords" data-cy="passwords-list">
           <?php
             $userID = $_SESSION['usuarioID'];
             $passwords = new Password();
