@@ -88,6 +88,8 @@ function closeOverlay(event) {
         if (event.target === overlay && !formulario.contains(event.target)) {
             atributosOverlay(event.target.id);
         }
+    } else if(event.target.id == "modal-anuncio" || event.target.id == "boton-cerrar-anuncio") {
+        atributosOverlay('modal-anuncio');
     }
 }
 
@@ -114,6 +116,10 @@ function atributosOverlay(id) {
         overlay.style.visibility = "hidden";
     } else if (id == "add-new-pass") {
         let overlay = document.getElementById("add-new-pass");
+        overlay.style.opacity = "0";
+        overlay.style.visibility = "hidden";
+    } else if(id == "modal-anuncio") {
+        let overlay = document.getElementById("modal-anuncio");
         overlay.style.opacity = "0";
         overlay.style.visibility = "hidden";
     }

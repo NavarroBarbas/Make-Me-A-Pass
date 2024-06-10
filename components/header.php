@@ -1,3 +1,11 @@
+<?php
+    if (!isset($_SESSION["email"]) && !isset($_COOKIE["anuncio"])) {
+        $cookie_name = "anuncio";
+        $expiry_time = time() + (24 * 60 * 60);
+        setcookie($cookie_name, $expiry_time, "/");
+        include 'components/modal-anuncio.php';
+    }
+?>
 <header class="header" data-cy="header">
     <a href="./" class="header__nombre">
         <img class="nombre__logo" src="img/desktop/logo.webp" data-cy="header-logo">
