@@ -1,8 +1,9 @@
 <?php
-    if (!isset($_SESSION["email"]) && !isset($_COOKIE["anuncio"])) {
-        $cookie_name = "anuncio";
-        $expiry_time = time() + (24 * 60 * 60);
-        setcookie($cookie_name, $expiry_time, "/");
+    if (!isset($_SESSION["email"]) && !isset($_COOKIE["ANUNCIO"])) {
+        $cookie_name = "ANUNCIO";
+        $cookie_value = rand(10000, 99999);
+        $expiry_time = time() + 24 * 60 * 60;
+        setcookie($cookie_name, $cookie_value, $expiry_time);
         include 'components/modal-anuncio.php';
     }
 ?>
