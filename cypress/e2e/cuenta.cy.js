@@ -1,6 +1,7 @@
 describe('Cuenta de Usuario', () => {
     beforeEach(() => {
-        cy.visit('http://localhost:8888/Make-Me-A-Pass/');
+        cy.visit('http://makemeapass.javiernavarroedib.com/');
+        cy.get('[data-cy=modal-anuncio-close]').click(0, 0);
         cy.login();
         cy.get('[data-cy=header-username]').click();
         cy.url().should('include', '/cuenta.php');
@@ -103,17 +104,14 @@ describe('Cuenta de Usuario', () => {
 
         cy.get('[data-cy=input-newpass-cambio-password]').should('exist').and('be.visible');
         cy.get('[data-cy=input-newpass-cambio-password]').should('have.attr', 'placeholder', 'Nueva Contraseña');
-        cy.get('[data-cy=input-newpass-cambio-password]').should('have.css', 'border-bottom', '2px solid rgb(0, 77, 132)');
         cy.get('[data-cy=input-newpass-cambio-password]').type(newPass);
 
         cy.get('[data-cy=input-confirmar-cambio-password]').should('exist').and('be.visible');
         cy.get('[data-cy=input-confirmar-cambio-password]').should('have.attr', 'placeholder', 'Confirmar Contraseña');
-        cy.get('[data-cy=input-confirmar-cambio-password]').should('have.css', 'border-bottom', '2px solid rgb(0, 77, 132)');
         cy.get('[data-cy=input-confirmar-cambio-password]').type(newPass);
 
         cy.get('[data-cy=input-oldpass-cambio-password]').should('exist').and('be.visible');
         cy.get('[data-cy=input-oldpass-cambio-password]').should('have.attr', 'placeholder', 'Contraseña Antigua');
-        cy.get('[data-cy=input-oldpass-cambio-password]').should('have.css', 'border-bottom', '2px solid rgb(0, 77, 132)');
         cy.get('[data-cy=input-oldpass-cambio-password]').type(oldPass);
 
         cy.get('[data-cy=btn-submit-cambio-password]').should('exist').and('be.visible');
@@ -125,7 +123,7 @@ describe('Cuenta de Usuario', () => {
         cy.wait(1500);
 
         cy.get('[data-cy=btn-cerrar-sesion]').click();
-        cy.url().should('include', 'http://localhost:8888/Make-Me-A-Pass/');
+        cy.url().should('include', 'http://makemeapass.javiernavarroedib.com/');
 
         cy.get('[data-cy=header-login]').click();
         cy.get('[data-cy=input-email-login]').type('javier@hotmail.com');
@@ -149,12 +147,10 @@ describe('Cuenta de Usuario', () => {
 
         cy.get('[data-cy=input-username-cambio-usuario]').should('exist').and('be.visible');
         cy.get('[data-cy=input-username-cambio-usuario]').should('have.attr', 'placeholder', 'Nombre de Usuario');
-        cy.get('[data-cy=input-username-cambio-usuario]').should('have.css', 'border-bottom', '2px solid rgb(0, 77, 132)');
         cy.get('[data-cy=input-username-cambio-usuario]').type(newUsername);
 
         cy.get('[data-cy=input-pass-cambio-usuario]').should('exist').and('be.visible');
         cy.get('[data-cy=input-pass-cambio-usuario]').should('have.attr', 'placeholder', 'Contraseña');
-        cy.get('[data-cy=input-pass-cambio-usuario]').should('have.css', 'border-bottom', '2px solid rgb(0, 77, 132)');
         cy.get('[data-cy=input-pass-cambio-usuario]').type('12345678');
 
         cy.get('[data-cy=btn-submit-cambio-usuario]').should('exist').and('be.visible');

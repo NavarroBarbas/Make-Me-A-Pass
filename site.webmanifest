@@ -1,9 +1,9 @@
 {
-  "name": "Mi sitio web",
-  "short_name": "Sitio web",
+  "name": "Make Me a Pass",
+  "short_name": "MakeMeAPass",
   "icons": [
     {
-      "src": "/favicon.ico",
+      "src": "img/desktop/logo.webp",
       "sizes": "16x16 32x32 48x48 64x64 128x128 256x256 512x512"
     },
     {

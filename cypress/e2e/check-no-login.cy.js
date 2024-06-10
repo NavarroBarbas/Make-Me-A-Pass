@@ -1,8 +1,9 @@
 describe('Test Index Sin Login', () => {
-  const url = 'http://localhost:8888/Make-Me-A-Pass/';
+  const url = 'http://makemeapass.javiernavarroedib.com/';
 
   beforeEach(() => {
     cy.visit(url);
+    cy.get('[data-cy=modal-anuncio-close]').click(0, 0);
     cy.wait(2000);
   });
   it('El generador funciona y se ve correctamente, el Header, Generador, Main y Footer tiene los textos y estilos correctos', () => {

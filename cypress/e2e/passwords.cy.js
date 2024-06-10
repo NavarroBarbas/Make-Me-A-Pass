@@ -1,6 +1,7 @@
 describe('Página Passwords', () => {
     beforeEach(() => {
-        cy.visit('http://localhost:8888/Make-Me-A-Pass/');
+        cy.visit('http://makemeapass.javiernavarroedib.com/');
+        cy.get('[data-cy=modal-anuncio-close]').click(0, 0);
         cy.login();
         cy.get('[data-cy=header-contrasenyas]').click();
         cy.url().should('include', '/passwords');
