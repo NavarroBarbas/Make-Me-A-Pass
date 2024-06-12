@@ -60,7 +60,7 @@ class Password extends Conexion {
         
         foreach ($result as $row) {
             $nombrePass = $row["nombre_pass"];
-            $password = htmlspecialchars($row["generated_pass"]);
+            $password = htmlspecialchars($this->descifrar($row["generated_pass"]));
             $passid = $row["password_id"];
 
             echo '<div id="savedpass" class="passwords__passdiv" data-cy="list-password">
@@ -77,8 +77,9 @@ class Password extends Conexion {
     public function savePass(){
 		$this->clearErr();
         try {
+            $password = $this->cifrar($this->generatedPass);
             $stmt = $this->getPdo()->prepare("INSERT INTO saved_passwords (generated_pass, nombre_pass, user_id) VALUES (:generatedPass, :nombrePass, :idUsuario)");
-            $stmt->bindParam(':generatedPass', $this->generatedPass);
+            $stmt->bindParam(':generatedPass', $password);
             $stmt->bindParam(':nombrePass', $this->nombrePass);
             $stmt->bindParam(':idUsuario', $this->idUsuario);
             $stmt->execute();
@@ -96,4 +97,35 @@ class Password extends Conexion {
         $stmt->bindParam(':idUsuario', $idUsuario);
         $stmt->execute();
     }
+
+    private function cifrar($texto){
+		$key=$_SESSION['pass'];
+
+		$ivlong=openssl_cipher_iv_length("AES-128-CBC"); //longitud del vector de inicialización
+		$iv=openssl_random_pseudo_bytes($ivlong);
+
+		$bruto=openssl_encrypt($texto, "AES-128-CBC", $key, $options=OPENSSL_RAW_DATA, $iv);
+		$hmac=hash_hmac('sha256', $bruto, $key, true);
+
+		$textoCifrado=base64_encode($iv.$hmac.$bruto);
+		return $textoCifrado;
+	}
+
+    private function descifrar($texto){
+		$key=$_SESSION['pass'];
+		
+		$ivlong=openssl_cipher_iv_length("AES-128-CBC");
+		$decode=base64_decode($texto);
+		$iv = substr($decode, 0, $ivlong);
+		$hmac = substr($decode, $ivlong, 32);
+
+		$brutoDes= substr($decode, $ivlong+32);
+		$textoDescifrado=openssl_decrypt($brutoDes, "AES-128-CBC", $key, $options=OPENSSL_RAW_DATA, $iv);
+		$hmac2=hash_hmac('sha256', $brutoDes, $key, true);
+		if (hash_equals ($hmac, $hmac2)){
+			return $textoDescifrado;
+		} else {
+			return "Contaseña no recuperable.";
+		}
+	}
 }
