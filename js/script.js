@@ -825,21 +825,34 @@ function buscarPassword() {
 // Eliminar contraseña
 function eliminarPass(idpass) {
 
-    $.ajax ({
-        type: 'POST',
-        url: 'php/deletepass.php',
-        data: {passid: idpass },
-        success: function(response) {
-            // Eliminamos contraseña
-            if(response === "Contraseña Eliminada") {
-                // Recargamos solo el apartado de las contraseñas
-                $("#contrasenas").load("passwords.php #savedpass");
-            } else {
-                alert(response);
-            }
-        },
-        error: function() {
-            alert("Operación no válida");
+    Swal.fire({
+        title: "¿Está seguro de borrar la contraseña?",
+        text: "No se podrá revertir!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#0073c7",
+        cancelButtonColor: "#f94444",
+        cancelButtonText: "Cancelar",
+        confirmButtonText: "Borrar"
+    }).then((result) => {
+        if (result.isConfirmed) {
+            $.ajax ({
+                type: 'POST',
+                url: 'php/deletepass.php',
+                data: {passid: idpass },
+                success: function(response) {
+                    // Eliminamos contraseña
+                    if(response === "Contraseña Eliminada") {
+                        // Recargamos solo el apartado de las contraseñas
+                        $("#contrasenas").load("passwords.php #savedpass");
+                    } else {
+                        alert(response);
+                    }
+                },
+                error: function() {
+                    alert("Operación no válida");
+                }
+            });
         }
     });
 }

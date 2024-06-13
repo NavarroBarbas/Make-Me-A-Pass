@@ -717,7 +717,7 @@ html {
       }
 
       & .datos__opcion:hover {
-        background: rgb(0,115,199);
+        background: rgb(0, 115, 199);
         background: linear-gradient(90deg, rgba(0,115,199,1) 0%, rgba(61,146,220,1) 100%);
         color: var(--blanco-gris);
         border-radius: 15px;
@@ -728,7 +728,7 @@ html {
       }
 
       & .datos__delete:hover {
-        background: rgb(249,68,68);
+        background: rgb(249, 68, 68);
         background: linear-gradient(90deg, rgba(249,68,68,1) 0%, rgba(237,3,120,1) 100%);
         color: var(--blanco-gris);
         border-radius: 15px;
